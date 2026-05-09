@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search hotels · InclusiTrip</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ------ Page-specific styles for the hotels search/results page ------ */
+
+    .results-hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .results-hero__title {
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0 0 8px 0;
+      color: var(--color-text-on-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .results-hero__sub {
+      font-size: 15px;
+      color: var(--color-text-on-dark-muted);
+      margin: 0;
+    }
+
+    /* ------ Search summary card (Edit Search) ------ */
+
+    .search-summary {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .search-summary__field {
+      display: flex;
+      flex-direction: column;
+      padding-right: 18px;
+      border-right: 0.5px solid var(--color-border-tertiary);
+      min-width: 0;
+    }
+
+    .search-summary__field:last-of-type {
+      border-right: none;
+    }
+
+    .search-summary__label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-tertiary);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .search-summary__value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .search-summary__value .ti {
+      color: var(--color-brand);
+      font-size: 16px;
+    }
+
+    .search-summary__edit {
+      margin-left: auto;
+    }
+
+    /* ------ Edit search drawer ------ */
+
+    .edit-search {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-left: 4px solid var(--color-brand);
+      border-radius: var(--border-radius-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 22px;
+    }
+
+    .edit-search[hidden] {
+      display: none;
+    }
+
+    .edit-search__title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: 0 0 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .edit-search__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+    }
+
+    .edit-search__field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .edit-search__field label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-tertiary);
+      font-weight: 600;
+    }
+
+    .edit-search__field input,
+    .edit-search__field select {
+      padding: 10px 12px;
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-md);
+      font-size: 14px;
+      color: var(--color-text-primary);
+      background: var(--color-background-primary);
+      font-family: inherit;
+    }
+
+    .edit-search__field input:focus,
+    .edit-search__field select:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 1px;
+      border-color: var(--color-brand);
+    }
+
+    .edit-search__actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    /* ------ Two-column results layout ------ */
+
+    .results-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .results-layout__sidebar {
+      position: sticky;
+      top: calc(var(--header-height) + 16px);
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .results-layout__main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    /* ------ Filter card ------ */
+
+    .filter-card {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-card__title {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+      color: var(--color-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-card__group + .filter-card__group {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 0.5px solid var(--color-border-tertiary);
+    }
+
+    .filter-card__legend {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-brand);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 13.5px;
+      color: var(--color-text-primary);
+      cursor: pointer;
+    }
+
+    .filter-option input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-brand);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .filter-card__more {
+      background: none;
+      border: none;
+      padding: 6px 0 0 0;
+      color: var(--color-brand);
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 500;
+    }
+
+    .filter-card__input {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-md);
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--color-text-primary);
+    }
+
+    .filter-card__input:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 1px;
+      border-color: var(--color-brand);
+    }
+
+    .filter-card__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .filter-card__actions .btn-primary,
+    .filter-card__actions .btn-ghost {
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* ------ Results header (count + sort) ------ */
+
+    .results-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 2px;
+    }
+
+    .results-toolbar__count {
+      font-size: 14px;
+      color: var(--color-text-on-dark-muted);
+    }
+
+    .results-toolbar__count strong {
+      color: var(--color-text-on-dark);
+    }
+
+    .results-toolbar__sort {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 999px;
+      padding: 6px 6px 6px 14px;
+      font-size: 13px;
+      color: var(--color-text-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .results-toolbar__sort select {
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-brand-dark);
+      padding: 4px 8px 4px 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .results-toolbar__sort select:focus {
+      outline: none;
+    }
+
+    /* ------ Hotel result card ------ */
+
+    .hotel-card {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 18px;
+      transition: box-shadow 0.18s ease, transform 0.18s ease;
+    }
+
+    .hotel-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .hotel-card__image {
+      border-radius: var(--border-radius-md);
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 48px;
+      flex-shrink: 0;
+    }
+
+    .hotel-card__body {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .hotel-card__head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .hotel-card__name {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      color: var(--color-text-primary);
+      line-height: 1.2;
+    }
+
+    .hotel-card__match {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--color-success-light);
+      color: #0F6E56;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 14px;
+    }
+
+    .hotel-card__match--med {
+      background: var(--color-warn-light);
+      color: #7a4d0a;
+    }
+
+    .hotel-card__meta {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      margin: 6px 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hotel-card__meta .ti {
+      font-size: 14px;
+    }
+
+    .hotel-card__features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .feature-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--color-brand-light);
+      color: var(--color-brand-dark);
+      font-size: 11.5px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+      border: 0.5px solid var(--color-brand-border);
+    }
+
+    .feature-pill .ti {
+      font-size: 12px;
+    }
+
+    .hotel-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    .hotel-card__cta {
+      text-decoration: none;
+    }
+
+    /* ------ Empty state when filters return nothing ------ */
+
+    .results-empty {
+      background: var(--color-background-primary);
+      border: 0.5px dashed var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
+      padding: 36px 24px;
+      text-align: center;
+      color: var(--color-text-secondary);
+      font-size: 14px;
+    }
+
+    .results-empty .ti {
+      font-size: 36px;
+      color: var(--color-brand);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* ------ Responsive ------ */
+
+    @media (max-width: 960px) {
+      .results-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .results-layout__sidebar {
+        position: static;
+      }
+
+      .edit-search__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hotel-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hotel-card__image {
+        height: 140px;
+      }
+
+      .edit-search__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-summary__field {
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="site-header__brand">
+        <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
+        InclusiTrip
+      </a>
+
+      <div class="search-pill" role="search">
+        <div class="search-pill__field">
+          <span class="search-pill__label">Where</span>
+          <span class="search-pill__value" id="header-where">Paris, France</span>
+        </div>
+        <div class="search-pill__field">
+          <span class="search-pill__label">Travelers</span>
+          <span class="search-pill__value" id="header-guests">2 adults</span>
+        </div>
+        <button class="search-pill__btn" aria-label="Search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <nav class="site-header__nav" aria-label="Primary">
+        <a href="#">Saved</a>
+        <a href="#">Trips</a>
+        <a href="#">Help</a>
+      </nav>
+      <button class="site-header__profile" type="button" aria-label="My profile">A</button>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb__sep">›</span>
+      <a href="welcome.html">Search</a>
+      <span class="breadcrumb__sep">›</span>
+      <span style="color: var(--color-text-on-dark);">Paris, France</span>
+    </nav>
+
+    <!-- Hero -->
+    <section class="results-hero" aria-labelledby="results-title">
+      <div>
+        <h1 id="results-title" class="results-hero__title">Hotels matching your needs</h1>
+        <p class="results-hero__sub">
+          Showing results for <strong style="color: var(--color-text-on-dark);">Paris, France</strong>
+          · 2 guests
+        </p>
+      </div>
+    </section>
+
+    <!-- Search summary (collapsed view) -->
+    <section class="search-summary" id="search-summary" aria-label="Current search">
+      <div class="search-summary__field">
+        <span class="search-summary__label">Destination</span>
+        <span class="search-summary__value">
+          <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France
+        </span>
+      </div>
+      <div class="search-summary__field">
+        <span class="search-summary__label">Travelers</span>
+        <span class="search-summary__value">
+          <i class="ti ti-users" aria-hidden="true"></i> 2 adults
+        </span>
+      </div>
+
+      <button class="btn-primary search-summary__edit" type="button" id="edit-search-toggle" aria-controls="edit-search" aria-expanded="false">
+        <i class="ti ti-edit" aria-hidden="true"></i> Edit search
+      </button>
+    </section>
+
+    <!-- Edit search drawer (toggled) -->
+    <section class="edit-search" id="edit-search" hidden aria-label="Edit search">
+      <h2 class="edit-search__title">
+        <i class="ti ti-search" aria-hidden="true" style="color: var(--color-brand);"></i>
+        Edit your search
+      </h2>
+
+      <form id="edit-search-form" onsubmit="return false;">
+        <div class="edit-search__grid">
+          <div class="edit-search__field">
+            <label for="es-destination">Destination</label>
+            <input type="text" id="es-destination" name="destination" value="Paris, France" autocomplete="address-level2" />
+          </div>
+          <div class="edit-search__field">
+            <label for="es-guests">Travelers</label>
+            <select id="es-guests" name="guests">
+              <option>1 adult</option>
+              <option selected>2 adults</option>
+              <option>3 adults</option>
+              <option>4 adults</option>
+              <option>2 adults · 1 child</option>
+              <option>2 adults · 2 children</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="edit-search__actions">
+          <button type="button" class="btn-ghost" id="edit-search-cancel">Cancel</button>
+          <button type="submit" class="btn-primary" id="edit-search-apply">
+            <i class="ti ti-search" aria-hidden="true"></i> Update results
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Two-column layout -->
+    <div class="results-layout">
+
+      <!-- Filters sidebar -->
+      <aside class="results-layout__sidebar" aria-label="Filter hotels">
+
+        <div class="filter-card">
+          <h2 class="filter-card__title">
+            <i class="ti ti-adjustments-horizontal" aria-hidden="true" style="color: var(--color-brand);"></i>
+            Filter results
+          </h2>
+
+          <fieldset class="filter-card__group" style="border: 0; padding: 0; margin: 0;">
+            <legend class="filter-card__legend"><i class="ti ti-wheelchair" aria-hidden="true"></i> Accessibility</legend>
+            <label class="filter-option"><input type="checkbox" checked /> Wheelchair access</label>
+            <label class="filter-option"><input type="checkbox" checked /> Step-free entrance</label>
+            <label class="filter-option"><input type="checkbox" /> Elevator available</label>
+            <label class="filter-option"><input type="checkbox" /> Roll-in shower</label>
+            <label class="filter-option"><input type="checkbox" /> Accessible parking</label>
+            <button type="button" class="filter-card__more">Show more</button>
+          </fieldset>
+
+          <fieldset class="filter-card__group" style="border: 0; padding: 0; margin: 0;">
+            <legend class="filter-card__legend"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i> Meal / Diet</legend>
+            <label class="filter-option"><input type="checkbox" checked /> Vegetarian</label>
+            <label class="filter-option"><input type="checkbox" /> Non-vegetarian</label>
+            <label class="filter-option"><input type="checkbox" /> Pescatarian</label>
+            <label class="filter-option"><input type="checkbox" /> Vegan</label>
+            <label class="filter-option"><input type="checkbox" /> Halal</label>
+          </fieldset>
+
+          <fieldset class="filter-card__group" style="border: 0; padding: 0; margin: 0;">
+            <legend class="filter-card__legend"><i class="ti ti-alert-circle" aria-hidden="true"></i> Dietary restrictions</legend>
+            <input type="text" class="filter-card__input" placeholder="e.g. Nuts, Gluten" aria-label="Dietary restrictions" />
+          </fieldset>
+
+          <fieldset class="filter-card__group" style="border: 0; padding: 0; margin: 0;">
+            <legend class="filter-card__legend"><i class="ti ti-ear" aria-hidden="true"></i> Sensory</legend>
+            <label class="filter-option"><input type="checkbox" /> Visual fire alarm</label>
+            <label class="filter-option"><input type="checkbox" /> Closed-captioned TV</label>
+            <label class="filter-option"><input type="checkbox" /> Quiet check-in</label>
+          </fieldset>
+
+          <div class="filter-card__actions">
+            <button type="button" class="btn-primary" id="apply-filters">
+              <i class="ti ti-filter-check" aria-hidden="true"></i> Apply filters
+            </button>
+            <button type="button" class="btn-ghost" id="clear-filters">
+              <i class="ti ti-x" aria-hidden="true"></i> Clear filters
+            </button>
+          </div>
+        </div>
+
+        <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-left: 3px solid var(--teal); border-radius: var(--border-radius-lg); padding: 14px 16px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <i class="ti ti-info-circle" style="font-size: 18px; color: var(--color-brand);" aria-hidden="true"></i>
+            <div style="font-size: 13px; font-weight: 600;">Match scores explained</div>
+          </div>
+          <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.6;">
+            Each hotel is scored against your accessibility profile and verified traveler reports.
+          </p>
+        </div>
+
+      </aside>
+
+      <!-- Main results column -->
+      <section class="results-layout__main" aria-label="Hotel results">
+
+        <div class="results-toolbar">
+          <div class="results-toolbar__count">
+            <strong>26 hotels</strong> found
+          </div>
+          <label class="results-toolbar__sort">
+            <span style="color: var(--color-text-secondary);">Sort by:</span>
+            <select aria-label="Sort hotels by">
+              <option>Best match</option>
+              <option>Highest rated</option>
+              <option>Closest to city center</option>
+            </select>
+          </label>
+        </div>
+
+        <!-- Hotel card 1 -->
+        <article class="hotel-card">
+          <div class="hotel-card__image" style="background: linear-gradient(135deg, #B5D4F4, #85B7EB); color: #0C447C;">
+            <i class="ti ti-photo" aria-hidden="true"></i>
+          </div>
+          <div class="hotel-card__body">
+            <div class="hotel-card__head">
+              <h3 class="hotel-card__name">Hôtel de l'Access</h3>
+              <span class="hotel-card__match">
+                <i class="ti ti-shield-check" aria-hidden="true"></i> 92% match
+              </span>
+            </div>
+            <div class="hotel-card__meta">
+              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 0.6 km to city center
+            </div>
+            <div class="hotel-card__features">
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Step-free entry</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Roll-in shower</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Elevator</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Vegetarian options</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Sign language support</span>
+            </div>
+            <div class="hotel-card__footer">
+              <a class="btn-primary hotel-card__cta" href="hotel.html">
+                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Hotel card 2 -->
+        <article class="hotel-card">
+          <div class="hotel-card__image" style="background: linear-gradient(135deg, #9FE1CB, #5DCAA5); color: #085041;">
+            <i class="ti ti-photo" aria-hidden="true"></i>
+          </div>
+          <div class="hotel-card__body">
+            <div class="hotel-card__head">
+              <h3 class="hotel-card__name">Comfort Stay Paris</h3>
+              <span class="hotel-card__match">
+                <i class="ti ti-shield-check" aria-hidden="true"></i> 88% match
+              </span>
+            </div>
+            <div class="hotel-card__meta">
+              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 1.2 km to city center
+            </div>
+            <div class="hotel-card__features">
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Wheelchair access</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Accessible parking</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Vegetarian options</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Visual fire alarm</span>
+            </div>
+            <div class="hotel-card__footer">
+              <a class="btn-primary hotel-card__cta" href="hotel.html">
+                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Hotel card 3 -->
+        <article class="hotel-card">
+          <div class="hotel-card__image" style="background: linear-gradient(135deg, #F5C4B3, #F0997B); color: #6B3A24;">
+            <i class="ti ti-photo" aria-hidden="true"></i>
+          </div>
+          <div class="hotel-card__body">
+            <div class="hotel-card__head">
+              <h3 class="hotel-card__name">Le Voyageur Hotel</h3>
+              <span class="hotel-card__match hotel-card__match--med">
+                <i class="ti ti-shield-half" aria-hidden="true"></i> 80% match
+              </span>
+            </div>
+            <div class="hotel-card__meta">
+              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 1.8 km to city center
+            </div>
+            <div class="hotel-card__features">
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Elevator</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Step-free entrance</span>
+              <span class="feature-pill"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Dimly lit hallways</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Dietary accommodations</span>
+            </div>
+            <div class="hotel-card__footer">
+              <a class="btn-primary hotel-card__cta" href="hotel.html">
+                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Hotel card 4 -->
+        <article class="hotel-card">
+          <div class="hotel-card__image" style="background: linear-gradient(135deg, #E8DCFB, #BFA9F0); color: #3C3489;">
+            <i class="ti ti-photo" aria-hidden="true"></i>
+          </div>
+          <div class="hotel-card__body">
+            <div class="hotel-card__head">
+              <h3 class="hotel-card__name">Maison Lumière</h3>
+              <span class="hotel-card__match">
+                <i class="ti ti-shield-check" aria-hidden="true"></i> 85% match
+              </span>
+            </div>
+            <div class="hotel-card__meta">
+              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 2.4 km to city center
+            </div>
+            <div class="hotel-card__features">
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Step-free entry</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Quiet check-in</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Closed-captioned TV</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Service animals welcome</span>
+            </div>
+            <div class="hotel-card__footer">
+              <a class="btn-primary hotel-card__cta" href="hotel.html">
+                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Hotel card 5 -->
+        <article class="hotel-card">
+          <div class="hotel-card__image" style="background: linear-gradient(135deg, #FBE5A8, #F0C25D); color: #6B4F0A;">
+            <i class="ti ti-photo" aria-hidden="true"></i>
+          </div>
+          <div class="hotel-card__body">
+            <div class="hotel-card__head">
+              <h3 class="hotel-card__name">Boutique Marais Inn</h3>
+              <span class="hotel-card__match hotel-card__match--med">
+                <i class="ti ti-shield-half" aria-hidden="true"></i> 74% match
+              </span>
+            </div>
+            <div class="hotel-card__meta">
+              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 0.9 km to city center
+            </div>
+            <div class="hotel-card__features">
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Wheelchair access</span>
+              <span class="feature-pill"><i class="ti ti-alert-triangle" aria-hidden="true"></i> No elevator (3 floors)</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Vegetarian breakfast</span>
+              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Visual fire alarm</span>
+            </div>
+            <div class="hotel-card__footer">
+              <a class="btn-primary hotel-card__cta" href="hotel.html">
+                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <button class="btn-ghost" style="justify-content: center; margin-top: 4px;">
+          Load more hotels <i class="ti ti-chevron-down" aria-hidden="true"></i>
+        </button>
+
+      </section>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__cols">
+        <div class="site-footer__col">
+          <a href="index.html" class="site-header__brand" style="font-size: 16px;">
+            <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
+            InclusiTrip
+          </a>
+          <p class="site-footer__brand-blurb">
+            Travel info that actually reflects accessibility — built with and for disabled travelers.
+          </p>
+        </div>
+        <div class="site-footer__col">
+          <h4>Travelers</h4>
+          <ul>
+            <li><a href="#">How it works</a></li>
+            <li><a href="#">Build your profile</a></li>
+            <li><a href="#">Saved hotels</a></li>
+            <li><a href="#">Help center</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h4>Hotels</h4>
+          <ul>
+            <li><a href="#">List your property</a></li>
+            <li><a href="#">Verify accessibility</a></li>
+            <li><a href="#">Partner login</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Accessibility statement</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>© 2026 InclusiTrip · We don't handle bookings.</span>
+        <span><a href="#" style="color: inherit; text-decoration: none;">Privacy</a> · <a href="#" style="color: inherit; text-decoration: none;">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // Toggle the "Edit search" drawer.
+      var toggleBtn = document.getElementById('edit-search-toggle');
+      var drawer = document.getElementById('edit-search');
+      var cancelBtn = document.getElementById('edit-search-cancel');
+      var form = document.getElementById('edit-search-form');
+
+      function openDrawer() {
+        drawer.hidden = false;
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        var firstField = drawer.querySelector('input, select');
+        if (firstField) firstField.focus();
+      }
+
+      function closeDrawer() {
+        drawer.hidden = true;
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.focus();
+      }
+
+      toggleBtn.addEventListener('click', function () {
+        if (drawer.hidden) openDrawer(); else closeDrawer();
+      });
+
+      cancelBtn.addEventListener('click', closeDrawer);
+
+      // On apply, just close the drawer (mockup — no real fetch).
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        closeDrawer();
+      });
+
+      // Clear filter checkboxes.
+      var clearBtn = document.getElementById('clear-filters');
+      clearBtn.addEventListener('click', function () {
+        document.querySelectorAll('.filter-card input[type="checkbox"]').forEach(function (cb) {
+          cb.checked = false;
+        });
+        document.querySelectorAll('.filter-card input[type="text"]').forEach(function (input) {
+          input.value = '';
+        });
+      });
+
+      // Apply filters — mockup feedback only.
+      var applyBtn = document.getElementById('apply-filters');
+      applyBtn.addEventListener('click', function () {
+        applyBtn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Filters applied';
+        setTimeout(function () {
+          applyBtn.innerHTML = '<i class="ti ti-filter-check" aria-hidden="true"></i> Apply filters';
+        }, 1400);
+      });
+    })();
+  </script>
+
+</body>
+</html>
