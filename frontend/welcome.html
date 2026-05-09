@@ -775,26 +775,109 @@
 
     const categoryLabels = {
       "Mobility": "mobility",
-      "Food/Diet": "foodDiet",
-      "Language/Speech Accommodations": "languageSpeech",
+      "Food/Diet": "dietary",
+      "Language/Speech Accommodations": "speech",
       "Sensory Needs": "sensory",
       "Cognitive Needs": "cognitive"
     };
 
-    function renderAuthActions() {
+    const preferenceLabels = {
+      wheelchair_accessible: "Wheelchair accessible",
+      short_walking_distances: "Short walking distances",
+      long_walking_distances: "Long walking distances",
+      remote_controlled_doors: "Remote controlled doors",
+      remote_controlled_curtains: "Remote controlled curtains",
+      remote_controlled_lights: "Remote controlled lights",
+      ramp_access: "Ramp access",
+      elevator_access: "Elevator access",
+      accessible_bathroom: "Accessible bathroom",
+      wide_hallways: "Wide hallways",
+      non_vegetarian: "Non-vegetarian",
+      pescatarian: "Pescatarian",
+      vegetarian: "Vegetarian",
+      vegan: "Vegan",
+      gluten_free: "Gluten free",
+      halal: "Halal",
+      kosher: "Kosher",
+      allergy_accommodations: "Allergy accommodations",
+      hearing_impaired_support: "Hearing impaired support",
+      speech_impaired_support: "Speech impaired support",
+      sign_language: "Sign language",
+      captions: "Captions",
+      languages: "Languages",
+      dimly_lit_spaces: "Dimly lit spaces",
+      quiet_rooms: "Quiet rooms",
+      sensory_rooms: "Sensory rooms",
+      noise_cancelling_support: "Noise cancelling support",
+      weighted_blankets: "Weighted blankets",
+      fidget_tools: "Fidget tools",
+      aromatherapy_free_rooms: "Aromatherapy-free rooms",
+      ibcces_certification: "IBCCES certification",
+      clear_wayfinding: "Clear wayfinding",
+      staff_disability_awareness_training: "Staff disability awareness training"
+    };
+
+    const profileCategoryLabels = {
+      mobility: "Mobility",
+      dietary: "Food/Diet",
+      speech: "Language/Speech Accommodations",
+      sensory: "Sensory Needs",
+      cognitive: "Cognitive Needs"
+    };
+
+    let currentProfile = null;
+
+    function clearElement(element) {
+      while (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+    }
+
+    function getUserId() {
+      return localStorage.getItem("inclusitripUserId");
+    }
+
+    async function fetchCurrentProfile() {
+      const userId = getUserId();
+      if (!userId) {
+        throw new Error("Missing user id.");
+      }
+
+      const response = await fetch(`/api/users/${userId}/profile`);
+      if (!response.ok) {
+        throw new Error("Could not load profile.");
+      }
+
+      return response.json();
+    }
+
+    function renderAuthActions(profile = null) {
       const isSignedIn = localStorage.getItem("inclusitripSignedIn") === "true";
 
       if (isSignedIn) {
-        authActions.innerHTML = `
-          <button type="button" class="auth-link" id="profile-button">My Profile</button>
-          <button type="button" class="auth-button" id="logout-button">Log Out</button>
-        `;
+        clearElement(authActions);
 
-        document.getElementById("profile-button").addEventListener("click", openProfile);
-        document.getElementById("logout-button").addEventListener("click", () => {
+        const profileButton = document.createElement("button");
+        profileButton.type = "button";
+        profileButton.className = "auth-link";
+        profileButton.id = "profile-button";
+        profileButton.textContent = profile?.name || "My Profile";
+        profileButton.addEventListener("click", openProfile);
+
+        const logoutButton = document.createElement("button");
+        logoutButton.type = "button";
+        logoutButton.className = "auth-button";
+        logoutButton.id = "logout-button";
+        logoutButton.textContent = "Log Out";
+        logoutButton.addEventListener("click", () => {
           localStorage.removeItem("inclusitripSignedIn");
+          localStorage.removeItem("inclusitripUserId");
+          currentProfile = null;
           renderAuthActions();
+          renderDefaultNeeds();
         });
+
+        authActions.append(profileButton, logoutButton);
       } else {
         authActions.innerHTML = `
           <a href="/login" class="auth-link">Log In</a>
@@ -803,8 +886,60 @@
       }
     }
 
-    function getSavedProfile() {
-      return JSON.parse(localStorage.getItem("inclusitripPreferences") || "{}");
+    function getSelectedPreferences(profile) {
+      if (!profile?.accessibility_profile) {
+        return [];
+      }
+
+      return Object.entries(profile.accessibility_profile).map(([categoryKey, preferences]) => {
+        const selections = [];
+
+        Object.entries(preferences || {}).forEach(([preferenceKey, value]) => {
+          if (value === true) {
+            selections.push(preferenceLabels[preferenceKey] || preferenceKey);
+          }
+
+          if (Array.isArray(value) && value.length > 0) {
+            selections.push(`${preferenceLabels[preferenceKey] || preferenceKey}: ${value.join(", ")}`);
+          }
+        });
+
+        return {
+          label: profileCategoryLabels[categoryKey] || categoryKey,
+          selections
+        };
+      }).filter((category) => category.selections.length > 0);
+    }
+
+    function renderDefaultNeeds() {
+      const needsList = document.querySelector(".needs-list");
+      clearElement(needsList);
+
+      ["Mobility", "Food/Diet", "Language/Speech Accommodations", "Sensory Needs", "Cognitive Needs"].forEach((need) => {
+        const chip = document.createElement("span");
+        chip.className = "need-chip";
+        chip.textContent = need;
+        needsList.appendChild(chip);
+      });
+    }
+
+    function renderProfileNeeds(profile) {
+      const needsList = document.querySelector(".needs-list");
+      const categories = getSelectedPreferences(profile);
+      const selections = categories.flatMap((category) => category.selections);
+
+      if (selections.length === 0) {
+        renderDefaultNeeds();
+        return;
+      }
+
+      clearElement(needsList);
+      selections.forEach((selection) => {
+        const chip = document.createElement("span");
+        chip.className = "need-chip";
+        chip.textContent = selection;
+        needsList.appendChild(chip);
+      });
     }
 
     function savePreferenceSelections() {
@@ -839,24 +974,33 @@
     }
 
     function renderSavedPreferences() {
-      const savedProfile = getSavedProfile();
-      const categories = Object.values(savedProfile).filter((category) => category.selections.length > 0);
+      const categories = getSelectedPreferences(currentProfile);
 
       if (categories.length === 0) {
         savedPreferences.innerHTML = `
-          <p class="empty-state">No accessibility preferences saved yet. Use Modify Preferences to add them.</p>
+          <p class="empty-state">No accessibility preferences are saved for this account yet.</p>
         `;
         return;
       }
 
-      savedPreferences.innerHTML = categories.map((category) => `
-        <section class="saved-card">
-          <h3>${category.label}</h3>
-          <ul>
-            ${category.selections.map((selection) => `<li>${selection}</li>`).join("")}
-          </ul>
-        </section>
-      `).join("");
+      clearElement(savedPreferences);
+      categories.forEach((category) => {
+        const card = document.createElement("section");
+        card.className = "saved-card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = category.label;
+
+        const list = document.createElement("ul");
+        category.selections.forEach((selection) => {
+          const item = document.createElement("li");
+          item.textContent = selection;
+          list.appendChild(item);
+        });
+
+        card.append(heading, list);
+        savedPreferences.appendChild(card);
+      });
     }
 
     function openPreferences() {
@@ -872,6 +1016,11 @@
     }
 
     function openProfile() {
+      if (!currentProfile) {
+        return;
+      }
+
+      document.getElementById("profile-title").textContent = currentProfile.name;
       renderSavedPreferences();
       profileModal.hidden = false;
       profileModal.classList.add("is-open");
@@ -922,7 +1071,27 @@
       }
     });
 
-    renderAuthActions();
+    async function initializeAuthState() {
+      if (localStorage.getItem("inclusitripSignedIn") !== "true") {
+        renderAuthActions();
+        renderDefaultNeeds();
+        return;
+      }
+
+      try {
+        currentProfile = await fetchCurrentProfile();
+        renderAuthActions(currentProfile);
+        renderProfileNeeds(currentProfile);
+      } catch (error) {
+        localStorage.removeItem("inclusitripSignedIn");
+        localStorage.removeItem("inclusitripUserId");
+        currentProfile = null;
+        renderAuthActions();
+        renderDefaultNeeds();
+      }
+    }
+
+    initializeAuthState();
   </script>
 </body>
 </html>

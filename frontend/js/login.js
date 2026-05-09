@@ -57,7 +57,13 @@ loginForm.addEventListener("submit", async (event) => {
       return;
     }
 
-    showStatus(`Welcome back, ${profile.name}. Your profile loaded successfully.`);
+    localStorage.setItem("inclusitripSignedIn", "true");
+    localStorage.setItem("inclusitripUserId", loginData.user_id);
+
+    showStatus(`Welcome back, ${profile.name}. Redirecting you home...`);
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 700);
   } catch (error) {
     showStatus("Something went wrong while logging in. Please try again.", true);
   }
