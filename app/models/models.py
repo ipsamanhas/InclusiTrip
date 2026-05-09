@@ -3,6 +3,9 @@ import uuid
 from typing import List, Optional
 from pydantic import BaseModel, EmailStr, Field
 
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
 
 class MobilityNeeds(BaseModel):
     wheelchair_accessible: bool = False

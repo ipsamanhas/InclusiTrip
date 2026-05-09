@@ -1,4 +1,4 @@
-from app.data.seed import HOTELS, REVIEWS
+from app.data.seed import HOTELS, REVIEWS, USERS
 from app.data.users import (
     USERS_DB,
     get_user_by_email,
@@ -10,6 +10,7 @@ from app.data.users import (
 __all__ = [
     "HOTELS",
     "REVIEWS",
+    "USERS",
     "USERS_DB",
     "get_user_by_email",
     "hash_password",

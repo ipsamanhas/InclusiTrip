@@ -147,6 +147,23 @@
       border-radius: 8px;
     }
 
+    .status {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--teal);
+      background: rgba(34,201,202,0.13);
+    }
+
+    .status.error {
+      border-left-color: var(--gold);
+      background: #fff7e6;
+    }
+
+    .status[hidden] {
+      display: none;
+    }
+
     a {
       color: var(--teal);
       font-weight: bold;
@@ -208,10 +225,9 @@
 
       <p class="subtitle">Welcome back. Your accessible journey awaits.</p>
 
-      <form>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" autocomplete="username" required />
-
+      <form id="login-form">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" required />
         <label for="password">Password</label>
         <input type="password" id="password" name="password" autocomplete="current-password" required />
 
@@ -226,6 +242,8 @@
         <button type="submit" class="btn">Log In</button>
       </form>
 
+      <div id="login-status" class="status" role="status" aria-live="polite" hidden></div>
+
       <div class="tip">
         <strong>Tip:</strong> Use the Tab key to move between fields and buttons.
       </div>
@@ -236,5 +254,7 @@
       </p>
     </section>
   </main>
+
+  <script src="/static/js/login.js"></script>
 </body>
 </html>
