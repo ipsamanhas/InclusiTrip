@@ -72,7 +72,7 @@ $RECYCLE.BIN/
 .idea/
 
 # =========================
-# Node/frontend files
+# Node frontend files
 # Only needed if you add React/Vite/etc.
 # =========================
 node_modules/
