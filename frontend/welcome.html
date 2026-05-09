@@ -110,7 +110,12 @@
 
     button.auth-link,
     button.auth-button {
+      appearance: none;
       font-family: inherit;
+    }
+
+    button.auth-link {
+      background: transparent;
     }
 
     .auth-link {
@@ -463,6 +468,55 @@
       background: #fbf8f2;
     }
 
+    .profile-content {
+      padding: 1.5rem clamp(1rem, 3vw, 2rem);
+    }
+
+    .profile-summary {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .saved-preferences {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .saved-card {
+      padding: 1rem;
+      border: 2px solid #eee8dc;
+      border-radius: 8px;
+      background: #fbf8f2;
+    }
+
+    .saved-card h3 {
+      margin: 0 0 0.75rem;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--navy);
+      font-size: 1.25rem;
+    }
+
+    .saved-card ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .saved-card li {
+      margin: 0.35rem 0;
+    }
+
+    .empty-state {
+      margin: 0;
+      padding: 1rem;
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      background: rgba(34,201,202,0.13);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
     a:focus,
     button:focus,
     input:focus {
@@ -515,6 +569,10 @@
       }
 
       .preference-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .saved-preferences {
         grid-template-columns: 1fr;
       }
 
@@ -683,6 +741,25 @@
     </section>
   </div>
 
+  <div class="modal-backdrop" id="profile-modal" role="dialog" aria-modal="true" aria-labelledby="profile-title" hidden>
+    <section class="preferences-modal">
+      <div class="modal-header">
+        <h2 id="profile-title">My Profile</h2>
+        <button type="button" class="icon-button" id="close-profile" aria-label="Close profile">×</button>
+      </div>
+
+      <div class="profile-content">
+        <p class="profile-summary">Your saved accessibility preferences are shown below.</p>
+        <div class="saved-preferences" id="saved-preferences"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="edit-profile-preferences">Edit Preferences</button>
+        <button type="button" class="btn btn-primary" id="done-profile">Done</button>
+      </div>
+    </section>
+  </div>
+
   <script>
     const openPreferencesButton = document.getElementById("open-preferences");
     const preferencesModal = document.getElementById("preferences-modal");
@@ -690,16 +767,30 @@
     const cancelPreferencesButton = document.getElementById("cancel-preferences");
     const savePreferencesButton = document.getElementById("save-preferences");
     const authActions = document.getElementById("auth-actions");
+    const profileModal = document.getElementById("profile-modal");
+    const closeProfileButton = document.getElementById("close-profile");
+    const doneProfileButton = document.getElementById("done-profile");
+    const editProfilePreferencesButton = document.getElementById("edit-profile-preferences");
+    const savedPreferences = document.getElementById("saved-preferences");
+
+    const categoryLabels = {
+      "Mobility": "mobility",
+      "Food/Diet": "foodDiet",
+      "Language/Speech Accommodations": "languageSpeech",
+      "Sensory Needs": "sensory",
+      "Cognitive Needs": "cognitive"
+    };
 
     function renderAuthActions() {
       const isSignedIn = localStorage.getItem("inclusitripSignedIn") === "true";
 
       if (isSignedIn) {
         authActions.innerHTML = `
-          <a href="#" class="auth-link">My Profile</a>
+          <button type="button" class="auth-link" id="profile-button">My Profile</button>
           <button type="button" class="auth-button" id="logout-button">Log Out</button>
         `;
 
+        document.getElementById("profile-button").addEventListener("click", openProfile);
         document.getElementById("logout-button").addEventListener("click", () => {
           localStorage.removeItem("inclusitripSignedIn");
           renderAuthActions();
@@ -710,6 +801,62 @@
           <a href="/create-account" class="auth-button">Sign Up</a>
         `;
       }
+    }
+
+    function getSavedProfile() {
+      return JSON.parse(localStorage.getItem("inclusitripPreferences") || "{}");
+    }
+
+    function savePreferenceSelections() {
+      const savedProfile = {};
+
+      document.querySelectorAll(".preference-group").forEach((group) => {
+        const categoryName = group.querySelector("legend").textContent.trim();
+        const categoryKey = categoryLabels[categoryName];
+        const selections = [];
+
+        group.querySelectorAll(".checkbox-label").forEach((label) => {
+          const checkbox = label.querySelector("input[type='checkbox']");
+          if (checkbox.checked) {
+            selections.push(label.textContent.trim());
+          }
+        });
+
+        group.querySelectorAll(".text-field input").forEach((input) => {
+          if (input.value.trim()) {
+            const label = group.querySelector(`label[for="${input.id}"]`).textContent.trim();
+            selections.push(`${label}: ${input.value.trim()}`);
+          }
+        });
+
+        savedProfile[categoryKey] = {
+          label: categoryName,
+          selections
+        };
+      });
+
+      localStorage.setItem("inclusitripPreferences", JSON.stringify(savedProfile));
+    }
+
+    function renderSavedPreferences() {
+      const savedProfile = getSavedProfile();
+      const categories = Object.values(savedProfile).filter((category) => category.selections.length > 0);
+
+      if (categories.length === 0) {
+        savedPreferences.innerHTML = `
+          <p class="empty-state">No accessibility preferences saved yet. Use Modify Preferences to add them.</p>
+        `;
+        return;
+      }
+
+      savedPreferences.innerHTML = categories.map((category) => `
+        <section class="saved-card">
+          <h3>${category.label}</h3>
+          <ul>
+            ${category.selections.map((selection) => `<li>${selection}</li>`).join("")}
+          </ul>
+        </section>
+      `).join("");
     }
 
     function openPreferences() {
@@ -724,10 +871,32 @@
       openPreferencesButton.focus();
     }
 
+    function openProfile() {
+      renderSavedPreferences();
+      profileModal.hidden = false;
+      profileModal.classList.add("is-open");
+      closeProfileButton.focus();
+    }
+
+    function closeProfile() {
+      profileModal.classList.remove("is-open");
+      profileModal.hidden = true;
+      document.getElementById("profile-button")?.focus();
+    }
+
     openPreferencesButton.addEventListener("click", openPreferences);
     closePreferencesButton.addEventListener("click", closePreferences);
     cancelPreferencesButton.addEventListener("click", closePreferences);
-    savePreferencesButton.addEventListener("click", closePreferences);
+    savePreferencesButton.addEventListener("click", () => {
+      savePreferenceSelections();
+      closePreferences();
+    });
+    closeProfileButton.addEventListener("click", closeProfile);
+    doneProfileButton.addEventListener("click", closeProfile);
+    editProfilePreferencesButton.addEventListener("click", () => {
+      closeProfile();
+      openPreferences();
+    });
 
     preferencesModal.addEventListener("click", (event) => {
       if (event.target === preferencesModal) {
@@ -735,9 +904,21 @@
       }
     });
 
+    profileModal.addEventListener("click", (event) => {
+      if (event.target === profileModal) {
+        closeProfile();
+      }
+    });
+
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !preferencesModal.hidden) {
-        closePreferences();
+      if (event.key === "Escape") {
+        if (!preferencesModal.hidden) {
+          closePreferences();
+        }
+
+        if (!profileModal.hidden) {
+          closeProfile();
+        }
       }
     });
 
