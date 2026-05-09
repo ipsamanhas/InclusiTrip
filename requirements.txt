@@ -2,5 +2,6 @@ fastapi[standard]==0.136.1
 python-dotenv
 pydantic
 email-validator
+sqlalchemy
 numpy==2.3.0
 pandas==2.3.0

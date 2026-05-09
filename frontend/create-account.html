@@ -104,6 +104,28 @@
       outline-offset: 3px;
     }
 
+    .status {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+      background: rgba(34,201,202,0.13);
+    }
+
+    .status.error {
+      border-left-color: var(--gold);
+      background: #fff7e6;
+    }
+
+    .status.success {
+      border-left-color: var(--primary);
+      background: rgba(34,201,202,0.13);
+    }
+
+    .status[hidden] {
+      display: none;
+    }
+
     @media (max-width: 768px) {
       .wrapper {
         margin: 2rem 1rem;
@@ -136,10 +158,14 @@
       <button type="submit" class="btn">Create Account</button>
     </form>
 
+    <div id="account-status" class="status" role="status" aria-live="polite" hidden></div>
+
     <p>
       Already have an account?
       <a href="/login">Log in</a>
     </p>
   </main>
+
+  <script src="/static/js/create-account.js"></script>
 </body>
 </html>

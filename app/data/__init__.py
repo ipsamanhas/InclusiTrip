@@ -1,9 +1,9 @@
-from app.data.seed import HOTELS, REVIEWS, USERS
+from app.data.seed import HOTELS, REVIEWS, USERS, seed_database
 from app.data.users import (
-    USERS_DB,
+    create_user,
     get_user_by_email,
+    get_user_by_id,
     hash_password,
-    save_user,
     verify_password,
 )
 
@@ -11,9 +11,10 @@ __all__ = [
     "HOTELS",
     "REVIEWS",
     "USERS",
-    "USERS_DB",
+    "create_user",
     "get_user_by_email",
+    "get_user_by_id",
     "hash_password",
-    "save_user",
+    "seed_database",
     "verify_password",
 ]

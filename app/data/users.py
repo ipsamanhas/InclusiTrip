@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import hashlib
 import secrets
-from typing import Dict, Optional
+import uuid
+from typing import Optional
 
-from app.models import User
+from sqlalchemy.orm import Session
 
-
-USERS_DB: Dict[str, User] = {}
+from app.models.db_models import UserDB
 
 
 def hash_password(plain_password: str) -> str:
@@ -19,15 +19,39 @@ def hash_password(plain_password: str) -> str:
 
 def verify_password(plain_password: str, stored_password: str) -> bool:
     """Verify a plain password against the stored salt:hash string."""
+    if ":" not in stored_password:
+        return plain_password == stored_password
     salt, hashed = stored_password.split(":")
     return hashlib.sha256(f"{salt}{plain_password}".encode()).hexdigest() == hashed
 
 
-def get_user_by_email(email: str) -> Optional[User]:
+def get_user_by_email(db: Session, email: str) -> Optional[UserDB]:
     """Look up a user by their email address."""
-    return USERS_DB.get(email.lower())
+    return db.query(UserDB).filter(UserDB.email == email.lower()).first()
 
 
-def save_user(user: User) -> None:
-    """Save a user to the store, keyed by lowercase email."""
-    USERS_DB[user.email.lower()] = user
+def get_user_by_id(db: Session, user_id: str) -> Optional[UserDB]:
+    """Look up a user by their UUID."""
+    return db.query(UserDB).filter(UserDB.id == user_id).first()
+
+
+def create_user(
+    db: Session,
+    name: str,
+    email: str,
+    password: str,
+    accessibility_profile: Optional[dict] = None,
+) -> UserDB:
+    """Create a new user and save to the database."""
+    hashed_pw = hash_password(password)
+    new_user = UserDB(
+        id=str(uuid.uuid4()),
+        name=name,
+        email=email.lower(),
+        password=hashed_pw,
+        accessibility_profile=accessibility_profile,
+    )
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user

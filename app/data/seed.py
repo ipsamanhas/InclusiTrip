@@ -208,3 +208,32 @@ HOTELS = [
 
 
 DEFAULT_GUEST_PROFILE = AccessibilityProfile()
+
+
+def seed_database() -> None:
+    """Insert seed users into the database if the users table is empty."""
+    from app.database import SessionLocal
+    from app.models.db_models import UserDB
+
+    db = SessionLocal()
+    try:
+        if db.query(UserDB).first() is not None:
+            return
+
+        for user in USERS:
+            db_user = UserDB(
+                id=str(user.id),
+                name=user.name,
+                email=user.email.lower(),
+                password=user.password,
+                accessibility_profile=(
+                    user.accessibility_profile.model_dump()
+                    if user.accessibility_profile
+                    else None
+                ),
+            )
+            db.add(db_user)
+
+        db.commit()
+    finally:
+        db.close()
