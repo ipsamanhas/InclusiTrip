@@ -136,6 +136,180 @@
         font-size: 2.2rem;
       }
     }
+
+    /* ---------- Accessibility preferences modal (matches welcome.html) ---------- */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(23, 23, 44, 0.72);
+      padding: 1rem;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .preferences-modal {
+      width: min(960px, 100%);
+      max-height: min(88vh, 900px);
+      overflow: auto;
+      background: white;
+      color: #252536;
+      border-radius: 8px;
+      box-shadow: 0 28px 80px rgba(10, 15, 32, 0.38);
+      border-top: 6px solid var(--gold);
+    }
+
+    .modal-header,
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem clamp(1rem, 3vw, 2rem);
+    }
+
+    .modal-header {
+      border-bottom: 2px solid #eee8dc;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--navy);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.1;
+    }
+
+    .icon-button {
+      width: 2.75rem;
+      min-height: 2.75rem;
+      border: 2px solid #d6cec1;
+      border-radius: 8px;
+      background: white;
+      color: var(--navy);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .preferences-form {
+      padding: 1.5rem clamp(1rem, 3vw, 2rem);
+    }
+
+    .preference-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .preference-group {
+      margin: 0;
+      padding: 1rem;
+      border: 2px solid #eee8dc;
+      border-radius: 8px;
+      background: #fbf8f2;
+    }
+
+    .preference-group legend {
+      padding: 0 0.35rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin: 0.75rem 0;
+      color: #252536;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .checkbox-label input {
+      width: 1.1rem;
+      min-height: 1.1rem;
+      margin-top: 0.25rem;
+      padding: 0;
+      flex: 0 0 auto;
+      accent-color: var(--primary);
+    }
+
+    .text-field {
+      margin-top: 1rem;
+    }
+
+    .text-field label {
+      display: block;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+      margin-top: 0;
+    }
+
+    .text-field input {
+      padding: 0.7rem 1rem;
+      min-height: 3rem;
+      border: 2px solid #d6cec1;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .modal-footer {
+      border-top: 2px solid #eee8dc;
+      background: #fbf8f2;
+    }
+
+    .modal-footer button {
+      min-height: 3rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .modal-btn-secondary {
+      background: white;
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .modal-btn-secondary:hover,
+    .modal-btn-secondary:focus {
+      background: rgba(34, 201, 202, 0.12);
+    }
+
+    .modal-btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .modal-btn-primary:hover,
+    .modal-btn-primary:focus {
+      background: var(--primary-dark);
+    }
+
+    @media (max-width: 640px) {
+      .preference-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-footer {
+        flex-direction: column-reverse;
+        align-items: stretch;
+      }
+    }
   </style>
 </head>
 <body>
@@ -165,6 +339,91 @@
       <a href="/login">Log in</a>
     </p>
   </main>
+
+  <!-- Accessibility preferences modal (opens after successful account creation) -->
+  <div
+    class="modal-backdrop"
+    id="preferences-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="preferences-title"
+    hidden
+  >
+    <section class="preferences-modal">
+      <div class="modal-header">
+        <h2 id="preferences-title">Accessibility Preferences</h2>
+        <button type="button" class="icon-button" id="close-preferences" aria-label="Close preferences">×</button>
+      </div>
+
+      <form class="preferences-form" id="preferences-form">
+        <div class="preference-grid">
+          <fieldset class="preference-group">
+            <legend>Mobility</legend>
+            <label class="checkbox-label"><input type="checkbox" name="wheelchair_accessible" /> Wheelchair accessible</label>
+            <label class="checkbox-label"><input type="checkbox" name="short_walking_distances" /> Short walking distances</label>
+            <label class="checkbox-label"><input type="checkbox" name="long_walking_distances" /> Long walking distances</label>
+            <label class="checkbox-label"><input type="checkbox" name="remote_controlled_doors" /> Remote controlled doors</label>
+            <label class="checkbox-label"><input type="checkbox" name="remote_controlled_curtains" /> Remote controlled curtains</label>
+            <label class="checkbox-label"><input type="checkbox" name="remote_controlled_lights" /> Remote controlled lights</label>
+            <label class="checkbox-label"><input type="checkbox" name="ramp_access" /> Ramp access</label>
+            <label class="checkbox-label"><input type="checkbox" name="elevator_access" /> Elevator access</label>
+            <label class="checkbox-label"><input type="checkbox" name="accessible_bathroom" /> Accessible bathroom</label>
+            <label class="checkbox-label"><input type="checkbox" name="wide_hallways" /> Wide hallways</label>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>Food/Diet</legend>
+            <label class="checkbox-label"><input type="checkbox" name="non_vegetarian" /> Non-vegetarian</label>
+            <label class="checkbox-label"><input type="checkbox" name="pescatarian" /> Pescatarian</label>
+            <label class="checkbox-label"><input type="checkbox" name="vegetarian" /> Vegetarian</label>
+            <label class="checkbox-label"><input type="checkbox" name="vegan" /> Vegan</label>
+            <label class="checkbox-label"><input type="checkbox" name="gluten_free" /> Gluten free</label>
+            <label class="checkbox-label"><input type="checkbox" name="halal" /> Halal</label>
+            <label class="checkbox-label"><input type="checkbox" name="kosher" /> Kosher</label>
+            <div class="text-field">
+              <label for="allergy_accommodations">Allergy accommodations</label>
+              <input type="text" id="allergy_accommodations" name="allergy_accommodations" placeholder="e.g., nuts, shellfish, dairy" />
+            </div>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>Language/Speech Accommodations</legend>
+            <label class="checkbox-label"><input type="checkbox" name="hearing_impaired_support" /> Hearing impaired support</label>
+            <label class="checkbox-label"><input type="checkbox" name="speech_impaired_support" /> Speech impaired support</label>
+            <label class="checkbox-label"><input type="checkbox" name="sign_language" /> Sign language</label>
+            <label class="checkbox-label"><input type="checkbox" name="captions" /> Captions</label>
+            <div class="text-field">
+              <label for="languages">Languages</label>
+              <input type="text" id="languages" name="languages" placeholder="e.g., English, French, ASL" />
+            </div>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>Sensory Needs</legend>
+            <label class="checkbox-label"><input type="checkbox" name="dimly_lit_spaces" /> Dimly lit spaces</label>
+            <label class="checkbox-label"><input type="checkbox" name="quiet_rooms" /> Quiet rooms</label>
+            <label class="checkbox-label"><input type="checkbox" name="sensory_rooms" /> Sensory rooms</label>
+            <label class="checkbox-label"><input type="checkbox" name="noise_cancelling_support" /> Noise cancelling support</label>
+            <label class="checkbox-label"><input type="checkbox" name="weighted_blankets" /> Weighted blankets</label>
+            <label class="checkbox-label"><input type="checkbox" name="fidget_tools" /> Fidget tools</label>
+            <label class="checkbox-label"><input type="checkbox" name="aromatherapy_free_rooms" /> Aromatherapy-free rooms</label>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>Cognitive Needs</legend>
+            <label class="checkbox-label"><input type="checkbox" name="ibcces_certification" /> IBCCES certification</label>
+            <label class="checkbox-label"><input type="checkbox" name="clear_wayfinding" /> Clear wayfinding</label>
+            <label class="checkbox-label"><input type="checkbox" name="staff_disability_awareness_training" /> Staff disability awareness training</label>
+          </fieldset>
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" class="modal-btn-secondary" id="cancel-preferences">Cancel</button>
+        <button type="button" class="modal-btn-primary" id="save-preferences">Save Preferences</button>
+      </div>
+    </section>
+  </div>
 
   <script src="/static/js/create-account.js"></script>
 </body>
