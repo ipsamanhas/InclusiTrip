@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InclusiTrip - Create Account</title>
+
+  <style>
+    :root {
+      --primary: #147f80;
+      --primary-dark: #0c4d53;
+      --teal-bright: #22c9ca;
+      --gold: #f5ad37;
+      --navy: #17172c;
+      --background: #f3ede2;
+      --focus: #ffd54f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(34,201,202,0.12), transparent 30%),
+        var(--background);
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .wrapper {
+      max-width: 700px;
+      margin: 3rem auto;
+      background: white;
+      border-radius: 8px;
+      padding: 3rem;
+      border-top: 6px solid var(--primary);
+      box-shadow: 0 18px 44px rgba(23,23,44,0.12);
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--navy);
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #555;
+    }
+
+    form {
+      margin-top: 2rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 2px solid #d6cec1;
+      font-size: 1rem;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 2rem;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: var(--primary-dark);
+    }
+
+    a {
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    a:focus,
+    button:focus,
+    input:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 768px) {
+      .wrapper {
+        margin: 2rem 1rem;
+        padding: 2rem;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <a href="/">Back</a>
+
+    <h1>Create Account</h1>
+    <p>Create your account now, then save accessibility preferences when you search.</p>
+
+    <form>
+      <label for="name">Full name</label>
+      <input type="text" id="name" name="name" autocomplete="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="new-password" required />
+
+      <button type="submit" class="btn">Create Account</button>
+    </form>
+
+    <p>
+      Already have an account?
+      <a href="/login">Log in</a>
+    </p>
+  </main>
+</body>
+</html>

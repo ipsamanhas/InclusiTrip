@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InclusiTrip - Destination Search</title>
+
+  <style>
+    :root {
+      --teal: #147f80;
+      --teal-bright: #22c9ca;
+      --teal-dark: #0c4d53;
+      --navy: #17172c;
+      --cream: #f3ede2;
+      --gold: #f5ad37;
+      --ink: #252536;
+      --muted: #5a5b63;
+      --line: #d8d0c4;
+      --focus: #ffd54f;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+    }
+
+    .skip-link:focus {
+      left: 1rem;
+      top: 1rem;
+      background: var(--white);
+      color: var(--navy);
+      padding: 1rem;
+      z-index: 1000;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 83% 18%, rgba(34,201,202,0.16), transparent 28%),
+        radial-gradient(circle at 18% 86%, rgba(245,173,55,0.14), transparent 30%),
+        linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 42%, var(--navy) 100%);
+      color: var(--white);
+      padding: 1.5rem clamp(1rem, 4vw, 4rem) 3rem;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 4.8rem;
+      height: 4.8rem;
+      flex: 0 0 auto;
+    }
+
+    .brand-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 3.4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .auth-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .auth-link,
+    .auth-button,
+    .btn {
+      min-height: 3rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .auth-link {
+      color: var(--white);
+      padding: 0.7rem 1rem;
+      border: 2px solid rgba(255,255,255,0.24);
+    }
+
+    .auth-link:hover,
+    .auth-link:focus {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .auth-button {
+      background: var(--cream);
+      color: var(--navy);
+      padding: 0.7rem 1rem;
+      border: 2px solid var(--cream);
+    }
+
+    .auth-button:hover,
+    .auth-button:focus {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 470px);
+      align-items: center;
+      gap: clamp(2rem, 5vw, 5rem);
+      max-width: 1180px;
+      margin: 5rem auto 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.09);
+      border: 2px solid rgba(200,211,216,0.28);
+      color: var(--teal-bright);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .badge::before {
+      content: "";
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      background: var(--teal-bright);
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 1.5rem 0 1rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 7vw, 5.4rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    h1 span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .lede {
+      max-width: 620px;
+      margin: 0;
+      color: #c8d3d8;
+      font-size: clamp(1.2rem, 2vw, 1.65rem);
+    }
+
+    .hero-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .feature {
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.09);
+      border: 2px solid rgba(200,211,216,0.24);
+      color: #e7ecee;
+      font-weight: 700;
+    }
+
+    .feature::before {
+      content: "";
+      display: inline-block;
+      width: 0.65rem;
+      height: 0.65rem;
+      margin-right: 0.65rem;
+      border-radius: 50%;
+      background: var(--teal-bright);
+    }
+
+    .search-panel {
+      background: var(--white);
+      color: var(--ink);
+      border-radius: 8px;
+      padding: clamp(1.35rem, 3vw, 2rem);
+      box-shadow: 0 24px 60px rgba(10, 15, 32, 0.28);
+      border-top: 6px solid var(--gold);
+    }
+
+    .search-panel h2 {
+      margin: 0 0 0.35rem;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+    }
+
+    .search-panel p {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    label,
+    legend {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .destination-field {
+      position: relative;
+    }
+
+    .destination-field svg {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      width: 1.25rem;
+      height: 1.25rem;
+      transform: translateY(-50%);
+      color: var(--teal);
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      min-height: 3.5rem;
+      padding: 0.95rem 1rem 0.95rem 3rem;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    fieldset {
+      margin: 1.35rem 0 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .needs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .need-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 2.5rem;
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      background: #f7f2e9;
+      border: 2px solid var(--line);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .need-chip::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--teal-bright);
+    }
+
+    .panel-actions {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      width: 100%;
+      border: 2px solid transparent;
+      padding: 0.95rem 1rem;
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      border-color: var(--teal);
+      color: var(--teal-dark);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus {
+      background: rgba(34,201,202,0.12);
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: var(--teal-dark);
+    }
+
+    .access-note {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background: rgba(34,201,202,0.13);
+      border-left: 4px solid var(--gold);
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+
+    a:focus,
+    button:focus,
+    input:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    input:focus {
+      border-color: var(--teal);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        margin-top: 3.5rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 1rem 1rem 2rem;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .brand-name {
+        font-size: 1.6rem;
+      }
+
+      .logo-mark {
+        width: 3.8rem;
+        height: 3.8rem;
+      }
+
+      .auth-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .auth-link,
+      .auth-button {
+        min-height: 2.65rem;
+        padding: 0.55rem 0.75rem;
+      }
+
+      .panel-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="hero">
+    <nav class="topbar" aria-label="Main navigation">
+      <a class="brand" href="/" aria-label="InclusiTrip home">
+        <svg class="logo-mark" viewBox="0 0 96 96" role="img" aria-label="InclusiTrip airplane and wheelchair icon">
+          <defs>
+            <linearGradient id="simple-logo-bg" x1="14" y1="9" x2="82" y2="88" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#168b8d" />
+              <stop offset="1" stop-color="#0c4d53" />
+            </linearGradient>
+          </defs>
+          <rect width="96" height="96" rx="24" fill="url(#simple-logo-bg)" />
+
+          <path d="M26 28 H67 C77 28 84 34 86 41 C82 48 75 52 66 52 H26 Z" fill="#ffffff" />
+          <path d="M50 28 L36 14 C34 12 36 10 39 11 L67 28 Z" fill="#ffffff" />
+          <path d="M55 52 L46 66 C45 68 47 70 49 70 H58 L75 52 Z" fill="#ffffff" />
+          <path d="M31 52 L22 65 H43 L51 52 Z" fill="#ffffff" />
+          <path d="M26 28 L18 20 H32 Z" fill="#ffffff" />
+
+          <circle cx="40" cy="50" r="5.2" fill="#f5ad37" />
+          <path d="M40 58 V70 H56" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M52 70 H65 L75 85" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="40" cy="76" r="15" fill="none" stroke="#f5ad37" stroke-width="7" />
+          <path d="M75 85 L82 80" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+        </svg>
+        <span class="brand-name">InclusiTrip</span>
+      </a>
+
+      <div class="auth-actions" aria-label="Account actions">
+        <a href="/login" class="auth-link">Log In</a>
+        <a href="/create-account" class="auth-button">Sign Up</a>
+      </div>
+    </nav>
+
+    <main class="hero-grid" id="main-content">
+      <section aria-labelledby="home-heading">
+        <div class="badge">WCAG 2.2 AA compliant</div>
+
+        <h1 id="home-heading">
+          Where will your next journey <span>take you?</span>
+        </h1>
+
+        <p class="lede">
+          Search accessible hotels and travel services as a guest, then save your preferences when you are ready.
+        </p>
+
+        <div class="hero-features" aria-label="Accessibility features">
+          <div class="feature">Wheelchair access</div>
+          <div class="feature">Sensory-friendly</div>
+          <div class="feature">Dietary support</div>
+        </div>
+      </section>
+
+      <section class="search-panel" aria-labelledby="search-heading">
+        <h2 id="search-heading">Destination Search</h2>
+        <p>Inclusive travel starts here.</p>
+
+        <form>
+          <label for="destination">Choose your destination</label>
+          <div class="destination-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M9.5 3a6.5 6.5 0 0 1 5.18 10.43l4.45 4.44a1.5 1.5 0 0 1-2.12 2.12l-4.44-4.45A6.5 6.5 0 1 1 9.5 3Zm0 3a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7Z" />
+            </svg>
+            <input type="search" id="destination" name="destination" placeholder="Search city or country" autocomplete="address-level2" />
+          </div>
+
+          <fieldset>
+            <legend>Your accessibility needs</legend>
+            <div class="needs-list">
+              <span class="need-chip">Mobility</span>
+              <span class="need-chip">Food/Diet</span>
+              <span class="need-chip">Language/Speech Accommodations</span>
+              <span class="need-chip">Sensory Needs</span>
+              <span class="need-chip">Cognitive Needs</span>
+            </div>
+          </fieldset>
+
+          <div class="panel-actions">
+            <button type="button" class="btn btn-secondary">Modify Preferences</button>
+            <button type="submit" class="btn btn-primary">Search Hotels</button>
+          </div>
+        </form>
+
+        <div class="access-note">
+          Clear layout, large controls, descriptive labels, and keyboard-friendly navigation.
+        </div>
+      </section>
+    </main>
+  </header>
+</body>
+</html>
