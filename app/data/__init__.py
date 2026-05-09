@@ -1,3 +1,3 @@
-from app.data.seed import HOTELS, REVIEWS
+from app.data.seed import HOTELS, REVIEWS, USERS
 
-__all__ = ["HOTELS", "REVIEWS"]
+__all__ = ["HOTELS", "REVIEWS", "USERS"]

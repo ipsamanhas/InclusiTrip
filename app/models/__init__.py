@@ -1,11 +1,11 @@
 from app.models.models import (
-    AccessibilityOptions,
     AccessibilityProfile,
     CognitiveNeeds,
     DietaryNeeds,
     Hotel,
     HotelAccessibilityFeatures,
     HotelMatchResult,
+    LoginRequest,
     MobilityNeeds,
     Review,
     SearchRequest,
@@ -15,13 +15,13 @@ from app.models.models import (
 )
 
 __all__ = [
-    "AccessibilityOptions",
     "AccessibilityProfile",
     "CognitiveNeeds",
     "DietaryNeeds",
     "Hotel",
     "HotelAccessibilityFeatures",
     "HotelMatchResult",
+    "LoginRequest",
     "MobilityNeeds",
     "Review",
     "SearchRequest",

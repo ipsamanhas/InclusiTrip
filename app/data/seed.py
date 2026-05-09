@@ -12,11 +12,84 @@ from app.models import (
     Review,
     SensoryNeeds,
     SpeechNeeds,
+    User,
 )
 
 HOTEL_ACCESS_ID = uuid.UUID("11111111-1111-1111-1111-111111111111")
 HOTEL_COMFORT_ID = uuid.UUID("22222222-2222-2222-2222-222222222222")
 HOTEL_VOYAGEUR_ID = uuid.UUID("33333333-3333-3333-3333-333333333333")
+USER_MAYA_ID = uuid.UUID("44444444-4444-4444-4444-444444444444")
+USER_ALEX_ID = uuid.UUID("55555555-5555-5555-5555-555555555555")
+USER_SAM_ID = uuid.UUID("66666666-6666-6666-6666-666666666666")
+USER_PRIYA_ID = uuid.UUID("77777777-7777-7777-7777-777777777777")
+
+
+USERS = [
+    User(
+        id=USER_MAYA_ID,
+        name="Maya Chen",
+        email="maya@example.com",
+        password="password123",
+        accessibility_profile=AccessibilityProfile(
+            mobility=MobilityNeeds(
+                wheelchair_accessible=True,
+                ramp_access=True,
+                elevator_access=True,
+                accessible_bathroom=True,
+            ),
+            dietary=DietaryNeeds(vegetarian=True, gluten_free=True),
+            speech=SpeechNeeds(captions=True, languages=["English", "French"]),
+            sensory=SensoryNeeds(quiet_rooms=True),
+            cognitive=CognitiveNeeds(clear_wayfinding=True),
+        ),
+    ),
+    User(
+        id=USER_ALEX_ID,
+        name="Alex Rivera",
+        email="alex@example.com",
+        password="travel2026",
+        accessibility_profile=AccessibilityProfile(
+            mobility=MobilityNeeds(short_walking_distances=True, elevator_access=True),
+            dietary=DietaryNeeds(vegan=True, allergy_accommodations=["nuts"]),
+            speech=SpeechNeeds(languages=["English", "Spanish"]),
+            sensory=SensoryNeeds(dimly_lit_spaces=True, quiet_rooms=True),
+        ),
+    ),
+    User(
+        id=USER_SAM_ID,
+        name="Sam Patel",
+        email="sam@example.com",
+        password="guestpass",
+        accessibility_profile=AccessibilityProfile(
+            dietary=DietaryNeeds(halal=True, gluten_free=True),
+            speech=SpeechNeeds(
+                hearing_impaired_support=True,
+                sign_language=True,
+                captions=True,
+            ),
+            cognitive=CognitiveNeeds(staff_disability_awareness_training=True),
+        ),
+    ),
+    User(
+        id=USER_PRIYA_ID,
+        name="Priya Nair",
+        email="priya@example.com",
+        password="inclusive",
+        accessibility_profile=AccessibilityProfile(
+            mobility=MobilityNeeds(
+                wheelchair_accessible=True,
+                wide_hallways=True,
+                remote_controlled_doors=True,
+            ),
+            sensory=SensoryNeeds(
+                sensory_rooms=True,
+                noise_cancelling_support=True,
+                aromatherapy_free_rooms=True,
+            ),
+            cognitive=CognitiveNeeds(clear_wayfinding=True),
+        ),
+    ),
+]
 
 
 REVIEWS = [
