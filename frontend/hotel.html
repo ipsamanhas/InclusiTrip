@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pinnacle Hotel Harbourfront · InclusiTrip</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="site-header__brand">
+        <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
+        InclusiTrip
+      </a>
+
+      <div class="search-pill" role="search">
+        <div class="search-pill__field">
+          <span class="search-pill__label">Where</span>
+          <span class="search-pill__value">Vancouver, BC</span>
+        </div>
+        <div class="search-pill__field">
+          <span class="search-pill__label">Travelers</span>
+          <span class="search-pill__value">2 adults</span>
+        </div>
+        <button class="search-pill__btn" aria-label="Search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <nav class="site-header__nav" aria-label="Primary">
+        <a href="#">Saved</a>
+        <a href="#">Trips</a>
+        <a href="#">Help</a>
+      </nav>
+      <button class="site-header__profile" type="button" aria-label="My profile">A</button>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb__sep">›</span>
+      <a href="#">Vancouver, BC</a>
+      <span class="breadcrumb__sep">›</span>
+      <span style="color: var(--color-text-primary);">Pinnacle Hotel Harbourfront</span>
+    </nav>
+
+    <section class="hotel-hero" aria-labelledby="hotel-name">
+      <div class="hotel-hero__header">
+        <div>
+          <h1 id="hotel-name" class="hotel-hero__title">Pinnacle Hotel Harbourfront</h1>
+          <div class="hotel-hero__meta">
+            <span class="hotel-hero__rating">
+              <i class="ti ti-star-filled" aria-hidden="true"></i> 4.7
+              <span style="color: rgba(243, 237, 226, 0.75); font-weight: 400;">(3,120 reviews)</span>
+            </span>
+            <span>·</span>
+            <span><i class="ti ti-map-pin" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> 1133 W Hastings St, Vancouver, BC</span>
+            <span>·</span>
+            <a href="#" style="color: var(--gold); text-decoration: underline; text-underline-offset: 3px;">Show on map</a>
+          </div>
+        </div>
+        <div class="hotel-hero__actions">
+          <button class="btn-ghost"><i class="ti ti-share" aria-hidden="true"></i> Share</button>
+          <button class="btn-ghost"><i class="ti ti-heart" aria-hidden="true"></i> Save</button>
+        </div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-grid__main" style="background: linear-gradient(135deg, #B5D4F4, #85B7EB); color: #0C447C;">
+          <i class="ti ti-photo" style="font-size: 72px;" aria-hidden="true"></i>
+        </div>
+        <div class="gallery-grid__side">
+          <div class="gallery-grid__cell" style="background: linear-gradient(135deg, #9FE1CB, #5DCAA5); color: #085041;">
+            <i class="ti ti-photo" style="font-size: 40px;" aria-hidden="true"></i>
+          </div>
+          <div class="gallery-grid__cell" style="background: linear-gradient(135deg, #F5C4B3, #F0997B); color: #6B3A24;">
+            <i class="ti ti-photo" style="font-size: 40px;" aria-hidden="true"></i>
+          </div>
+          <div class="gallery-grid__cell" style="background: linear-gradient(135deg, #E8DCFB, #BFA9F0); color: #3C3489;">
+            <i class="ti ti-photo" style="font-size: 40px;" aria-hidden="true"></i>
+          </div>
+          <div class="gallery-grid__cell" style="background: linear-gradient(135deg, #FBE5A8, #F0C25D); color: #6B4F0A;">
+            <i class="ti ti-photo" style="font-size: 40px;" aria-hidden="true"></i>
+          </div>
+        </div>
+        <button class="gallery-grid__view-all">
+          <i class="ti ti-grid-dots" aria-hidden="true"></i> Show all 198 photos
+        </button>
+      </div>
+    </section>
+
+    <div class="viewing-as" role="region" aria-label="Personalization">
+      <div class="viewing-as__left">
+        <div class="viewing-as__avatar">A</div>
+        <div>
+          <div style="font-size: 13px; color: var(--color-brand-dark); font-weight: 500;">Viewing as Aisha</div>
+          <div style="font-size: 12px; color: var(--color-brand);">Wheelchair · Low-noise · Captions · Gluten-free</div>
+        </div>
+      </div>
+      <button class="btn-ghost" style="border-color: var(--color-brand-border); color: var(--color-brand-dark);">
+        <i class="ti ti-edit" aria-hidden="true"></i> Edit profile
+      </button>
+    </div>
+
+    <nav class="tab-nav" aria-label="Sections">
+      <a href="#overview" class="is-active">Overview</a>
+      <a href="#score">Why this score</a>
+      <a href="#breakdown">Breakdown</a>
+      <a href="#rooms">Room types</a>
+      <a href="#pretrip">Pre-trip support</a>
+      <a href="#reviews">Reviews</a>
+    </nav>
+
+    <div class="hotel-layout">
+
+      <div class="hotel-layout__main">
+
+        <!-- Overview / claim alert ------------------------------------ -->
+        <section id="overview" class="section-card">
+          <div class="section-card__eyebrow">Overview</div>
+          <h2 class="section-card__title" style="margin-bottom: 12px;">A high-confidence match for your needs</h2>
+          <p style="margin: 0 0 16px 0; color: var(--color-text-secondary); font-size: 14px;">
+            Pinnacle Hotel Harbourfront scores well on mobility and hearing accessibility, with confirmed step-free entrances, roll-in showers in select rooms, and visual fire alarms. There is one important caveat travelers report consistently — see below.
+          </p>
+
+          <div style="background: var(--color-danger-light); border-left: 3px solid #E24B4A; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start;">
+            <i class="ti ti-alert-octagon" style="font-size: 20px; color: var(--color-danger); flex-shrink: 0; margin-top: 1px;" aria-hidden="true"></i>
+            <div style="font-size: 13px;">
+              <div style="font-weight: 600; color: #501313; margin-bottom: 2px;">Claim vs reality alert</div>
+              <div style="color: #791F1F; line-height: 1.6;">
+                Provider claims <em>"fully step-free access"</em>, but
+                <strong>6 wheelchair travelers report a heavy manual door at the side entrance</strong>
+                when the main lobby is closed after 11pm.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Score breakdown (collapsible) ----------------------------- -->
+        <section id="score" class="section-card section-card--collapsible">
+          <details>
+            <summary>
+              <div>
+                <div class="section-card__eyebrow">How we got to your score</div>
+                <h2 class="section-card__title">What's helping &amp; hurting</h2>
+                <p class="section-card__subtitle">Computed from your 4 needs, traveler reports, and verified hotel data.</p>
+              </div>
+              <i class="ti ti-chevron-down section-card__chevron" aria-hidden="true"></i>
+            </summary>
+
+            <div class="section-card__body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                  <i class="ti ti-trending-up" style="font-size: 18px; color: var(--color-success);" aria-hidden="true"></i>
+                  <h3 style="font-size: 14px; margin: 0; color: #0F6E56;">Helping your score</h3>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+                  <div style="display: flex; gap: 8px; align-items: flex-start;"><i class="ti ti-plus" style="color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div><strong>+18</strong> from confirmed mobility features (roll-in shower, step-free entrance)</div></div>
+                  <div style="display: flex; gap: 8px; align-items: flex-start;"><i class="ti ti-plus" style="color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div><strong>+12</strong> from hearing accessibility (visual alarms, captioned TVs)</div></div>
+                  <div style="display: flex; gap: 8px; align-items: flex-start;"><i class="ti ti-plus" style="color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div><strong>+8</strong> from cognitive supports (quiet check-in, clear signage)</div></div>
+                </div>
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                  <i class="ti ti-trending-down" style="font-size: 18px; color: var(--color-danger);" aria-hidden="true"></i>
+                  <h3 style="font-size: 14px; margin: 0; color: #791F1F;">Hurting your score</h3>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+                  <div style="display: flex; gap: 8px; align-items: flex-start;"><i class="ti ti-minus" style="color: var(--color-danger); margin-top: 3px;" aria-hidden="true"></i><div><strong>−6</strong> heavy side door reported by 6 travelers</div></div>
+                  <div style="display: flex; gap: 8px; align-items: flex-start;"><i class="ti ti-minus" style="color: var(--color-danger); margin-top: 3px;" aria-hidden="true"></i><div><strong>−4</strong> gluten-free menu range not yet verified</div></div>
+                </div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <!-- Breakdown ------------------------------------------------- -->
+        <section id="breakdown" class="section-card section-card--accent">
+          <div class="section-card__header">
+            <div>
+              <div class="section-card__eyebrow">Accessibility breakdown</div>
+              <h2 class="section-card__title">By category</h2>
+              <p class="section-card__subtitle">Computed from hotel data + traveler reviews · tap any row to expand</p>
+            </div>
+            <button class="btn-ghost"><i class="ti ti-volume" aria-hidden="true"></i> Read aloud</button>
+          </div>
+
+          <div class="breakdown-list">
+
+            <details class="breakdown-row">
+              <summary class="breakdown-row__summary">
+                <div class="breakdown-row__label"><i class="ti ti-wheelchair" aria-hidden="true"></i><span>Mobility</span></div>
+                <div class="breakdown-row__bar"><div class="breakdown-row__bar-fill" style="width: 84%;"></div></div>
+                <div class="breakdown-row__score">4.2 / 5</div>
+                <span class="breakdown-row__pill breakdown-row__pill--high">HIGH</span>
+                <i class="ti ti-chevron-down breakdown-row__chevron" aria-hidden="true"></i>
+              </summary>
+              <div class="breakdown-row__body">
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Step-free main entrance · <span class="breakdown-item__meta">22 confirms</span></div></div>
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Roll-in shower in rooms 401–415 · <span class="breakdown-item__meta">14 confirms</span></div></div>
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Grab bars in accessible bathrooms</div></div>
+                <div class="breakdown-item"><i class="ti ti-alert-triangle breakdown-item__icon breakdown-item__icon--warn" aria-hidden="true"></i><div>Heavy side door after 11pm · <span class="breakdown-item__meta">6 reports</span></div></div>
+                <div class="breakdown-item"><i class="ti ti-alert-triangle breakdown-item__icon breakdown-item__icon--warn" aria-hidden="true"></i><div>Long corridor to accessible rooms · <span class="breakdown-item__meta">5 reports</span></div></div>
+              </div>
+            </details>
+
+            <details class="breakdown-row">
+              <summary class="breakdown-row__summary">
+                <div class="breakdown-row__label"><i class="ti ti-ear" aria-hidden="true"></i><span>Sensory</span></div>
+                <div class="breakdown-row__bar"><div class="breakdown-row__bar-fill" style="width: 70%;"></div></div>
+                <div class="breakdown-row__score">3.5 / 5</div>
+                <span class="breakdown-row__pill breakdown-row__pill--med">MED</span>
+                <i class="ti ti-chevron-down breakdown-row__chevron" aria-hidden="true"></i>
+              </summary>
+              <div class="breakdown-row__body">
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Sensory kit available on request</div></div>
+                <div class="breakdown-item"><i class="ti ti-alert-triangle breakdown-item__icon breakdown-item__icon--warn" aria-hidden="true"></i><div>Lobby noise level 7–9am · <span class="breakdown-item__meta">4 reports</span></div></div>
+                <div class="breakdown-item"><i class="ti ti-alert-triangle breakdown-item__icon breakdown-item__icon--warn" aria-hidden="true"></i><div>Lobby music can be loud during peak hours</div></div>
+              </div>
+            </details>
+
+            <details class="breakdown-row breakdown-row--featured" open>
+              <summary class="breakdown-row__summary">
+                <div class="breakdown-row__label"><i class="ti ti-brain" aria-hidden="true"></i><span>Cognitive / Neurodivergent</span></div>
+                <div class="breakdown-row__bar"><div class="breakdown-row__bar-fill" style="width: 80%;"></div></div>
+                <div class="breakdown-row__score">4.0 / 5</div>
+                <span class="breakdown-row__pill breakdown-row__pill--high">HIGH</span>
+                <i class="ti ti-chevron-down breakdown-row__chevron" aria-hidden="true"></i>
+              </summary>
+              <div class="breakdown-row__body">
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Quiet check-in option · <span class="breakdown-item__meta">9 traveler confirms</span></div></div>
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Predictable daily schedule, clear signage</div></div>
+                <div class="breakdown-item"><i class="ti ti-alert-triangle breakdown-item__icon breakdown-item__icon--warn" aria-hidden="true"></i><div>Lobby music can be loud during peak hours</div></div>
+              </div>
+            </details>
+
+            <details class="breakdown-row">
+              <summary class="breakdown-row__summary">
+                <div class="breakdown-row__label"><i class="ti ti-eye" aria-hidden="true"></i><span>Visual</span></div>
+                <div class="breakdown-row__bar"><div class="breakdown-row__bar-fill" style="width: 76%;"></div></div>
+                <div class="breakdown-row__score">3.8 / 5</div>
+                <span class="breakdown-row__pill breakdown-row__pill--med">MED</span>
+                <i class="ti ti-chevron-down breakdown-row__chevron" aria-hidden="true"></i>
+              </summary>
+              <div class="breakdown-row__body">
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Lowered peephole in accessible rooms</div></div>
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Large-print signage in elevators · <span class="breakdown-item__meta">4 confirms</span></div></div>
+                <div class="breakdown-item"><i class="ti ti-alert-triangle breakdown-item__icon breakdown-item__icon--warn" aria-hidden="true"></i><div>Limited braille on guest-room doors</div></div>
+                <div class="breakdown-item"><i class="ti ti-help-circle breakdown-item__icon breakdown-item__icon--unknown" aria-hidden="true"></i><div>Audio descriptions on TV · <span class="breakdown-item__meta">not yet verified</span></div></div>
+              </div>
+            </details>
+
+            <details class="breakdown-row">
+              <summary class="breakdown-row__summary">
+                <div class="breakdown-row__label"><i class="ti ti-ear-scan" aria-hidden="true"></i><span>Hearing</span></div>
+                <div class="breakdown-row__bar"><div class="breakdown-row__bar-fill" style="width: 82%;"></div></div>
+                <div class="breakdown-row__score">4.1 / 5</div>
+                <span class="breakdown-row__pill breakdown-row__pill--high">HIGH</span>
+                <i class="ti ti-chevron-down breakdown-row__chevron" aria-hidden="true"></i>
+              </summary>
+              <div class="breakdown-row__body">
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Closed-captioned in-room TVs · <span class="breakdown-item__meta">7 confirms</span></div></div>
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Visual fire alarm · <span class="breakdown-item__meta">5 confirms</span></div></div>
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Vibrating alarm clock available on request</div></div>
+                <div class="breakdown-item"><i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i><div>Front desk has TTY on request</div></div>
+              </div>
+            </details>
+
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 11px; color: var(--color-text-secondary);">
+            <i class="ti ti-shield-check" style="font-size: 14px;" aria-hidden="true"></i>
+            <span>Confidence levels reflect volume of verifying reviews. HIGH = 30+ reviews · MED = 10–29 · LOW = under 10</span>
+          </div>
+        </section>
+
+        <!-- Confirmed / Barriers -------------------------------------- -->
+        <section class="section-card">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                <i class="ti ti-circle-check" style="font-size: 20px; color: var(--color-success);" aria-hidden="true"></i>
+                <h3 style="font-size: 16px; margin: 0; color: #0F6E56;">Features confirmed</h3>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-check" style="font-size: 14px; color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div>Step-free main entrance <span style="color: var(--color-text-secondary);">· 22 confirms</span></div></div>
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-check" style="font-size: 14px; color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div>Roll-in shower (rooms 401-415) <span style="color: var(--color-text-secondary);">· 14 confirms</span></div></div>
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-check" style="font-size: 14px; color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div>Closed-captioned in-room TVs <span style="color: var(--color-text-secondary);">· 7 confirms</span></div></div>
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-check" style="font-size: 14px; color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div>Visual fire alarm <span style="color: var(--color-text-secondary);">· 5 confirms</span></div></div>
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-check" style="font-size: 14px; color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div>Service animals welcome <span style="color: var(--color-text-secondary);">· 9 confirms</span></div></div>
+              </div>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                <i class="ti ti-alert-triangle" style="font-size: 20px; color: var(--color-warn);" aria-hidden="true"></i>
+                <h3 style="font-size: 16px; margin: 0; color: #7a4d0a;">Possible barriers</h3>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-alert-triangle" style="font-size: 14px; color: var(--color-warn); margin-top: 3px;" aria-hidden="true"></i><div>Heavy side door after 11pm <span style="color: var(--color-text-secondary);">· 6 reports</span></div></div>
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-alert-triangle" style="font-size: 14px; color: var(--color-warn); margin-top: 3px;" aria-hidden="true"></i><div>Lobby noise level 7-9am <span style="color: var(--color-text-secondary);">· 4 reports</span></div></div>
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-alert-triangle" style="font-size: 14px; color: var(--color-warn); margin-top: 3px;" aria-hidden="true"></i><div>Restaurant entrance has 1 small step <span style="color: var(--color-text-secondary);">· 3 reports</span></div></div>
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-alert-triangle" style="font-size: 14px; color: var(--color-warn); margin-top: 3px;" aria-hidden="true"></i><div>Long corridor to accessible rooms <span style="color: var(--color-text-secondary);">· 5 reports</span></div></div>
+                <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-help-circle" style="font-size: 14px; color: var(--color-text-secondary); margin-top: 3px;" aria-hidden="true"></i><div>Gluten-free menu range <span style="color: var(--color-text-secondary);">· not yet verified</span></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Room types ------------------------------------------------ -->
+        <section id="rooms" class="section-card">
+          <div class="section-card__header">
+            <div>
+              <h2 class="section-card__title">Room types &amp; accessibility</h2>
+              <p class="section-card__subtitle">Sorted by needs met for your profile · book directly with the hotel</p>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+
+            <article style="border: 1.5px solid var(--color-success); border-radius: var(--border-radius-lg); padding: 16px; background: #F4FBF7;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 12px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                    <span style="background: var(--color-success); color: white; font-size: 10px; padding: 3px 10px; border-radius: 12px; font-weight: 600; letter-spacing: 0.5px;">BEST FOR YOU</span>
+                    <span style="font-size: 16px; font-weight: 600;">Accessible King Suite</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--color-text-secondary);">650 sq ft · sleeps 2 · floor 4</div>
+                </div>
+                <div style="display: inline-flex; align-items: center; gap: 4px; background: var(--color-success); color: white; font-size: 12px; padding: 4px 12px; border-radius: 14px; font-weight: 500; flex-shrink: 0;">
+                  <i class="ti ti-circle-check" style="font-size: 14px;" aria-hidden="true"></i> 6 of 6 met
+                </div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; font-size: 13px;">
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Roll-in shower</div>
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Grab bars in bathroom</div>
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Wide doorway (32"+)</div>
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Closed-captioned TV</div>
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Visual fire alarm</div>
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Lowered peephole</div>
+              </div>
+            </article>
+
+            <article style="border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 12px;">
+                <div>
+                  <div style="font-size: 16px; font-weight: 600;">Standard King Suite</div>
+                  <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 2px;">485 sq ft · sleeps 2 · multiple floors</div>
+                </div>
+                <div style="display: inline-flex; align-items: center; gap: 4px; background: var(--color-warn-light); color: #633806; font-size: 12px; padding: 4px 12px; border-radius: 14px; font-weight: 500; flex-shrink: 0;">
+                  <i class="ti ti-alert-triangle" style="font-size: 14px;" aria-hidden="true"></i> 3 of 6 met
+                </div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; font-size: 13px;">
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Wide doorway (32"+)</div>
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Closed-captioned TV</div>
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Visual fire alarm</div>
+                <div style="color: var(--color-danger);"><i class="ti ti-x" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Roll-in shower</div>
+                <div style="color: var(--color-danger);"><i class="ti ti-x" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Grab bars in bathroom</div>
+                <div style="color: var(--color-danger);"><i class="ti ti-x" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Lowered peephole</div>
+              </div>
+            </article>
+
+            <article style="border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 12px;">
+                <div>
+                  <div style="font-size: 16px; font-weight: 600;">Harbour View Double</div>
+                  <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 2px;">410 sq ft · sleeps 4 · floors 2-8</div>
+                </div>
+                <div style="display: inline-flex; align-items: center; gap: 4px; background: var(--color-danger-light); color: #791F1F; font-size: 12px; padding: 4px 12px; border-radius: 14px; font-weight: 500; flex-shrink: 0;">
+                  <i class="ti ti-x" style="font-size: 14px;" aria-hidden="true"></i> 2 of 6 met
+                </div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; font-size: 13px;">
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Closed-captioned TV</div>
+                <div style="color: #27500A;"><i class="ti ti-check" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Visual fire alarm</div>
+                <div style="color: var(--color-danger);"><i class="ti ti-x" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Roll-in shower</div>
+                <div style="color: var(--color-danger);"><i class="ti ti-x" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Grab bars in bathroom</div>
+                <div style="color: var(--color-danger);"><i class="ti ti-x" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Wide doorway (32"+)</div>
+                <div style="color: var(--color-danger);"><i class="ti ti-x" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Lowered peephole</div>
+              </div>
+            </article>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 16px; padding: 12px 14px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); font-size: 13px; color: var(--color-text-secondary);">
+            <i class="ti ti-info-circle" style="font-size: 16px;" aria-hidden="true"></i>
+            <span>InclusiTrip provides accessibility info only — we don't handle bookings. Contact the hotel directly.</span>
+          </div>
+        </section>
+
+        <!-- Pre-trip support ------------------------------------------ -->
+        <section id="pretrip" class="section-card" style="background: #E1F5EE; border-color: #5DCAA5;">
+          <div class="section-card__header">
+            <div>
+              <div class="section-card__eyebrow" style="color: #0F6E56;">Pre-trip support for Aisha</div>
+              <h2 class="section-card__title" style="color: #085041;">Personalized prep</h2>
+              <p class="section-card__subtitle" style="color: #085041;">Based on your needs and traveler reports</p>
+            </div>
+            <button class="btn-ghost" style="border-color: var(--color-success); color: #0F6E56;">
+              <i class="ti ti-volume" aria-hidden="true"></i> Read aloud
+            </button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="background: white; border-radius: var(--border-radius-md); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start;">
+              <i class="ti ti-clock" style="font-size: 22px; color: var(--color-success); flex-shrink: 0;" aria-hidden="true"></i>
+              <div style="font-size: 13px;">
+                <div style="font-weight: 600; margin-bottom: 4px;">Quietest check-in window</div>
+                <div style="color: var(--color-text-secondary); line-height: 1.6;">After 8pm — lobby quietens, fewer crowds.</div>
+              </div>
+            </div>
+            <div style="background: white; border-radius: var(--border-radius-md); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start;">
+              <i class="ti ti-bed" style="font-size: 22px; color: var(--color-success); flex-shrink: 0;" aria-hidden="true"></i>
+              <div style="font-size: 13px;">
+                <div style="font-weight: 600; margin-bottom: 4px;">Request room location</div>
+                <div style="color: var(--color-text-secondary); line-height: 1.6;">Floor 4, away from elevator. Rooms 408–412 quietest.</div>
+              </div>
+            </div>
+            <div style="background: white; border-radius: var(--border-radius-md); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start;">
+              <i class="ti ti-tools-kitchen-2" style="font-size: 22px; color: var(--color-success); flex-shrink: 0;" aria-hidden="true"></i>
+              <div style="font-size: 13px;">
+                <div style="font-weight: 600; margin-bottom: 4px;">Dining peak times to avoid</div>
+                <div style="color: var(--color-text-secondary); line-height: 1.6;">Restaurant busiest 7–9am. Order GF 24h ahead.</div>
+              </div>
+            </div>
+            <div style="background: white; border-radius: var(--border-radius-md); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start;">
+              <i class="ti ti-device-tv" style="font-size: 22px; color: var(--color-success); flex-shrink: 0;" aria-hidden="true"></i>
+              <div style="font-size: 13px;">
+                <div style="font-weight: 600; margin-bottom: 4px;">In-room captions setup</div>
+                <div style="color: var(--color-text-secondary); line-height: 1.6;">TV menu → Settings → Accessibility → CC.</div>
+              </div>
+            </div>
+            <div style="background: white; border-radius: var(--border-radius-md); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start;">
+              <i class="ti ti-route" style="font-size: 22px; color: var(--color-success); flex-shrink: 0;" aria-hidden="true"></i>
+              <div style="font-size: 13px;">
+                <div style="font-weight: 600; margin-bottom: 4px;">Wayfinding tip</div>
+                <div style="color: var(--color-text-secondary); line-height: 1.6;">Use main entrance only. Side door is heavy.</div>
+              </div>
+            </div>
+            <div style="background: white; border-radius: var(--border-radius-md); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start;">
+              <i class="ti ti-phone" style="font-size: 22px; color: var(--color-success); flex-shrink: 0;" aria-hidden="true"></i>
+              <div style="font-size: 13px;">
+                <div style="font-weight: 600; margin-bottom: 4px;">Pre-arrival call script</div>
+                <div style="color: var(--color-text-secondary); line-height: 1.6;">Tap to copy a ready email confirming all 4 needs.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reviews --------------------------------------------------- -->
+        <section id="reviews" class="section-card">
+          <div class="section-card__header">
+            <div>
+              <h2 class="section-card__title">Reviews from travelers</h2>
+              <p class="section-card__subtitle">Reviews tagged with accessibility needs feed the scores above.</p>
+            </div>
+            <span style="font-size: 12px; color: var(--color-success); background: var(--color-success-light); padding: 4px 12px; border-radius: 14px; font-weight: 500;">
+              <i class="ti ti-circle-dot" style="font-size: 12px; vertical-align: -1px;" aria-hidden="true"></i> Live · updated 2 days ago
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 220px 1fr; gap: 24px; margin-bottom: 20px;">
+            <div>
+              <div style="font-size: 32px; font-weight: 600; line-height: 1;">4.7 <span style="font-size: 16px; color: var(--color-text-secondary); font-weight: 400;">/ 5</span></div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); margin: 6px 0 12px;">3,120 reviews</div>
+              <div style="display: flex; flex-direction: column; gap: 4px;">
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;"><span style="width: 30px;">★ 5</span><div style="flex: 1; background: var(--color-background-secondary); height: 6px; border-radius: 6px; overflow: hidden;"><div style="width: 81%; height: 100%; background: var(--gold); border-radius: 6px;"></div></div><span style="width: 28px; text-align: right; color: var(--color-text-secondary);">81%</span></div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;"><span style="width: 30px;">★ 4</span><div style="flex: 1; background: var(--color-background-secondary); height: 6px; border-radius: 6px; overflow: hidden;"><div style="width: 12%; height: 100%; background: var(--gold); border-radius: 6px;"></div></div><span style="width: 28px; text-align: right; color: var(--color-text-secondary);">12%</span></div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;"><span style="width: 30px;">★ 3</span><div style="flex: 1; background: var(--color-background-secondary); height: 6px; border-radius: 6px; overflow: hidden;"><div style="width: 5%; height: 100%; background: var(--gold); border-radius: 6px;"></div></div><span style="width: 28px; text-align: right; color: var(--color-text-secondary);">5%</span></div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;"><span style="width: 30px;">★ 2</span><div style="flex: 1; background: var(--color-background-secondary); height: 6px; border-radius: 6px; overflow: hidden;"><div style="width: 1%; height: 100%; background: var(--gold); border-radius: 6px;"></div></div><span style="width: 28px; text-align: right; color: var(--color-text-secondary);">1%</span></div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;"><span style="width: 30px;">★ 1</span><div style="flex: 1; background: var(--color-background-secondary); height: 6px; border-radius: 6px; overflow: hidden;"><div style="width: 1%; height: 100%; background: var(--gold); border-radius: 6px;"></div></div><span style="width: 28px; text-align: right; color: var(--color-text-secondary);">1%</span></div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size: 11px; color: var(--color-brand); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Filter by accessibility need</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;">
+                <span style="background: var(--color-brand); color: white; font-size: 12px; padding: 5px 14px; border-radius: 16px; font-weight: 500; cursor: pointer;">Mobility ×</span>
+                <span style="background: var(--color-brand); color: white; font-size: 12px; padding: 5px 14px; border-radius: 16px; font-weight: 500; cursor: pointer;">Sensory ×</span>
+                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">Visual</span>
+                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">Hearing</span>
+                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">Neurodivergent</span>
+                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">With caregiver</span>
+              </div>
+              <div style="font-size: 11px; color: var(--color-text-secondary); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Other filters</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <span style="background: var(--color-background-secondary); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-border-tertiary); cursor: pointer;">Verified</span>
+                <span style="background: var(--color-background-secondary); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-border-tertiary); cursor: pointer;">With photos</span>
+                <span style="background: var(--color-background-secondary); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-border-tertiary); cursor: pointer;">Solo</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: var(--color-brand-lighter); border: 0.5px solid var(--color-brand-border); border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+            <i class="ti ti-users" style="font-size: 16px; color: var(--color-brand);" aria-hidden="true"></i>
+            <span style="font-size: 12px; color: var(--color-brand-dark);"><strong>Showing reviews from travelers like Aisha</strong> — wheelchair + sensory needs · 12 matching reviews</span>
+          </div>
+
+          <div class="reviews-search">
+            <div class="reviews-search__field">
+              <i class="ti ti-search" aria-hidden="true"></i>
+              <input
+                type="search"
+                class="reviews-search__input"
+                placeholder="Search reviews — try “quiet”, “roll-in shower”, “breakfast”…"
+                aria-label="Search keywords in reviews"
+                autocomplete="off"
+              />
+              <button type="button" class="reviews-search__clear" aria-label="Clear review search" hidden>
+                <i class="ti ti-x" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="reviews-search__suggestions" aria-hidden="true">
+              <span class="reviews-search__suggestions-label">Try</span>
+              <button type="button" class="reviews-search__chip" data-term="quiet">quiet</button>
+              <button type="button" class="reviews-search__chip" data-term="roll-in shower">roll-in shower</button>
+              <button type="button" class="reviews-search__chip" data-term="staff">staff</button>
+              <button type="button" class="reviews-search__chip" data-term="breakfast">breakfast</button>
+              <button type="button" class="reviews-search__chip" data-term="elevator">elevator</button>
+            </div>
+            <div class="reviews-search__status" aria-live="polite"></div>
+          </div>
+
+          <div class="reviews-list">
+
+          <article class="review-card" style="border-top: 0.5px solid var(--color-border-tertiary); padding-top: 16px; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-success-light); color: #27500A; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">SB</div>
+              <div style="flex: 1;">
+                <div style="font-size: 14px; font-weight: 600;">Sarah B.</div>
+                <div style="font-size: 12px; color: var(--color-text-secondary);">★★★★★ &nbsp;·&nbsp; Verified booking &nbsp;·&nbsp; Mar 26</div>
+              </div>
+              <div style="display: flex; gap: 4px;">
+                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 500;">Mobility</span>
+                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 500;">Sensory</span>
+              </div>
+            </div>
+            <div style="font-size: 14px; font-weight: 600; margin: 6px 0 4px 0;">Finally a hotel that gets it right</div>
+            <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Roll-in shower worked exactly as described. Staff knew about accessibility before I arrived. Lobby noise was a real issue at breakfast though — earplugs saved me…</div>
+            <div style="display: flex; gap: 16px; margin-top: 10px; font-size: 12px; color: var(--color-text-secondary);">
+              <span><i class="ti ti-thumb-up" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Helpful (24)</span>
+              <span><i class="ti ti-thumb-down" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> (1)</span>
+            </div>
+          </article>
+
+          <article class="review-card" style="border-top: 0.5px solid var(--color-border-tertiary); padding-top: 16px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-background-secondary); color: var(--color-text-secondary); display: flex; align-items: center; justify-content: center; font-size: 13px;"><i class="ti ti-user" aria-hidden="true"></i></div>
+              <div style="flex: 1;">
+                <div style="font-size: 14px; font-weight: 600;">Anonymous</div>
+                <div style="font-size: 12px; color: var(--color-text-secondary);">★★★★☆ &nbsp;·&nbsp; Verified booking &nbsp;·&nbsp; Apr 12</div>
+              </div>
+              <div style="display: flex; gap: 4px;">
+                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 500;">Mobility</span>
+                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 500;">Sensory</span>
+              </div>
+            </div>
+            <div style="font-size: 14px; font-weight: 600; margin: 6px 0 4px 0;">Mostly accessible, a few rough edges</div>
+            <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Heavy side door is a real problem after 11pm — had to wait for staff. Otherwise the room was perfect for my chair, and they brought a sensory kit when I asked…</div>
+            <div style="display: flex; gap: 16px; margin-top: 10px; font-size: 12px; color: var(--color-text-secondary);">
+              <span><i class="ti ti-thumb-up" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> Helpful (18)</span>
+              <span><i class="ti ti-thumb-down" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> (0)</span>
+            </div>
+          </article>
+
+            <div class="reviews-empty" hidden>
+              <i class="ti ti-mood-empty" aria-hidden="true"></i>
+              <div class="reviews-empty__title">
+                No reviews mention <span>“</span><span class="reviews-empty__term"></span><span>”</span>
+              </div>
+              <div class="reviews-empty__hint">Try a shorter keyword or a different phrasing.</div>
+              <button type="button" class="reviews-empty__clear">Clear search</button>
+            </div>
+
+          </div>
+
+          <button class="btn-ghost" style="margin-top: 18px; width: 100%; justify-content: center;">
+            Show all 3,120 reviews <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </button>
+        </section>
+
+      </div>
+
+      <!-- Sticky sidebar (right column on desktop, slots after Overview when narrow) -->
+      <aside class="hotel-layout__sidebar">
+
+        <div class="sidebar-card sidebar-card--cream">
+          <div style="font-size: 11px; color: var(--color-brand); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600;">Your match score</div>
+          <div class="sidebar-card__score">
+            <span class="sidebar-card__score-num">78</span>
+            <span class="sidebar-card__score-out">/ 100</span>
+          </div>
+          <span style="display: inline-flex; align-items: center; gap: 4px; background: var(--color-success-light); color: #27500A; font-size: 11px; padding: 3px 10px; border-radius: 14px; font-weight: 600;">
+            <i class="ti ti-shield-check" style="font-size: 12px;" aria-hidden="true"></i> High confidence
+          </span>
+          <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; line-height: 1.5;">
+            Based on your 4 needs · 38 travelers like you reviewed this hotel.
+          </div>
+
+          <hr class="sidebar-card__divider" />
+
+          <div style="font-size: 12px; color: var(--color-text-secondary); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Key features for you</div>
+          <div class="sidebar-card__feature"><i class="ti ti-check" aria-hidden="true"></i> Step-free main entrance</div>
+          <div class="sidebar-card__feature"><i class="ti ti-check" aria-hidden="true"></i> Roll-in shower available</div>
+          <div class="sidebar-card__feature"><i class="ti ti-check" aria-hidden="true"></i> Visual fire alarm</div>
+          <div class="sidebar-card__feature"><i class="ti ti-check" aria-hidden="true"></i> Closed-captioned TVs</div>
+          <div class="sidebar-card__feature" style="color: var(--color-warn);"><i class="ti ti-alert-triangle" style="color: var(--color-warn);" aria-hidden="true"></i> Heavy side door after 11pm</div>
+
+          <button class="btn-primary" style="width: 100%; justify-content: center; margin-top: 16px;">
+            <i class="ti ti-phone" aria-hidden="true"></i> Contact hotel
+          </button>
+
+          <div class="sidebar-actions">
+            <button class="btn-ghost"><i class="ti ti-heart" aria-hidden="true"></i> Save</button>
+            <button class="btn-ghost"><i class="ti ti-share" aria-hidden="true"></i> Share</button>
+          </div>
+
+          <div style="font-size: 11px; color: var(--color-text-tertiary); text-align: center; margin-top: 12px; line-height: 1.5;">
+            We don't handle bookings. You'll book directly with the hotel.
+          </div>
+        </div>
+
+        <div class="sidebar-card sidebar-card--cream">
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 8px;">Where you'll be</div>
+          <div class="map-preview">
+            <i class="ti ti-map-pin-filled" aria-hidden="true"></i>
+          </div>
+          <div style="font-size: 13px; color: var(--color-text-primary);">1133 W Hastings St</div>
+          <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 2px;">Vancouver, BC · Coal Harbour</div>
+          <a href="#" style="font-size: 12px; color: var(--color-brand); text-decoration: none; margin-top: 8px; display: inline-block;">Open larger map →</a>
+        </div>
+
+        <div class="sidebar-card" style="border-left: 3px solid var(--teal);">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <i class="ti ti-info-circle" style="font-size: 18px; color: var(--color-brand);" aria-hidden="true"></i>
+            <div style="font-size: 13px; font-weight: 600; color: var(--color-text-primary);">How InclusiTrip works</div>
+          </div>
+          <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.6;">
+            We score hotels against <strong>your</strong> accessibility profile by combining provider data with verified traveler reports — flagging mismatches so you can plan with confidence.
+          </p>
+        </div>
+
+      </aside>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__cols">
+        <div class="site-footer__col">
+          <a href="index.html" class="site-header__brand" style="font-size: 16px;">
+            <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
+            InclusiTrip
+          </a>
+          <p class="site-footer__brand-blurb">
+            Travel info that actually reflects accessibility — built with and for disabled travelers.
+          </p>
+        </div>
+        <div class="site-footer__col">
+          <h4>Travelers</h4>
+          <ul>
+            <li><a href="#">How it works</a></li>
+            <li><a href="#">Build your profile</a></li>
+            <li><a href="#">Saved hotels</a></li>
+            <li><a href="#">Help center</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h4>Hotels</h4>
+          <ul>
+            <li><a href="#">List your property</a></li>
+            <li><a href="#">Verify accessibility</a></li>
+            <li><a href="#">Partner login</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Accessibility statement</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>© 2026 InclusiTrip · We don't handle bookings.</span>
+        <span><a href="#" style="color: inherit; text-decoration: none;">Privacy</a> · <a href="#" style="color: inherit; text-decoration: none;">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var section = document.getElementById('reviews');
+      if (!section) return;
+
+      var input = section.querySelector('.reviews-search__input');
+      var clearBtn = section.querySelector('.reviews-search__clear');
+      var status = section.querySelector('.reviews-search__status');
+      var chips = section.querySelectorAll('.reviews-search__chip');
+      var empty = section.querySelector('.reviews-empty');
+      var emptyTerm = section.querySelector('.reviews-empty__term');
+      var emptyClear = section.querySelector('.reviews-empty__clear');
+      var cards = Array.prototype.slice.call(section.querySelectorAll('.review-card'));
+
+      // Cache the original markup of each card so we can restore + re-highlight cleanly.
+      var originals = cards.map(function (card) { return card.innerHTML; });
+
+      function escapeRegExp(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, function (c) {
+          return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+        });
+      }
+
+      // Highlight matches inside text nodes only (between '>' and '<'), so
+      // we never mangle attribute values or tag names.
+      function highlight(html, query) {
+        if (!query) return html;
+        var pattern = new RegExp(escapeRegExp(query), 'gi');
+        return html.replace(/>([^<]+)</g, function (full, text) {
+          return '>' + text.replace(pattern, function (match) {
+            return '<mark class="review-hit">' + match + '</mark>';
+          }) + '<';
+        });
+      }
+
+      function update() {
+        var query = input.value.trim();
+        var lower = query.toLowerCase();
+        var visible = 0;
+
+        cards.forEach(function (card, i) {
+          // Use the cached original text (textContent of original markup) for matching
+          // so we don't search inside <mark> tags from a previous pass.
+          var temp = document.createElement('div');
+          temp.innerHTML = originals[i];
+          var text = temp.textContent.toLowerCase();
+          var matches = !lower || text.indexOf(lower) !== -1;
+
+          if (matches) {
+            card.hidden = false;
+            card.innerHTML = query ? highlight(originals[i], query) : originals[i];
+            visible++;
+          } else {
+            card.hidden = true;
+            card.innerHTML = originals[i];
+          }
+        });
+
+        clearBtn.hidden = !query;
+
+        if (!query) {
+          status.textContent = '';
+          empty.hidden = true;
+        } else if (visible === 0) {
+          status.textContent = 'No matches.';
+          emptyTerm.textContent = query;
+          empty.hidden = false;
+        } else {
+          status.innerHTML =
+            '<strong>' + visible + '</strong> review' + (visible === 1 ? '' : 's') +
+            ' match \u201C' + escapeHtml(query) + '\u201D';
+          empty.hidden = true;
+        }
+      }
+
+      input.addEventListener('input', update);
+
+      clearBtn.addEventListener('click', function () {
+        input.value = '';
+        input.focus();
+        update();
+      });
+
+      emptyClear.addEventListener('click', function () {
+        input.value = '';
+        input.focus();
+        update();
+      });
+
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          input.value = chip.getAttribute('data-term') || '';
+          input.focus();
+          update();
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
