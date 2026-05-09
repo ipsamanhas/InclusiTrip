@@ -208,7 +208,7 @@
 
       <p class="subtitle">Welcome back. Your accessible journey awaits.</p>
 
-      <form>
+      <form id="login-form">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" autocomplete="username" required />
 
@@ -236,5 +236,15 @@
       </p>
     </section>
   </main>
+
+  <script>
+    const loginForm = document.getElementById("login-form");
+
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      localStorage.setItem("inclusitripSignedIn", "true");
+      window.location.href = "/";
+    });
+  </script>
 </body>
 </html>

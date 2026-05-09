@@ -108,6 +108,11 @@
       transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
+    button.auth-link,
+    button.auth-button {
+      font-family: inherit;
+    }
+
     .auth-link {
       color: var(--white);
       padding: 0.7rem 1rem;
@@ -343,6 +348,121 @@
       font-size: 0.95rem;
     }
 
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(23,23,44,0.72);
+      padding: 1rem;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .preferences-modal {
+      width: min(960px, 100%);
+      max-height: min(88vh, 900px);
+      overflow: auto;
+      background: var(--white);
+      color: var(--ink);
+      border-radius: 8px;
+      box-shadow: 0 28px 80px rgba(10, 15, 32, 0.38);
+      border-top: 6px solid var(--gold);
+    }
+
+    .modal-header,
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem clamp(1rem, 3vw, 2rem);
+    }
+
+    .modal-header {
+      border-bottom: 2px solid #eee8dc;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--navy);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.1;
+    }
+
+    .icon-button {
+      width: 2.75rem;
+      min-height: 2.75rem;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--navy);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .preferences-form {
+      padding: 1.5rem clamp(1rem, 3vw, 2rem);
+    }
+
+    .preference-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .preference-group {
+      margin: 0;
+      padding: 1rem;
+      border: 2px solid #eee8dc;
+      border-radius: 8px;
+      background: #fbf8f2;
+    }
+
+    .preference-group legend {
+      padding: 0 0.35rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      color: var(--navy);
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin: 0.75rem 0;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .checkbox-label input {
+      width: 1.1rem;
+      min-height: 1.1rem;
+      margin-top: 0.25rem;
+      padding: 0;
+      flex: 0 0 auto;
+    }
+
+    .text-field {
+      margin-top: 1rem;
+    }
+
+    .text-field input {
+      padding-left: 1rem;
+      min-height: 3rem;
+    }
+
+    .modal-footer {
+      border-top: 2px solid #eee8dc;
+      background: #fbf8f2;
+    }
+
     a:focus,
     button:focus,
     input:focus {
@@ -393,6 +513,15 @@
       .panel-actions {
         grid-template-columns: 1fr;
       }
+
+      .preference-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-footer {
+        flex-direction: column-reverse;
+        align-items: stretch;
+      }
     }
   </style>
 </head>
@@ -403,30 +532,24 @@
     <nav class="topbar" aria-label="Main navigation">
       <a class="brand" href="/" aria-label="InclusiTrip home">
         <svg class="logo-mark" viewBox="0 0 96 96" role="img" aria-label="InclusiTrip airplane and wheelchair icon">
-          <defs>
-            <linearGradient id="simple-logo-bg" x1="14" y1="9" x2="82" y2="88" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#168b8d" />
-              <stop offset="1" stop-color="#0c4d53" />
-            </linearGradient>
-          </defs>
-          <rect width="96" height="96" rx="24" fill="url(#simple-logo-bg)" />
+          <rect x="10" y="7" width="76" height="82" rx="22" fill="#0c5d61" />
 
-          <path d="M26 28 H67 C77 28 84 34 86 41 C82 48 75 52 66 52 H26 Z" fill="#ffffff" />
-          <path d="M50 28 L36 14 C34 12 36 10 39 11 L67 28 Z" fill="#ffffff" />
-          <path d="M55 52 L46 66 C45 68 47 70 49 70 H58 L75 52 Z" fill="#ffffff" />
-          <path d="M31 52 L22 65 H43 L51 52 Z" fill="#ffffff" />
-          <path d="M26 28 L18 20 H32 Z" fill="#ffffff" />
+          <g transform="translate(19 13) scale(0.62)">
+            <path d="M35 25 C33 22 36 19 39 21 L59 34 L70 34 C77 34 84 38 87 45 C83 51 76 55 68 55 L52 55 L41 68 C39 70 36 68 37 65 L43 55 L27 55 C23 55 21 53 20 50 L15 39 C14 36 17 34 20 36 L30 43 L42 41 Z" fill="#ffffff" />
+          </g>
 
-          <circle cx="40" cy="50" r="5.2" fill="#f5ad37" />
-          <path d="M40 58 V70 H56" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M52 70 H65 L75 85" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
-          <circle cx="40" cy="76" r="15" fill="none" stroke="#f5ad37" stroke-width="7" />
-          <path d="M75 85 L82 80" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+          <g transform="translate(16 20) scale(0.62)">
+            <circle cx="42" cy="59" r="5.6" fill="#f5ad37" />
+            <path d="M42 67 L42 78 L58 78" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M57 78 L69 92" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M41 66 C30 68 23 78 25 89 C27 101 42 106 53 99 C59 95 63 89 64 82" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+            <path d="M69 92 L76 87" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+          </g>
         </svg>
         <span class="brand-name">InclusiTrip</span>
       </a>
 
-      <div class="auth-actions" aria-label="Account actions">
+      <div class="auth-actions" id="auth-actions" aria-label="Account actions">
         <a href="/login" class="auth-link">Log In</a>
         <a href="/create-account" class="auth-button">Sign Up</a>
       </div>
@@ -437,18 +560,13 @@
         <div class="badge">WCAG 2.2 AA compliant</div>
 
         <h1 id="home-heading">
-          Where will your next journey <span>take you?</span>
+          Plan accessible travel with <span>confidence</span>
         </h1>
 
         <p class="lede">
-          Search accessible hotels and travel services as a guest, then save your preferences when you are ready.
+          Personalized recommendations and verified accessibility information for every step of your journey.
         </p>
 
-        <div class="hero-features" aria-label="Accessibility features">
-          <div class="feature">Wheelchair access</div>
-          <div class="feature">Sensory-friendly</div>
-          <div class="feature">Dietary support</div>
-        </div>
       </section>
 
       <section class="search-panel" aria-labelledby="search-heading">
@@ -476,7 +594,7 @@
           </fieldset>
 
           <div class="panel-actions">
-            <button type="button" class="btn btn-secondary">Modify Preferences</button>
+            <button type="button" class="btn btn-secondary" id="open-preferences">Modify Preferences</button>
             <button type="submit" class="btn btn-primary">Search Hotels</button>
           </div>
         </form>
@@ -487,5 +605,143 @@
       </section>
     </main>
   </header>
+
+  <div class="modal-backdrop" id="preferences-modal" role="dialog" aria-modal="true" aria-labelledby="preferences-title" hidden>
+    <section class="preferences-modal">
+      <div class="modal-header">
+        <h2 id="preferences-title">Accessibility Preferences</h2>
+        <button type="button" class="icon-button" id="close-preferences" aria-label="Close preferences">×</button>
+      </div>
+
+      <form class="preferences-form">
+        <div class="preference-grid">
+          <fieldset class="preference-group">
+            <legend>Mobility</legend>
+            <label class="checkbox-label"><input type="checkbox" name="wheelchair_accessible" /> Wheelchair accessible</label>
+            <label class="checkbox-label"><input type="checkbox" name="short_walking_distances" /> Short walking distances</label>
+            <label class="checkbox-label"><input type="checkbox" name="long_walking_distances" /> Long walking distances</label>
+            <label class="checkbox-label"><input type="checkbox" name="remote_controlled_doors" /> Remote controlled doors</label>
+            <label class="checkbox-label"><input type="checkbox" name="remote_controlled_curtains" /> Remote controlled curtains</label>
+            <label class="checkbox-label"><input type="checkbox" name="remote_controlled_lights" /> Remote controlled lights</label>
+            <label class="checkbox-label"><input type="checkbox" name="ramp_access" /> Ramp access</label>
+            <label class="checkbox-label"><input type="checkbox" name="elevator_access" /> Elevator access</label>
+            <label class="checkbox-label"><input type="checkbox" name="accessible_bathroom" /> Accessible bathroom</label>
+            <label class="checkbox-label"><input type="checkbox" name="wide_hallways" /> Wide hallways</label>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>Food/Diet</legend>
+            <label class="checkbox-label"><input type="checkbox" name="non_vegetarian" /> Non-vegetarian</label>
+            <label class="checkbox-label"><input type="checkbox" name="pescatarian" /> Pescatarian</label>
+            <label class="checkbox-label"><input type="checkbox" name="vegetarian" /> Vegetarian</label>
+            <label class="checkbox-label"><input type="checkbox" name="vegan" /> Vegan</label>
+            <label class="checkbox-label"><input type="checkbox" name="gluten_free" /> Gluten free</label>
+            <label class="checkbox-label"><input type="checkbox" name="halal" /> Halal</label>
+            <label class="checkbox-label"><input type="checkbox" name="kosher" /> Kosher</label>
+            <div class="text-field">
+              <label for="allergy_accommodations">Allergy accommodations</label>
+              <input type="text" id="allergy_accommodations" name="allergy_accommodations" placeholder="e.g., nuts, shellfish, dairy" />
+            </div>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>Language/Speech Accommodations</legend>
+            <label class="checkbox-label"><input type="checkbox" name="hearing_impaired_support" /> Hearing impaired support</label>
+            <label class="checkbox-label"><input type="checkbox" name="speech_impaired_support" /> Speech impaired support</label>
+            <label class="checkbox-label"><input type="checkbox" name="sign_language" /> Sign language</label>
+            <label class="checkbox-label"><input type="checkbox" name="captions" /> Captions</label>
+            <div class="text-field">
+              <label for="languages">Languages</label>
+              <input type="text" id="languages" name="languages" placeholder="e.g., English, French, ASL" />
+            </div>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>Sensory Needs</legend>
+            <label class="checkbox-label"><input type="checkbox" name="dimly_lit_spaces" /> Dimly lit spaces</label>
+            <label class="checkbox-label"><input type="checkbox" name="quiet_rooms" /> Quiet rooms</label>
+            <label class="checkbox-label"><input type="checkbox" name="sensory_rooms" /> Sensory rooms</label>
+            <label class="checkbox-label"><input type="checkbox" name="noise_cancelling_support" /> Noise cancelling support</label>
+            <label class="checkbox-label"><input type="checkbox" name="weighted_blankets" /> Weighted blankets</label>
+            <label class="checkbox-label"><input type="checkbox" name="fidget_tools" /> Fidget tools</label>
+            <label class="checkbox-label"><input type="checkbox" name="aromatherapy_free_rooms" /> Aromatherapy-free rooms</label>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>Cognitive Needs</legend>
+            <label class="checkbox-label"><input type="checkbox" name="ibcces_certification" /> IBCCES certification</label>
+            <label class="checkbox-label"><input type="checkbox" name="clear_wayfinding" /> Clear wayfinding</label>
+            <label class="checkbox-label"><input type="checkbox" name="staff_disability_awareness_training" /> Staff disability awareness training</label>
+          </fieldset>
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancel-preferences">Cancel</button>
+        <button type="button" class="btn btn-primary" id="save-preferences">Save Preferences</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const openPreferencesButton = document.getElementById("open-preferences");
+    const preferencesModal = document.getElementById("preferences-modal");
+    const closePreferencesButton = document.getElementById("close-preferences");
+    const cancelPreferencesButton = document.getElementById("cancel-preferences");
+    const savePreferencesButton = document.getElementById("save-preferences");
+    const authActions = document.getElementById("auth-actions");
+
+    function renderAuthActions() {
+      const isSignedIn = localStorage.getItem("inclusitripSignedIn") === "true";
+
+      if (isSignedIn) {
+        authActions.innerHTML = `
+          <a href="#" class="auth-link">My Profile</a>
+          <button type="button" class="auth-button" id="logout-button">Log Out</button>
+        `;
+
+        document.getElementById("logout-button").addEventListener("click", () => {
+          localStorage.removeItem("inclusitripSignedIn");
+          renderAuthActions();
+        });
+      } else {
+        authActions.innerHTML = `
+          <a href="/login" class="auth-link">Log In</a>
+          <a href="/create-account" class="auth-button">Sign Up</a>
+        `;
+      }
+    }
+
+    function openPreferences() {
+      preferencesModal.hidden = false;
+      preferencesModal.classList.add("is-open");
+      closePreferencesButton.focus();
+    }
+
+    function closePreferences() {
+      preferencesModal.classList.remove("is-open");
+      preferencesModal.hidden = true;
+      openPreferencesButton.focus();
+    }
+
+    openPreferencesButton.addEventListener("click", openPreferences);
+    closePreferencesButton.addEventListener("click", closePreferences);
+    cancelPreferencesButton.addEventListener("click", closePreferences);
+    savePreferencesButton.addEventListener("click", closePreferences);
+
+    preferencesModal.addEventListener("click", (event) => {
+      if (event.target === preferencesModal) {
+        closePreferences();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !preferencesModal.hidden) {
+        closePreferences();
+      }
+    });
+
+    renderAuthActions();
+  </script>
 </body>
 </html>
