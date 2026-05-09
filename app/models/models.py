@@ -1,6 +1,6 @@
 from __future__ import annotations
 import uuid
-from typing import Dict, List, Optional
+from typing import List, Optional
 from pydantic import BaseModel, EmailStr, Field
 
 
@@ -93,6 +93,20 @@ class Hotel(BaseModel):
     rating: float = Field(ge=0, le=5)
     accessibility_features: HotelAccessibilityFeatures
     reviews: List[Review] = Field(default_factory=list)
+
+
+class CreateAccountRequest(BaseModel):
+    name: str = Field(min_length=1)
+    email: EmailStr
+    password: str = Field(min_length=8)
+
+
+class UserResponse(BaseModel):
+    """Safe user representation that excludes the password."""
+    id: uuid.UUID
+    name: str
+    email: EmailStr
+    accessibility_profile: Optional[AccessibilityProfile] = None
 
 
 class SearchRequest(BaseModel):

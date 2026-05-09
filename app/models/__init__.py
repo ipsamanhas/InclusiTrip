@@ -1,7 +1,7 @@
 from app.models.models import (
-    AccessibilityOptions,
     AccessibilityProfile,
     CognitiveNeeds,
+    CreateAccountRequest,
     DietaryNeeds,
     Hotel,
     HotelAccessibilityFeatures,
@@ -12,12 +12,13 @@ from app.models.models import (
     SensoryNeeds,
     SpeechNeeds,
     User,
+    UserResponse,
 )
 
 __all__ = [
-    "AccessibilityOptions",
     "AccessibilityProfile",
     "CognitiveNeeds",
+    "CreateAccountRequest",
     "DietaryNeeds",
     "Hotel",
     "HotelAccessibilityFeatures",
@@ -28,4 +29,5 @@ __all__ = [
     "SensoryNeeds",
     "SpeechNeeds",
     "User",
+    "UserResponse",
 ]
