@@ -81,9 +81,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Frontend build output
-frontend/dist/
-frontend/build/
 
 # =========================
 # Misc
