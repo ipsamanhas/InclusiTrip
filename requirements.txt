@@ -1,0 +1,6 @@
+fastapi[standard]==0.136.1
+python-dotenv
+datetime
+pydantic
+numpy==2.3.0
+pandas==2.3.0
