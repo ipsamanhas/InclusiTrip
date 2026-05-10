@@ -134,14 +134,14 @@ REVIEWS = [
         hotel_id=_hotel_id(1),
         rating=5,
         accessibility_category="mobility",
-        comment="Wide hallways, ramps, and the accessible bathroom were all ready at check-in.",
+        comment="Step-free access, wide hallways, and the accessible bathroom were all ready at check-in.",
     ),
     Review(
         id=uuid.UUID("20000000-0000-0000-0000-000000000002"),
         hotel_id=_hotel_id(2),
-        rating=4,
+        rating=5,
         accessibility_category="sensory",
-        comment="Quiet rooms were away from the elevators and the lighting was easy to adjust.",
+        comment="Step-free access, wide hallways, and accessible bathrooms made the stay feel effortless.",
     ),
     Review(
         id=uuid.UUID("20000000-0000-0000-0000-000000000003"),
@@ -164,6 +164,13 @@ REVIEWS = [
         accessibility_category="cognitive",
         comment="Clear signs and trained staff helped reduce travel stress.",
     ),
+    Review(
+        id=uuid.UUID("20000000-0000-0000-0000-000000000006"),
+        hotel_id=_hotel_id(18),
+        rating=4,
+        accessibility_category="speech",
+        comment="Captions, hearing support, and multilingual staff made front-desk communication simple.",
+    ),
 ]
 
 
@@ -173,7 +180,7 @@ HOTELS = [
         name="Harbour Step-Free Suites",
         location="Vancouver, Canada",
         description="Waterfront hotel with strong mobility access and quiet upper-floor rooms.",
-        rating=4.8,
+        rating=4.5,
         accessibility_features=HotelAccessibilityFeatures(
             mobility=MobilityNeeds(
                 wheelchair_accessible=True,
@@ -550,7 +557,7 @@ HOTELS = [
         name="Toronto Caption Suites",
         location="Toronto, Canada",
         description="Accessible downtown suites with captions, elevators, and allergy-aware meals.",
-        rating=4.5,
+        rating=4.1,
         accessibility_features=HotelAccessibilityFeatures(
             mobility=MobilityNeeds(
                 wheelchair_accessible=True,

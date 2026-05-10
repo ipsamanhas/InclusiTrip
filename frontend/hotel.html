@@ -69,7 +69,7 @@
           <div class="hotel-hero__meta">
             <span class="hotel-hero__rating">
               <i class="ti ti-star-filled" aria-hidden="true"></i> 4.7
-              <span style="color: rgba(243, 237, 226, 0.75); font-weight: 400;">(3,120 reviews)</span>
+              <span id="hotel-summary-review-count" style="color: rgba(243, 237, 226, 0.75); font-weight: 400;">(3,120 reviews)</span>
             </span>
             <span>·</span>
             <span><i class="ti ti-map-pin" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> 1133 W Hastings St, Vancouver, BC</span>
@@ -478,8 +478,8 @@
 
           <div style="display: grid; grid-template-columns: 220px 1fr; gap: 24px; margin-bottom: 20px;">
             <div>
-              <div style="font-size: 32px; font-weight: 600; line-height: 1;">4.7 <span style="font-size: 16px; color: var(--color-text-secondary); font-weight: 400;">/ 5</span></div>
-              <div style="font-size: 12px; color: var(--color-text-secondary); margin: 6px 0 12px;">3,120 reviews</div>
+              <div style="font-size: 32px; font-weight: 600; line-height: 1;"><span id="review-summary-rating">4.7</span> <span style="font-size: 16px; color: var(--color-text-secondary); font-weight: 400;">/ 5</span></div>
+              <div id="review-summary-count" style="font-size: 12px; color: var(--color-text-secondary); margin: 6px 0 12px;">3,120 reviews</div>
               <div style="display: flex; flex-direction: column; gap: 4px;">
                 <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;"><span style="width: 30px;">★ 5</span><div style="flex: 1; background: var(--color-background-secondary); height: 6px; border-radius: 6px; overflow: hidden;"><div style="width: 81%; height: 100%; background: var(--gold); border-radius: 6px;"></div></div><span style="width: 28px; text-align: right; color: var(--color-text-secondary);">81%</span></div>
                 <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;"><span style="width: 30px;">★ 4</span><div style="flex: 1; background: var(--color-background-secondary); height: 6px; border-radius: 6px; overflow: hidden;"><div style="width: 12%; height: 100%; background: var(--gold); border-radius: 6px;"></div></div><span style="width: 28px; text-align: right; color: var(--color-text-secondary);">12%</span></div>
@@ -491,12 +491,12 @@
             <div>
               <div style="font-size: 11px; color: var(--color-brand); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Filter by accessibility need</div>
               <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;">
-                <span style="background: var(--color-brand); color: white; font-size: 12px; padding: 5px 14px; border-radius: 16px; font-weight: 500; cursor: pointer;">Mobility ×</span>
-                <span style="background: var(--color-brand); color: white; font-size: 12px; padding: 5px 14px; border-radius: 16px; font-weight: 500; cursor: pointer;">Sensory ×</span>
-                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">Visual</span>
-                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">Hearing</span>
-                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">Neurodivergent</span>
-                <span style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">With caregiver</span>
+                <span id="review-filter-mobility" style="background: var(--color-brand); color: white; font-size: 12px; padding: 5px 14px; border-radius: 16px; font-weight: 500; cursor: pointer;">Mobility ×</span>
+                <span id="review-filter-sensory" style="background: var(--color-brand); color: white; font-size: 12px; padding: 5px 14px; border-radius: 16px; font-weight: 500; cursor: pointer;">Sensory ×</span>
+                <span id="review-filter-visual" style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">Visual</span>
+                <span id="review-filter-hearing" style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">Hearing</span>
+                <span id="review-filter-neurodivergent" style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">Neurodivergent</span>
+                <span id="review-filter-with-caregiver" style="background: var(--color-brand-light); color: var(--color-brand-dark); font-size: 12px; padding: 5px 14px; border-radius: 16px; border: 0.5px solid var(--color-brand-border); cursor: pointer;">With caregiver</span>
               </div>
               <div style="font-size: 11px; color: var(--color-text-secondary); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Other filters</div>
               <div style="display: flex; flex-wrap: wrap; gap: 6px;">
@@ -591,7 +591,7 @@
           </div>
 
           <button id="show-all-reviews-btn" class="btn-ghost" style="margin-top: 18px; width: 100%; justify-content: center;">
-            Show all 3,120 reviews <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            <span id="show-all-reviews-label">Show all 3,120 reviews</span> <i class="ti ti-arrow-right" aria-hidden="true"></i>
           </button>
         </section>
 
@@ -1014,6 +1014,7 @@
         var location = hotel.location || '';
         resolvedLocation = location || resolvedLocation;
         var rating = typeof hotel.rating === 'number' ? hotel.rating.toFixed(1) : 'N/A';
+        var reviewCount = Array.isArray(hotel.reviews) ? hotel.reviews.length : 0;
         var match = typeof selected.match_percentage === 'number' ? selected.match_percentage : null;
 
         document.title = hotelName + ' · InclusiTrip';
@@ -1037,6 +1038,31 @@
 
         var overviewCopy = document.querySelector('#overview p');
         if (overviewCopy && hotel.description) overviewCopy.textContent = hotel.description;
+
+        var summaryReviewCount = document.getElementById('hotel-summary-review-count');
+        if (summaryReviewCount) {
+          summaryReviewCount.textContent = '(' + reviewCount.toLocaleString() + ' ' + (reviewCount === 1 ? 'review' : 'reviews') + ')';
+        }
+
+        var reviewSummaryRating = document.getElementById('review-summary-rating');
+        if (reviewSummaryRating) {
+          reviewSummaryRating.textContent = rating;
+        }
+
+        var reviewSummaryCount = document.getElementById('review-summary-count');
+        if (reviewSummaryCount) {
+          reviewSummaryCount.textContent = reviewCount.toLocaleString() + ' ' + (reviewCount === 1 ? 'review' : 'reviews');
+        }
+
+        var reviewsLikeCopy = document.getElementById('reviews-like-copy');
+        if (reviewsLikeCopy) {
+          reviewsLikeCopy.innerHTML = '<strong>Showing reviews from travelers like ' + hotelName + '</strong> — accessibility needs · ' + reviewCount + ' matching ' + (reviewCount === 1 ? 'review' : 'reviews');
+        }
+
+        var showAllReviewsLabel = document.getElementById('show-all-reviews-label');
+        if (showAllReviewsLabel) {
+          showAllReviewsLabel.textContent = 'Show all ' + reviewCount.toLocaleString() + ' ' + (reviewCount === 1 ? 'review' : 'reviews');
+        }
 
         var scoreNum = document.getElementById('sidebar-score-num');
         if (scoreNum && typeof selected.match_percentage === 'number') {
@@ -1161,8 +1187,58 @@
       var viewingName = document.getElementById('viewing-name');
       var pretripName = document.getElementById('pretrip-name');
       var reviewsLikeCopy = document.getElementById('reviews-like-copy');
+      var travelerAccessibilityProfile = null;
+      var guestAccessibilityProfileKey = 'inclusitripGuestAccessibilityProfile';
       var signedIn = localStorage.getItem('inclusitripSignedIn') === 'true';
       var userId = localStorage.getItem('inclusitripUserId');
+
+      function syncReviewFilterChips() {
+        var profile = travelerAccessibilityProfile;
+        if (!profile) {
+          try {
+            var guestProfile = JSON.parse(sessionStorage.getItem(guestAccessibilityProfileKey) || 'null');
+            profile = guestProfile && typeof guestProfile === 'object' ? guestProfile : null;
+          } catch (error) {
+            profile = null;
+          }
+        }
+        if (!profile) {
+          try {
+            var activeSearch = JSON.parse(sessionStorage.getItem('inclusitripActiveSearch') || 'null');
+            profile = activeSearch && activeSearch.accessibility_needs ? activeSearch.accessibility_needs : null;
+          } catch (error) {
+            profile = null;
+          }
+        }
+
+        function categoryHasSelection(categoryName) {
+          var category = profile && profile[categoryName];
+          if (!category || typeof category !== 'object') return false;
+          return Object.keys(category).some(function (key) {
+            var value = category[key];
+            return value === true || (Array.isArray(value) && value.length > 0);
+          });
+        }
+
+        function setChipState(chip, label, selected) {
+          if (!chip) return;
+          chip.textContent = selected ? label + ' ×' : label;
+          chip.style.background = selected ? 'var(--color-brand)' : 'var(--color-brand-light)';
+          chip.style.color = selected ? 'white' : 'var(--color-brand-dark)';
+          chip.style.border = selected ? '0.5px solid transparent' : '0.5px solid var(--color-brand-border)';
+          chip.style.boxShadow = selected ? '0 4px 12px rgba(12, 93, 97, 0.14)' : 'none';
+          chip.style.fontWeight = selected ? '500' : '400';
+        }
+
+        setChipState(document.getElementById('review-filter-mobility'), 'Mobility', categoryHasSelection('mobility'));
+        setChipState(document.getElementById('review-filter-sensory'), 'Sensory', categoryHasSelection('sensory'));
+        setChipState(document.getElementById('review-filter-visual'), 'Visual', false);
+        setChipState(document.getElementById('review-filter-hearing'), 'Hearing', categoryHasSelection('speech'));
+        setChipState(document.getElementById('review-filter-neurodivergent'), 'Neurodivergent', categoryHasSelection('cognitive'));
+        setChipState(document.getElementById('review-filter-with-caregiver'), 'With caregiver', false);
+      }
+
+      window.__inclusitripSyncReviewFilters = syncReviewFilterChips;
 
       function applyUserName(name) {
         var displayName = name && String(name).trim() ? String(name).trim() : 'Traveler';
@@ -1183,6 +1259,7 @@
 
       if (!signedIn || !userId) {
         applyUserName('Traveler');
+        try { window.__inclusitripSyncReviewFilters && window.__inclusitripSyncReviewFilters(); } catch (e) {}
         return;
       }
 
@@ -1192,11 +1269,16 @@
           return response.json();
         })
         .then(function (data) {
+          travelerAccessibilityProfile = data && data.accessibility_profile ? data.accessibility_profile : null;
+          syncReviewFilterChips();
           applyUserName(data && data.name ? data.name : 'Traveler');
         })
         .catch(function () {
           applyUserName('Traveler');
+          syncReviewFilterChips();
         });
+
+      syncReviewFilterChips();
     })();
   </script>
 
