@@ -12,21 +12,33 @@
 
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="/" class="site-header__brand">
-        <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
-        InclusiTrip
+      <a href="/" class="site-header__brand" aria-label="InclusiTrip home">
+        <svg class="site-header__brand-svg" viewBox="0 0 96 96" role="img" aria-hidden="true" focusable="false">
+          <rect x="10" y="7" width="76" height="82" rx="22" fill="#0c5d61" />
+          <g transform="translate(19 13) scale(0.62)">
+            <path d="M35 25 C33 22 36 19 39 21 L59 34 L70 34 C77 34 84 38 87 45 C83 51 76 55 68 55 L52 55 L41 68 C39 70 36 68 37 65 L43 55 L27 55 C23 55 21 53 20 50 L15 39 C14 36 17 34 20 36 L30 43 L42 41 Z" fill="#ffffff" />
+          </g>
+          <g transform="translate(16 20) scale(0.62)">
+            <circle cx="42" cy="59" r="5.6" fill="#f5ad37" />
+            <path d="M42 67 L42 78 L58 78" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M57 78 L69 92" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M41 66 C30 68 23 78 25 89 C27 101 42 106 53 99 C59 95 63 89 64 82" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+            <path d="M69 92 L76 87" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+          </g>
+        </svg>
+        <span class="site-header__brand-text">InclusiTrip</span>
       </a>
 
       <div class="search-pill" role="search">
         <div class="search-pill__field">
           <span class="search-pill__label">Where</span>
-          <span class="search-pill__value">Vancouver, BC</span>
+          <span id="search-pill-where" class="search-pill__value">Vancouver, BC</span>
         </div>
         <div class="search-pill__field">
           <span class="search-pill__label">Travelers</span>
-          <span class="search-pill__value">2 adults</span>
+          <span id="search-pill-travelers" class="search-pill__value">2 adults</span>
         </div>
-        <button class="search-pill__btn" aria-label="Search">
+        <button id="search-pill-go" class="search-pill__btn" aria-label="Search">
           <i class="ti ti-search" aria-hidden="true"></i>
         </button>
       </div>
@@ -36,7 +48,7 @@
         <a href="#">Trips</a>
         <a href="#">Help</a>
       </nav>
-      <button class="site-header__profile" type="button" aria-label="My profile">A</button>
+      <button id="hotel-profile-btn" class="site-header__profile" type="button" aria-label="My profile">A</button>
     </div>
   </header>
 
@@ -45,7 +57,7 @@
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span class="breadcrumb__sep">›</span>
-      <a href="#">Vancouver, BC</a>
+      <a id="breadcrumb-destination" href="/hotels-search">Destination</a>
       <span class="breadcrumb__sep">›</span>
       <span style="color: var(--color-text-primary);">Pinnacle Hotel Harbourfront</span>
     </nav>
@@ -62,7 +74,7 @@
             <span>·</span>
             <span><i class="ti ti-map-pin" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> 1133 W Hastings St, Vancouver, BC</span>
             <span>·</span>
-            <a href="#" style="color: var(--gold); text-decoration: underline; text-underline-offset: 3px;">Show on map</a>
+            <a id="hero-map-link" href="#" style="color: var(--gold); text-decoration: underline; text-underline-offset: 3px;">Show on map</a>
           </div>
         </div>
         <div class="hotel-hero__actions">
@@ -97,9 +109,9 @@
 
     <div class="viewing-as" role="region" aria-label="Personalization">
       <div class="viewing-as__left">
-        <div class="viewing-as__avatar">A</div>
+        <div id="viewing-avatar" class="viewing-as__avatar">A</div>
         <div>
-          <div style="font-size: 13px; color: var(--color-brand-dark); font-weight: 500;">Viewing as Aisha</div>
+          <div id="viewing-name" style="font-size: 13px; color: var(--color-brand-dark); font-weight: 500;">Viewing as Traveler</div>
           <div style="font-size: 12px; color: var(--color-brand);">Wheelchair · Low-noise · Captions · Gluten-free</div>
         </div>
       </div>
@@ -288,7 +300,7 @@
                 <i class="ti ti-circle-check" style="font-size: 20px; color: var(--color-success);" aria-hidden="true"></i>
                 <h3 style="font-size: 16px; margin: 0; color: #0F6E56;">Features confirmed</h3>
               </div>
-              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+              <div id="confirmed-features-list" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
                 <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-check" style="font-size: 14px; color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div>Step-free main entrance <span style="color: var(--color-text-secondary);">· 22 confirms</span></div></div>
                 <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-check" style="font-size: 14px; color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div>Roll-in shower (rooms 401-415) <span style="color: var(--color-text-secondary);">· 14 confirms</span></div></div>
                 <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-check" style="font-size: 14px; color: var(--color-success); margin-top: 3px;" aria-hidden="true"></i><div>Closed-captioned in-room TVs <span style="color: var(--color-text-secondary);">· 7 confirms</span></div></div>
@@ -301,7 +313,7 @@
                 <i class="ti ti-alert-triangle" style="font-size: 20px; color: var(--color-warn);" aria-hidden="true"></i>
                 <h3 style="font-size: 16px; margin: 0; color: #7a4d0a;">Possible barriers</h3>
               </div>
-              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+              <div id="possible-barriers-list" style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
                 <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-alert-triangle" style="font-size: 14px; color: var(--color-warn); margin-top: 3px;" aria-hidden="true"></i><div>Heavy side door after 11pm <span style="color: var(--color-text-secondary);">· 6 reports</span></div></div>
                 <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-alert-triangle" style="font-size: 14px; color: var(--color-warn); margin-top: 3px;" aria-hidden="true"></i><div>Lobby noise level 7-9am <span style="color: var(--color-text-secondary);">· 4 reports</span></div></div>
                 <div style="display: flex; align-items: flex-start; gap: 8px;"><i class="ti ti-alert-triangle" style="font-size: 14px; color: var(--color-warn); margin-top: 3px;" aria-hidden="true"></i><div>Restaurant entrance has 1 small step <span style="color: var(--color-text-secondary);">· 3 reports</span></div></div>
@@ -397,7 +409,7 @@
         <section id="pretrip" class="section-card" style="background: #E1F5EE; border-color: #5DCAA5;">
           <div class="section-card__header">
             <div>
-              <div class="section-card__eyebrow" style="color: #0F6E56;">Pre-trip support for Aisha</div>
+              <div id="pretrip-name" class="section-card__eyebrow" style="color: #0F6E56;">Pre-trip support for Traveler</div>
               <h2 class="section-card__title" style="color: #085041;">Personalized prep</h2>
               <p class="section-card__subtitle" style="color: #085041;">Based on your needs and traveler reports</p>
             </div>
@@ -497,7 +509,7 @@
 
           <div style="background: var(--color-brand-lighter); border: 0.5px solid var(--color-brand-border); border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
             <i class="ti ti-users" style="font-size: 16px; color: var(--color-brand);" aria-hidden="true"></i>
-            <span style="font-size: 12px; color: var(--color-brand-dark);"><strong>Showing reviews from travelers like Aisha</strong> — wheelchair + sensory needs · 12 matching reviews</span>
+            <span id="reviews-like-copy" style="font-size: 12px; color: var(--color-brand-dark);"><strong>Showing reviews from travelers like you</strong> — accessibility needs · 12 matching reviews</span>
           </div>
 
           <div class="reviews-search">
@@ -578,7 +590,7 @@
 
           </div>
 
-          <button class="btn-ghost" style="margin-top: 18px; width: 100%; justify-content: center;">
+          <button id="show-all-reviews-btn" class="btn-ghost" style="margin-top: 18px; width: 100%; justify-content: center;">
             Show all 3,120 reviews <i class="ti ti-arrow-right" aria-hidden="true"></i>
           </button>
         </section>
@@ -591,24 +603,22 @@
         <div class="sidebar-card sidebar-card--cream">
           <div style="font-size: 11px; color: var(--color-brand); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600;">Your match score</div>
           <div class="sidebar-card__score">
-            <span class="sidebar-card__score-num">78</span>
+            <span id="sidebar-score-num" class="sidebar-card__score-num">78</span>
             <span class="sidebar-card__score-out">/ 100</span>
           </div>
-          <span style="display: inline-flex; align-items: center; gap: 4px; background: var(--color-success-light); color: #27500A; font-size: 11px; padding: 3px 10px; border-radius: 14px; font-weight: 600;">
+          <span id="sidebar-confidence-pill" style="display: inline-flex; align-items: center; gap: 4px; background: var(--color-success-light); color: #27500A; font-size: 11px; padding: 3px 10px; border-radius: 14px; font-weight: 600;">
             <i class="ti ti-shield-check" style="font-size: 12px;" aria-hidden="true"></i> High confidence
           </span>
-          <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; line-height: 1.5;">
+          <div id="sidebar-confidence-copy" style="font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; line-height: 1.5;">
             Based on your 4 needs · 38 travelers like you reviewed this hotel.
           </div>
 
           <hr class="sidebar-card__divider" />
 
           <div style="font-size: 12px; color: var(--color-text-secondary); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Key features for you</div>
-          <div class="sidebar-card__feature"><i class="ti ti-check" aria-hidden="true"></i> Step-free main entrance</div>
-          <div class="sidebar-card__feature"><i class="ti ti-check" aria-hidden="true"></i> Roll-in shower available</div>
-          <div class="sidebar-card__feature"><i class="ti ti-check" aria-hidden="true"></i> Visual fire alarm</div>
-          <div class="sidebar-card__feature"><i class="ti ti-check" aria-hidden="true"></i> Closed-captioned TVs</div>
-          <div class="sidebar-card__feature" style="color: var(--color-warn);"><i class="ti ti-alert-triangle" style="color: var(--color-warn);" aria-hidden="true"></i> Heavy side door after 11pm</div>
+          <div id="sidebar-features-list">
+            <div class="sidebar-card__feature"><i class="ti ti-check" aria-hidden="true"></i> Features will load from hotel data</div>
+          </div>
 
           <button class="btn-primary" style="width: 100%; justify-content: center; margin-top: 16px;">
             <i class="ti ti-phone" aria-hidden="true"></i> Contact hotel
@@ -629,9 +639,9 @@
           <div class="map-preview">
             <i class="ti ti-map-pin-filled" aria-hidden="true"></i>
           </div>
-          <div style="font-size: 13px; color: var(--color-text-primary);">1133 W Hastings St</div>
-          <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 2px;">Vancouver, BC · Coal Harbour</div>
-          <a href="#" style="font-size: 12px; color: var(--color-brand); text-decoration: none; margin-top: 8px; display: inline-block;">Open larger map →</a>
+          <div id="map-line-1" style="font-size: 13px; color: var(--color-text-primary);">1133 W Hastings St</div>
+          <div id="map-line-2" style="font-size: 12px; color: var(--color-text-secondary); margin-top: 2px;">Vancouver, BC · Coal Harbour</div>
+          <a id="map-open-link" href="#" style="font-size: 12px; color: var(--color-brand); text-decoration: none; margin-top: 8px; display: inline-block;">Open larger map →</a>
         </div>
 
         <div class="sidebar-card" style="border-left: 3px solid var(--teal);">
@@ -653,9 +663,21 @@
     <div class="site-footer__inner">
       <div class="site-footer__cols">
         <div class="site-footer__col">
-          <a href="/" class="site-header__brand" style="font-size: 16px;">
-            <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
-            InclusiTrip
+          <a href="/" class="site-header__brand site-footer__brand" aria-label="InclusiTrip home">
+            <svg class="site-header__brand-svg" viewBox="0 0 96 96" role="img" aria-hidden="true" focusable="false">
+              <rect x="10" y="7" width="76" height="82" rx="22" fill="#0c5d61" />
+              <g transform="translate(19 13) scale(0.62)">
+                <path d="M35 25 C33 22 36 19 39 21 L59 34 L70 34 C77 34 84 38 87 45 C83 51 76 55 68 55 L52 55 L41 68 C39 70 36 68 37 65 L43 55 L27 55 C23 55 21 53 20 50 L15 39 C14 36 17 34 20 36 L30 43 L42 41 Z" fill="#ffffff" />
+              </g>
+              <g transform="translate(16 20) scale(0.62)">
+                <circle cx="42" cy="59" r="5.6" fill="#f5ad37" />
+                <path d="M42 67 L42 78 L58 78" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M57 78 L69 92" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M41 66 C30 68 23 78 25 89 C27 101 42 106 53 99 C59 95 63 89 64 82" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+                <path d="M69 92 L76 87" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+              </g>
+            </svg>
+            <span class="site-header__brand-text">InclusiTrip</span>
           </a>
           <p class="site-footer__brand-blurb">
             Travel info that actually reflects accessibility — built with and for disabled travelers.
@@ -694,6 +716,468 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var NEED_LABELS = {
+        'mobility.wheelchair_accessible': 'Wheelchair accessible',
+        'mobility.short_walking_distances': 'Short walking distances',
+        'mobility.long_walking_distances': 'Long walking distances',
+        'mobility.remote_controlled_doors': 'Remote-controlled doors',
+        'mobility.remote_controlled_curtains': 'Remote-controlled curtains',
+        'mobility.remote_controlled_lights': 'Remote-controlled lights',
+        'mobility.ramp_access': 'Ramp access',
+        'mobility.elevator_access': 'Elevator access',
+        'mobility.accessible_bathroom': 'Accessible bathroom',
+        'mobility.wide_hallways': 'Wide hallways',
+        'dietary.non_vegetarian': 'Non-vegetarian options',
+        'dietary.pescatarian': 'Pescatarian options',
+        'dietary.vegetarian': 'Vegetarian options',
+        'dietary.vegan': 'Vegan options',
+        'dietary.gluten_free': 'Gluten-free options',
+        'dietary.halal': 'Halal options',
+        'dietary.kosher': 'Kosher options',
+        'dietary.allergy_accommodations': 'Allergy accommodations',
+        'speech.hearing_impaired_support': 'Hearing-impaired support',
+        'speech.speech_impaired_support': 'Speech-impaired support',
+        'speech.sign_language': 'Sign language support',
+        'speech.captions': 'Closed captions',
+        'speech.languages': 'Language support',
+        'sensory.dimly_lit_spaces': 'Dimly lit spaces',
+        'sensory.quiet_rooms': 'Quiet rooms',
+        'sensory.sensory_rooms': 'Sensory rooms',
+        'sensory.noise_cancelling_support': 'Noise-cancelling support',
+        'sensory.weighted_blankets': 'Weighted blankets',
+        'sensory.fidget_tools': 'Fidget tools',
+        'sensory.aromatherapy_free_rooms': 'Aromatherapy-free rooms',
+        'cognitive.ibcces_certification': 'IBCCES certification',
+        'cognitive.clear_wayfinding': 'Clear wayfinding',
+        'cognitive.staff_disability_awareness_training': 'Staff disability awareness training'
+      };
+
+      var CATEGORY_LABELS = {
+        mobility: 'Mobility',
+        sensory: 'Sensory',
+        cognitive: 'Cognitive / Neurodivergent',
+        speech: 'Hearing & Communication',
+        dietary: 'Dietary'
+      };
+
+      var CATEGORY_ICONS = {
+        mobility: 'ti-wheelchair',
+        sensory: 'ti-ear',
+        cognitive: 'ti-brain',
+        speech: 'ti-ear-scan',
+        dietary: 'ti-tools-kitchen-2'
+      };
+
+      function titleCase(text) {
+        return String(text || '')
+          .split(/[_\s]+/)
+          .filter(Boolean)
+          .map(function (part) {
+            return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+          })
+          .join(' ');
+      }
+
+      function featureLabel(path) {
+        if (NEED_LABELS[path]) return NEED_LABELS[path];
+        var parts = String(path || '').split('.');
+        var tail = parts[parts.length - 1] || '';
+        return titleCase(tail);
+      }
+
+      function collectEnabledNeedPaths(obj, prefix) {
+        var out = [];
+        if (!obj || typeof obj !== 'object') return out;
+
+        Object.keys(obj).forEach(function (key) {
+          var value = obj[key];
+          var path = prefix ? prefix + '.' + key : key;
+          if (value && typeof value === 'object' && !Array.isArray(value)) {
+            out = out.concat(collectEnabledNeedPaths(value, path));
+            return;
+          }
+          if (Array.isArray(value)) {
+            if (value.length) out.push(path);
+            return;
+          }
+          if (value === true) {
+            out.push(path);
+          }
+        });
+
+        return out;
+      }
+
+      function renderSimpleFeatureList(container, paths, options) {
+        if (!container) return;
+        var icon = options && options.icon ? options.icon : 'ti-check';
+        var color = options && options.color ? options.color : 'var(--color-success)';
+        var emptyText = options && options.emptyText ? options.emptyText : 'No data available.';
+        var metaText = options && options.metaText ? options.metaText : '';
+
+        container.replaceChildren();
+
+        if (!paths || !paths.length) {
+          var emptyRow = document.createElement('div');
+          emptyRow.style.display = 'flex';
+          emptyRow.style.alignItems = 'flex-start';
+          emptyRow.style.gap = '8px';
+          emptyRow.innerHTML = '<i class="ti ti-info-circle" style="font-size: 14px; color: var(--color-text-secondary); margin-top: 3px;" aria-hidden="true"></i>';
+          var emptyTextNode = document.createElement('div');
+          emptyTextNode.style.color = 'var(--color-text-secondary)';
+          emptyTextNode.textContent = emptyText;
+          emptyRow.appendChild(emptyTextNode);
+          container.appendChild(emptyRow);
+          return;
+        }
+
+        paths.forEach(function (path) {
+          var row = document.createElement('div');
+          row.style.display = 'flex';
+          row.style.alignItems = 'flex-start';
+          row.style.gap = '8px';
+          row.innerHTML = '<i class="ti ' + icon + '" style="font-size: 14px; color: ' + color + '; margin-top: 3px;" aria-hidden="true"></i>';
+
+          var text = document.createElement('div');
+          text.textContent = featureLabel(path);
+          if (metaText) {
+            var meta = document.createElement('span');
+            meta.style.color = 'var(--color-text-secondary)';
+            meta.textContent = ' · ' + metaText;
+            text.appendChild(meta);
+          }
+
+          row.appendChild(text);
+          container.appendChild(row);
+        });
+      }
+
+      function renderBreakdown(selected, requestedNeeds, hotelFeatures) {
+        var breakdownList = document.querySelector('.breakdown-list');
+        if (!breakdownList || !selected) return;
+
+        var matchedNeeds = Array.isArray(selected.matched_needs) ? selected.matched_needs : [];
+        var missingNeeds = Array.isArray(selected.missing_needs) ? selected.missing_needs : [];
+
+        var categories = ['mobility', 'sensory', 'cognitive', 'speech', 'dietary'];
+        var rows = [];
+
+        categories.forEach(function (category) {
+          var categoryRequested = requestedNeeds.filter(function (path) {
+            return path.indexOf(category + '.') === 0;
+          });
+          var categoryMatched = matchedNeeds.filter(function (path) {
+            return path.indexOf(category + '.') === 0;
+          });
+          var categoryMissing = missingNeeds.filter(function (path) {
+            return path.indexOf(category + '.') === 0;
+          });
+          var categoryAvailable = collectEnabledNeedPaths(hotelFeatures[category] || {}, category);
+
+          if (!categoryRequested.length && !categoryAvailable.length && !categoryMissing.length) {
+            return;
+          }
+
+          var scoreRatio = 0;
+          if (categoryRequested.length) {
+            scoreRatio = categoryMatched.length / categoryRequested.length;
+          } else {
+            var denom = categoryAvailable.length + categoryMissing.length;
+            scoreRatio = denom ? categoryAvailable.length / denom : 0;
+          }
+
+          var percent = Math.max(0, Math.min(100, Math.round(scoreRatio * 100)));
+          var score = (scoreRatio * 5).toFixed(1);
+          var pillClass = percent >= 80 ? 'breakdown-row__pill--high' : (percent >= 55 ? 'breakdown-row__pill--med' : 'breakdown-row__pill--low');
+          var pillText = percent >= 80 ? 'HIGH' : (percent >= 55 ? 'MED' : 'LOW');
+
+          var goodItems = categoryMatched.length ? categoryMatched : categoryAvailable.slice(0, 4);
+          var badItems = categoryMissing.slice(0, 4);
+
+          rows.push({
+            category: category,
+            label: CATEGORY_LABELS[category] || titleCase(category),
+            icon: CATEGORY_ICONS[category] || 'ti-circle',
+            percent: percent,
+            score: score,
+            pillClass: pillClass,
+            pillText: pillText,
+            goodItems: goodItems,
+            badItems: badItems
+          });
+        });
+
+        if (!rows.length) return;
+
+        breakdownList.replaceChildren();
+        rows.forEach(function (row, index) {
+          var details = document.createElement('details');
+          details.className = 'breakdown-row';
+          if (index === 0) details.open = true;
+
+          var summary = document.createElement('summary');
+          summary.className = 'breakdown-row__summary';
+          summary.innerHTML =
+            '<div class="breakdown-row__label"><i class="ti ' + row.icon + '" aria-hidden="true"></i><span>' + row.label + '</span></div>' +
+            '<div class="breakdown-row__bar"><div class="breakdown-row__bar-fill" style="width: ' + row.percent + '%;"></div></div>' +
+            '<div class="breakdown-row__score">' + row.score + ' / 5</div>' +
+            '<span class="breakdown-row__pill ' + row.pillClass + '">' + row.pillText + '</span>' +
+            '<i class="ti ti-chevron-down breakdown-row__chevron" aria-hidden="true"></i>';
+
+          var body = document.createElement('div');
+          body.className = 'breakdown-row__body';
+
+          row.goodItems.forEach(function (path) {
+            var item = document.createElement('div');
+            item.className = 'breakdown-item';
+            item.innerHTML = '<i class="ti ti-check breakdown-item__icon breakdown-item__icon--good" aria-hidden="true"></i>';
+            var text = document.createElement('div');
+            text.textContent = featureLabel(path);
+            item.appendChild(text);
+            body.appendChild(item);
+          });
+
+          row.badItems.forEach(function (path) {
+            var item = document.createElement('div');
+            item.className = 'breakdown-item';
+            item.innerHTML = '<i class="ti ti-alert-triangle breakdown-item__icon breakdown-item__icon--warn" aria-hidden="true"></i>';
+            var text = document.createElement('div');
+            text.textContent = featureLabel(path) + ' not confirmed for your needs';
+            item.appendChild(text);
+            body.appendChild(item);
+          });
+
+          details.append(summary, body);
+          breakdownList.appendChild(details);
+        });
+      }
+
+      function initials(name) {
+        if (!name) return '?';
+        var parts = String(name).trim().split(/\s+/).filter(Boolean);
+        if (!parts.length) return '?';
+        var first = parts[0].charAt(0);
+        var last = parts.length > 1 ? parts[parts.length - 1].charAt(0) : '';
+        return (first + last).toUpperCase();
+      }
+
+      function guestLabel(count) {
+        var guests = Number(count) || 1;
+        return guests === 1 ? '1 adult' : guests + ' adults';
+      }
+
+      var activeSearch = null;
+      try {
+        activeSearch = JSON.parse(sessionStorage.getItem('inclusitripActiveSearch') || 'null');
+      } catch (error) {
+        activeSearch = null;
+      }
+
+      var selectedRaw = sessionStorage.getItem('inclusitripSelectedHotel');
+
+      var selected;
+      try {
+        selected = selectedRaw ? JSON.parse(selectedRaw) : null;
+      } catch (error) {
+        selected = null;
+      }
+
+      var searchWhere = document.getElementById('search-pill-where');
+      if (searchWhere && activeSearch && activeSearch.destination) {
+        searchWhere.textContent = activeSearch.destination;
+      }
+
+      var searchTravelers = document.getElementById('search-pill-travelers');
+      if (searchTravelers && activeSearch) {
+        searchTravelers.textContent = guestLabel(activeSearch.guests);
+      }
+
+      var breadcrumbDestination = document.getElementById('breadcrumb-destination');
+      if (breadcrumbDestination && activeSearch && activeSearch.destination) {
+        breadcrumbDestination.textContent = activeSearch.destination;
+      }
+
+      var resolvedLocation = activeSearch && activeSearch.destination ? activeSearch.destination : '';
+
+      if (selected && selected.hotel) {
+        var hotel = selected.hotel;
+        var features = hotel.accessibility_features || {};
+        var matchedNeeds = Array.isArray(selected.matched_needs) ? selected.matched_needs : [];
+        var missingNeeds = Array.isArray(selected.missing_needs) ? selected.missing_needs : [];
+        var requestedNeeds = activeSearch && activeSearch.accessibility_needs
+          ? collectEnabledNeedPaths(activeSearch.accessibility_needs, '')
+          : [];
+        var hotelName = hotel.name || 'Hotel details';
+        var location = hotel.location || '';
+        resolvedLocation = location || resolvedLocation;
+        var rating = typeof hotel.rating === 'number' ? hotel.rating.toFixed(1) : 'N/A';
+        var match = typeof selected.match_percentage === 'number' ? selected.match_percentage : null;
+
+        document.title = hotelName + ' · InclusiTrip';
+
+        var breadcrumbHotel = document.querySelector('.breadcrumb span[style]');
+        if (breadcrumbHotel) breadcrumbHotel.textContent = hotelName;
+
+        var hotelNameEl = document.getElementById('hotel-name');
+        if (hotelNameEl) hotelNameEl.textContent = hotelName;
+
+        var metaEl = document.querySelector('.hotel-hero__meta');
+        if (metaEl) {
+          metaEl.innerHTML =
+            '<span class="hotel-hero__rating">' +
+              '<i class="ti ti-star-filled" aria-hidden="true"></i> ' + rating +
+              (match === null ? '' : '<span style="color: rgba(243, 237, 226, 0.75); font-weight: 400;"> (' + match + '% match)</span>') +
+            '</span>' +
+            '<span> · </span>' +
+            '<span><i class="ti ti-map-pin" style="font-size: 14px; vertical-align: -2px;" aria-hidden="true"></i> ' + location + '</span>';
+        }
+
+        var overviewCopy = document.querySelector('#overview p');
+        if (overviewCopy && hotel.description) overviewCopy.textContent = hotel.description;
+
+        var scoreNum = document.getElementById('sidebar-score-num');
+        if (scoreNum && typeof selected.match_percentage === 'number') {
+          scoreNum.textContent = String(Math.round(selected.match_percentage));
+        }
+
+        var sidebarConfidenceCopy = document.getElementById('sidebar-confidence-copy');
+        if (sidebarConfidenceCopy) {
+          var reviewCount = Array.isArray(hotel.reviews) ? hotel.reviews.length : 0;
+          var needCount = requestedNeeds.length;
+          sidebarConfidenceCopy.textContent =
+            'Based on your ' + needCount + ' ' + (needCount === 1 ? 'need' : 'needs') +
+            ' · ' + reviewCount + ' traveler ' + (reviewCount === 1 ? 'review' : 'reviews') + ' for this hotel.';
+        }
+
+        var sidebarFeatures = document.getElementById('sidebar-features-list');
+        var topFeatures = matchedNeeds.length
+          ? matchedNeeds.slice(0, 5)
+          : collectEnabledNeedPaths(features, '').slice(0, 5);
+        if (sidebarFeatures) {
+          sidebarFeatures.replaceChildren();
+          if (!topFeatures.length) {
+            var placeholder = document.createElement('div');
+            placeholder.className = 'sidebar-card__feature';
+            placeholder.innerHTML = '<i class="ti ti-info-circle" aria-hidden="true"></i> No feature details available yet';
+            sidebarFeatures.appendChild(placeholder);
+          } else {
+            topFeatures.forEach(function (path) {
+              var row = document.createElement('div');
+              row.className = 'sidebar-card__feature';
+              row.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> ';
+              row.appendChild(document.createTextNode(featureLabel(path)));
+              sidebarFeatures.appendChild(row);
+            });
+          }
+        }
+
+        renderSimpleFeatureList(document.getElementById('confirmed-features-list'), matchedNeeds.slice(0, 6), {
+          icon: 'ti-check',
+          color: 'var(--color-success)',
+          metaText: 'matched with your profile',
+          emptyText: 'No confirmed matching features for this profile yet.'
+        });
+
+        renderSimpleFeatureList(document.getElementById('possible-barriers-list'), missingNeeds.slice(0, 6), {
+          icon: 'ti-alert-triangle',
+          color: 'var(--color-warn)',
+          metaText: 'not confirmed',
+          emptyText: 'No major barriers detected from your selected needs.'
+        });
+
+        renderBreakdown(selected, requestedNeeds, features);
+      }
+
+      var mapQuery = resolvedLocation || 'hotel';
+      var mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(mapQuery);
+      var heroMapLink = document.getElementById('hero-map-link');
+      if (heroMapLink) {
+        heroMapLink.href = mapsUrl;
+        heroMapLink.target = '_blank';
+        heroMapLink.rel = 'noopener noreferrer';
+      }
+
+      var mapCard = null;
+      var creamCards = document.querySelectorAll('.sidebar-card--cream');
+      creamCards.forEach(function (card) {
+        if (!mapCard && card.textContent && card.textContent.indexOf("Where you'll be") !== -1) {
+          mapCard = card;
+        }
+      });
+      if (mapCard) {
+        var lineOne = document.getElementById('map-line-1') || mapCard.querySelector('div:nth-of-type(2)');
+        var lineTwo = document.getElementById('map-line-2') || mapCard.querySelector('div:nth-of-type(3)');
+        var mapOpenLink = document.getElementById('map-open-link') || mapCard.querySelector('a');
+        if (lineOne) lineOne.textContent = resolvedLocation || 'Location unavailable';
+        if (lineTwo) lineTwo.textContent = resolvedLocation ? 'Based on selected hotel data' : 'No hotel selected yet';
+        if (mapOpenLink) {
+          mapOpenLink.href = mapsUrl;
+          mapOpenLink.target = '_blank';
+          mapOpenLink.rel = 'noopener noreferrer';
+        }
+      }
+
+      var searchGoBtn = document.getElementById('search-pill-go');
+      if (searchGoBtn) {
+        searchGoBtn.addEventListener('click', function () {
+          window.location.href = '/hotels-search';
+        });
+      }
+      var searchPill = document.querySelector('.search-pill');
+      if (searchPill) {
+        searchPill.style.cursor = 'pointer';
+        searchPill.addEventListener('click', function (event) {
+          if (event.target && event.target.closest && event.target.closest('.search-pill__btn')) return;
+          window.location.href = '/hotels-search';
+        });
+      }
+
+      var profileBtn = document.getElementById('hotel-profile-btn');
+      var viewingAvatar = document.getElementById('viewing-avatar');
+      var viewingName = document.getElementById('viewing-name');
+      var pretripName = document.getElementById('pretrip-name');
+      var reviewsLikeCopy = document.getElementById('reviews-like-copy');
+      var signedIn = localStorage.getItem('inclusitripSignedIn') === 'true';
+      var userId = localStorage.getItem('inclusitripUserId');
+
+      function applyUserName(name) {
+        var displayName = name && String(name).trim() ? String(name).trim() : 'Traveler';
+        var label = initials(displayName);
+        if (profileBtn) {
+          profileBtn.textContent = label;
+          profileBtn.setAttribute('aria-label', 'My profile (' + displayName + ')');
+          profileBtn.title = displayName;
+          profileBtn.onclick = function () { window.location.href = '/'; };
+        }
+        if (viewingAvatar) viewingAvatar.textContent = label;
+        if (viewingName) viewingName.textContent = 'Viewing as ' + displayName;
+        if (pretripName) pretripName.textContent = 'Pre-trip support for ' + displayName;
+        if (reviewsLikeCopy) {
+          reviewsLikeCopy.innerHTML = '<strong>Showing reviews from travelers like ' + displayName + '</strong> — accessibility needs · 12 matching reviews';
+        }
+      }
+
+      if (!signedIn || !userId) {
+        applyUserName('Traveler');
+        return;
+      }
+
+      fetch('/api/users/' + encodeURIComponent(userId) + '/profile')
+        .then(function (response) {
+          if (!response.ok) throw new Error('profile fetch failed');
+          return response.json();
+        })
+        .then(function (data) {
+          applyUserName(data && data.name ? data.name : 'Traveler');
+        })
+        .catch(function () {
+          applyUserName('Traveler');
+        });
+    })();
+  </script>
 
   <script>
     (function () {
