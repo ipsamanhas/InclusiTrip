@@ -6,7 +6,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.database import Base, engine, migrate_sqlite_users_table
-from app.routes import auth_router, users_router
+from app.routes import auth_router, search_router, users_router
 
 app = FastAPI(title="InclusiTrip API")
 
@@ -19,6 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(search_router)
 app.include_router(users_router)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -60,3 +61,13 @@ async def login():
 @app.get("/create-account")
 async def create_account():
     return FileResponse(FRONTEND_DIR / "create-account.html")
+
+
+@app.get("/hotels-search")
+async def hotels_search():
+    return FileResponse(FRONTEND_DIR / "hotels-search.html")
+
+
+@app.get("/hotel")
+async def hotel_detail():
+    return FileResponse(FRONTEND_DIR / "hotel.html")

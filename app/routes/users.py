@@ -49,6 +49,24 @@ def get_user_profile(
     return user_to_response(user)
 
 
+@router.get(
+    "/api/users/{user_id}/accessibility-preferences",
+    response_model=AccessibilityProfile,
+)
+def get_user_accessibility_preferences(
+    user_id: str,
+    db: Session = Depends(get_db),
+) -> AccessibilityProfile:
+    user = get_user_by_id(db, user_id)
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User profile not found.")
+
+    if user.accessibility_profile is None:
+        return AccessibilityProfile()
+
+    return AccessibilityProfile.model_validate(user.accessibility_profile)
+
+
 @router.put(
     "/api/users/{user_id}/profile",
     response_model=UserResponse,

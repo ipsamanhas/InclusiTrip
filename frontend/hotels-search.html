@@ -6,7 +6,7 @@
   <title>Search hotels · InclusiTrip</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="/static/css/style.css" />
 
   <style>
     /* ------ Page-specific styles for the hotels search/results page ------ */
@@ -508,7 +508,7 @@
 
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="index.html" class="site-header__brand">
+      <a href="/" class="site-header__brand">
         <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
         InclusiTrip
       </a>
@@ -539,9 +539,9 @@
   <main class="page">
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="index.html">Home</a>
+      <a href="/">Home</a>
       <span class="breadcrumb__sep">›</span>
-      <a href="welcome.html">Search</a>
+      <a href="/">Search</a>
       <span class="breadcrumb__sep">›</span>
       <span style="color: var(--color-text-on-dark);">Paris, France</span>
     </nav>
@@ -624,36 +624,7 @@
             Filter results
           </h2>
 
-          <fieldset class="filter-card__group" style="border: 0; padding: 0; margin: 0;">
-            <legend class="filter-card__legend"><i class="ti ti-wheelchair" aria-hidden="true"></i> Accessibility</legend>
-            <label class="filter-option"><input type="checkbox" checked /> Wheelchair access</label>
-            <label class="filter-option"><input type="checkbox" checked /> Step-free entrance</label>
-            <label class="filter-option"><input type="checkbox" /> Elevator available</label>
-            <label class="filter-option"><input type="checkbox" /> Roll-in shower</label>
-            <label class="filter-option"><input type="checkbox" /> Accessible parking</label>
-            <button type="button" class="filter-card__more">Show more</button>
-          </fieldset>
-
-          <fieldset class="filter-card__group" style="border: 0; padding: 0; margin: 0;">
-            <legend class="filter-card__legend"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i> Meal / Diet</legend>
-            <label class="filter-option"><input type="checkbox" checked /> Vegetarian</label>
-            <label class="filter-option"><input type="checkbox" /> Non-vegetarian</label>
-            <label class="filter-option"><input type="checkbox" /> Pescatarian</label>
-            <label class="filter-option"><input type="checkbox" /> Vegan</label>
-            <label class="filter-option"><input type="checkbox" /> Halal</label>
-          </fieldset>
-
-          <fieldset class="filter-card__group" style="border: 0; padding: 0; margin: 0;">
-            <legend class="filter-card__legend"><i class="ti ti-alert-circle" aria-hidden="true"></i> Dietary restrictions</legend>
-            <input type="text" class="filter-card__input" placeholder="e.g. Nuts, Gluten" aria-label="Dietary restrictions" />
-          </fieldset>
-
-          <fieldset class="filter-card__group" style="border: 0; padding: 0; margin: 0;">
-            <legend class="filter-card__legend"><i class="ti ti-ear" aria-hidden="true"></i> Sensory</legend>
-            <label class="filter-option"><input type="checkbox" /> Visual fire alarm</label>
-            <label class="filter-option"><input type="checkbox" /> Closed-captioned TV</label>
-            <label class="filter-option"><input type="checkbox" /> Quiet check-in</label>
-          </fieldset>
+          <div id="selected-accessibility-filters"></div>
 
           <div class="filter-card__actions">
             <button type="button" class="btn-primary" id="apply-filters">
@@ -686,163 +657,15 @@
           </div>
           <label class="results-toolbar__sort">
             <span style="color: var(--color-text-secondary);">Sort by:</span>
-            <select aria-label="Sort hotels by">
-              <option>Best match</option>
-              <option>Highest rated</option>
-              <option>Closest to city center</option>
+            <select id="sort-hotels" aria-label="Sort hotels by">
+              <option value="best-match">Best match</option>
+              <option value="highest-rated">Highest rated</option>
+              <option value="hotel-name">Hotel name</option>
             </select>
           </label>
         </div>
 
-        <!-- Hotel card 1 -->
-        <article class="hotel-card">
-          <div class="hotel-card__image" style="background: linear-gradient(135deg, #B5D4F4, #85B7EB); color: #0C447C;">
-            <i class="ti ti-photo" aria-hidden="true"></i>
-          </div>
-          <div class="hotel-card__body">
-            <div class="hotel-card__head">
-              <h3 class="hotel-card__name">Hôtel de l'Access</h3>
-              <span class="hotel-card__match">
-                <i class="ti ti-shield-check" aria-hidden="true"></i> 92% match
-              </span>
-            </div>
-            <div class="hotel-card__meta">
-              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 0.6 km to city center
-            </div>
-            <div class="hotel-card__features">
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Step-free entry</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Roll-in shower</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Elevator</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Vegetarian options</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Sign language support</span>
-            </div>
-            <div class="hotel-card__footer">
-              <a class="btn-primary hotel-card__cta" href="hotel.html">
-                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Hotel card 2 -->
-        <article class="hotel-card">
-          <div class="hotel-card__image" style="background: linear-gradient(135deg, #9FE1CB, #5DCAA5); color: #085041;">
-            <i class="ti ti-photo" aria-hidden="true"></i>
-          </div>
-          <div class="hotel-card__body">
-            <div class="hotel-card__head">
-              <h3 class="hotel-card__name">Comfort Stay Paris</h3>
-              <span class="hotel-card__match">
-                <i class="ti ti-shield-check" aria-hidden="true"></i> 88% match
-              </span>
-            </div>
-            <div class="hotel-card__meta">
-              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 1.2 km to city center
-            </div>
-            <div class="hotel-card__features">
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Wheelchair access</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Accessible parking</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Vegetarian options</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Visual fire alarm</span>
-            </div>
-            <div class="hotel-card__footer">
-              <a class="btn-primary hotel-card__cta" href="hotel.html">
-                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Hotel card 3 -->
-        <article class="hotel-card">
-          <div class="hotel-card__image" style="background: linear-gradient(135deg, #F5C4B3, #F0997B); color: #6B3A24;">
-            <i class="ti ti-photo" aria-hidden="true"></i>
-          </div>
-          <div class="hotel-card__body">
-            <div class="hotel-card__head">
-              <h3 class="hotel-card__name">Le Voyageur Hotel</h3>
-              <span class="hotel-card__match hotel-card__match--med">
-                <i class="ti ti-shield-half" aria-hidden="true"></i> 80% match
-              </span>
-            </div>
-            <div class="hotel-card__meta">
-              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 1.8 km to city center
-            </div>
-            <div class="hotel-card__features">
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Elevator</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Step-free entrance</span>
-              <span class="feature-pill"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Dimly lit hallways</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Dietary accommodations</span>
-            </div>
-            <div class="hotel-card__footer">
-              <a class="btn-primary hotel-card__cta" href="hotel.html">
-                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Hotel card 4 -->
-        <article class="hotel-card">
-          <div class="hotel-card__image" style="background: linear-gradient(135deg, #E8DCFB, #BFA9F0); color: #3C3489;">
-            <i class="ti ti-photo" aria-hidden="true"></i>
-          </div>
-          <div class="hotel-card__body">
-            <div class="hotel-card__head">
-              <h3 class="hotel-card__name">Maison Lumière</h3>
-              <span class="hotel-card__match">
-                <i class="ti ti-shield-check" aria-hidden="true"></i> 85% match
-              </span>
-            </div>
-            <div class="hotel-card__meta">
-              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 2.4 km to city center
-            </div>
-            <div class="hotel-card__features">
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Step-free entry</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Quiet check-in</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Closed-captioned TV</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Service animals welcome</span>
-            </div>
-            <div class="hotel-card__footer">
-              <a class="btn-primary hotel-card__cta" href="hotel.html">
-                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Hotel card 5 -->
-        <article class="hotel-card">
-          <div class="hotel-card__image" style="background: linear-gradient(135deg, #FBE5A8, #F0C25D); color: #6B4F0A;">
-            <i class="ti ti-photo" aria-hidden="true"></i>
-          </div>
-          <div class="hotel-card__body">
-            <div class="hotel-card__head">
-              <h3 class="hotel-card__name">Boutique Marais Inn</h3>
-              <span class="hotel-card__match hotel-card__match--med">
-                <i class="ti ti-shield-half" aria-hidden="true"></i> 74% match
-              </span>
-            </div>
-            <div class="hotel-card__meta">
-              <i class="ti ti-map-pin" aria-hidden="true"></i> Paris, France · 0.9 km to city center
-            </div>
-            <div class="hotel-card__features">
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Wheelchair access</span>
-              <span class="feature-pill"><i class="ti ti-alert-triangle" aria-hidden="true"></i> No elevator (3 floors)</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Vegetarian breakfast</span>
-              <span class="feature-pill"><i class="ti ti-check" aria-hidden="true"></i> Visual fire alarm</span>
-            </div>
-            <div class="hotel-card__footer">
-              <a class="btn-primary hotel-card__cta" href="hotel.html">
-                View details <i class="ti ti-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <button class="btn-ghost" style="justify-content: center; margin-top: 4px;">
-          Load more hotels <i class="ti ti-chevron-down" aria-hidden="true"></i>
-        </button>
+        <div id="hotel-results-list" class="results-layout__main" aria-live="polite"></div>
 
       </section>
     </div>
@@ -853,7 +676,7 @@
     <div class="site-footer__inner">
       <div class="site-footer__cols">
         <div class="site-footer__col">
-          <a href="index.html" class="site-header__brand" style="font-size: 16px;">
+          <a href="/" class="site-header__brand" style="font-size: 16px;">
             <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
             InclusiTrip
           </a>
@@ -897,6 +720,510 @@
 
   <script>
     (function () {
+      var activeSearch = null;
+      var searchResults = null;
+
+      try {
+        activeSearch = JSON.parse(sessionStorage.getItem('inclusitripActiveSearch') || 'null');
+        searchResults = JSON.parse(sessionStorage.getItem('inclusitripSearchResults') || 'null');
+      } catch (error) {
+        activeSearch = null;
+        searchResults = null;
+      }
+
+      function guestLabel(count) {
+        var guests = Number(count) || 1;
+        return guests === 1 ? '1 adult' : guests + ' adults';
+      }
+
+      var featureLabels = {
+        'mobility.wheelchair_accessible': 'Wheelchair accessible',
+        'mobility.short_walking_distances': 'Short walking distances',
+        'mobility.long_walking_distances': 'Long walking distances',
+        'mobility.remote_controlled_doors': 'Remote controlled doors',
+        'mobility.remote_controlled_curtains': 'Remote controlled curtains',
+        'mobility.remote_controlled_lights': 'Remote controlled lights',
+        'mobility.ramp_access': 'Ramp access',
+        'mobility.elevator_access': 'Elevator',
+        'mobility.accessible_bathroom': 'Accessible bathroom',
+        'mobility.wide_hallways': 'Wide hallways',
+        'dietary.non_vegetarian': 'Non-vegetarian options',
+        'dietary.pescatarian': 'Pescatarian options',
+        'dietary.vegetarian': 'Vegetarian options',
+        'dietary.vegan': 'Vegan options',
+        'dietary.gluten_free': 'Gluten-free options',
+        'dietary.halal': 'Halal options',
+        'dietary.kosher': 'Kosher options',
+        'dietary.allergy_accommodations': 'Allergy accommodations',
+        'speech.hearing_impaired_support': 'Hearing support',
+        'speech.speech_impaired_support': 'Speech support',
+        'speech.sign_language': 'Sign language support',
+        'speech.captions': 'Captions',
+        'speech.languages': 'Language support',
+        'sensory.dimly_lit_spaces': 'Dimly lit spaces',
+        'sensory.quiet_rooms': 'Quiet rooms',
+        'sensory.sensory_rooms': 'Sensory rooms',
+        'sensory.noise_cancelling_support': 'Noise cancelling support',
+        'sensory.weighted_blankets': 'Weighted blankets',
+        'sensory.fidget_tools': 'Fidget tools',
+        'sensory.aromatherapy_free_rooms': 'Aromatherapy-free rooms',
+        'cognitive.ibcces_certification': 'IBCCES certified',
+        'cognitive.clear_wayfinding': 'Clear wayfinding',
+        'cognitive.staff_disability_awareness_training': 'Disability-aware staff',
+      };
+
+      var filterSchema = [
+        {
+          key: 'mobility',
+          label: 'Mobility',
+          fields: [
+            'wheelchair_accessible',
+            'short_walking_distances',
+            'long_walking_distances',
+            'remote_controlled_doors',
+            'remote_controlled_curtains',
+            'remote_controlled_lights',
+            'ramp_access',
+            'elevator_access',
+            'accessible_bathroom',
+            'wide_hallways',
+          ],
+          listFields: [],
+        },
+        {
+          key: 'dietary',
+          label: 'Meal / Diet',
+          fields: [
+            'non_vegetarian',
+            'pescatarian',
+            'vegetarian',
+            'vegan',
+            'gluten_free',
+            'halal',
+            'kosher',
+          ],
+          listFields: ['allergy_accommodations'],
+        },
+        {
+          key: 'speech',
+          label: 'Language / Speech',
+          fields: [
+            'hearing_impaired_support',
+            'speech_impaired_support',
+            'sign_language',
+            'captions',
+          ],
+          listFields: ['languages'],
+        },
+        {
+          key: 'sensory',
+          label: 'Sensory',
+          fields: [
+            'dimly_lit_spaces',
+            'quiet_rooms',
+            'sensory_rooms',
+            'noise_cancelling_support',
+            'weighted_blankets',
+            'fidget_tools',
+            'aromatherapy_free_rooms',
+          ],
+          listFields: [],
+        },
+        {
+          key: 'cognitive',
+          label: 'Cognitive',
+          fields: [
+            'ibcces_certification',
+            'clear_wayfinding',
+            'staff_disability_awareness_training',
+          ],
+          listFields: [],
+        },
+      ];
+
+      var fallbackFeatureLabels = [
+        ['mobility.wheelchair_accessible', 'Wheelchair accessible'],
+        ['mobility.ramp_access', 'Ramp access'],
+        ['mobility.elevator_access', 'Elevator'],
+        ['mobility.accessible_bathroom', 'Accessible bathroom'],
+        ['mobility.wide_hallways', 'Wide hallways'],
+        ['dietary.vegetarian', 'Vegetarian options'],
+        ['dietary.vegan', 'Vegan options'],
+        ['dietary.gluten_free', 'Gluten-free options'],
+        ['dietary.halal', 'Halal options'],
+        ['speech.captions', 'Captions'],
+        ['speech.sign_language', 'Sign language support'],
+        ['sensory.quiet_rooms', 'Quiet rooms'],
+        ['sensory.sensory_rooms', 'Sensory rooms'],
+        ['cognitive.clear_wayfinding', 'Clear wayfinding'],
+      ];
+
+      var imageStyles = [
+        ['linear-gradient(135deg, #B5D4F4, #85B7EB)', '#0C447C'],
+        ['linear-gradient(135deg, #9FE1CB, #5DCAA5)', '#085041'],
+        ['linear-gradient(135deg, #F5C4B3, #F0997B)', '#6B3A24'],
+        ['linear-gradient(135deg, #E8DCFB, #BFA9F0)', '#3C3489'],
+        ['linear-gradient(135deg, #FBE5A8, #F0C25D)', '#6B4F0A'],
+      ];
+
+      function featureLabel(path) {
+        return featureLabels[path] || path.split('.').pop().replaceAll('_', ' ');
+      }
+
+      function listValue(value) {
+        return Array.isArray(value) ? value.join(', ') : '';
+      }
+
+      function renderAccessibilityFilters() {
+        var container = document.getElementById('selected-accessibility-filters');
+        var profile = activeSearch && activeSearch.accessibility_needs
+          ? activeSearch.accessibility_needs
+          : {};
+
+        container.replaceChildren();
+
+        filterSchema.forEach(function (group) {
+          var fieldset = document.createElement('fieldset');
+          fieldset.className = 'filter-card__group';
+          fieldset.style.border = '0';
+          fieldset.style.padding = '0';
+          fieldset.style.margin = '0';
+
+          var legend = document.createElement('legend');
+          legend.className = 'filter-card__legend';
+          legend.textContent = group.label;
+          fieldset.appendChild(legend);
+
+          group.fields.forEach(function (field) {
+            var path = group.key + '.' + field;
+            var label = document.createElement('label');
+            label.className = 'filter-option';
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = nestedValue(profile, path) === true;
+            checkbox.dataset.category = group.key;
+            checkbox.dataset.field = field;
+            checkbox.dataset.needPath = path;
+            label.appendChild(checkbox);
+            label.append(' ' + featureLabel(path));
+            fieldset.appendChild(label);
+          });
+
+          group.listFields.forEach(function (field) {
+            var path = group.key + '.' + field;
+            var wrapper = document.createElement('label');
+            wrapper.className = 'filter-list-field';
+            wrapper.style.display = 'block';
+            wrapper.style.border = '0';
+            wrapper.style.padding = '6px 0 0';
+            wrapper.style.margin = '0';
+            wrapper.style.fontSize = '12.5px';
+            wrapper.style.color = 'var(--color-text-secondary)';
+
+            var caption = document.createElement('span');
+            caption.textContent = featureLabel(path);
+            caption.style.display = 'block';
+            caption.style.marginBottom = '6px';
+
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'filter-card__input';
+            input.placeholder = field === 'languages' ? 'e.g. ASL, Spanish' : 'e.g. nuts, gluten';
+            input.value = listValue(nestedValue(profile, path));
+            input.dataset.category = group.key;
+            input.dataset.field = field;
+            input.dataset.needPath = path;
+
+            wrapper.append(caption, input);
+            fieldset.appendChild(wrapper);
+          });
+
+          container.appendChild(fieldset);
+        });
+      }
+
+      function emptyAccessibilityProfile() {
+        return {
+          mobility: {
+            wheelchair_accessible: false,
+            short_walking_distances: false,
+            long_walking_distances: false,
+            remote_controlled_doors: false,
+            remote_controlled_curtains: false,
+            remote_controlled_lights: false,
+            ramp_access: false,
+            elevator_access: false,
+            accessible_bathroom: false,
+            wide_hallways: false,
+          },
+          dietary: {
+            non_vegetarian: false,
+            pescatarian: false,
+            vegetarian: false,
+            vegan: false,
+            gluten_free: false,
+            halal: false,
+            kosher: false,
+            allergy_accommodations: [],
+          },
+          speech: {
+            hearing_impaired_support: false,
+            speech_impaired_support: false,
+            sign_language: false,
+            captions: false,
+            languages: [],
+          },
+          sensory: {
+            dimly_lit_spaces: false,
+            quiet_rooms: false,
+            sensory_rooms: false,
+            noise_cancelling_support: false,
+            weighted_blankets: false,
+            fidget_tools: false,
+            aromatherapy_free_rooms: false,
+          },
+          cognitive: {
+            ibcces_certification: false,
+            clear_wayfinding: false,
+            staff_disability_awareness_training: false,
+          },
+        };
+      }
+
+      function splitListInput(value) {
+        return value
+          .split(',')
+          .map(function (item) { return item.trim(); })
+          .filter(Boolean);
+      }
+
+      function buildAccessibilityProfileFromFilters() {
+        var profile = emptyAccessibilityProfile();
+
+        document.querySelectorAll('#selected-accessibility-filters input[type="checkbox"]').forEach(function (checkbox) {
+          profile[checkbox.dataset.category][checkbox.dataset.field] = checkbox.checked;
+        });
+
+        document.querySelectorAll('#selected-accessibility-filters input[type="text"]').forEach(function (input) {
+          profile[input.dataset.category][input.dataset.field] = splitListInput(input.value);
+        });
+
+        return profile;
+      }
+
+      function nestedValue(obj, path) {
+        return path.split('.').reduce(function (value, part) {
+          return value && value[part];
+        }, obj);
+      }
+
+      function fallbackFeatures(hotel) {
+        var features = hotel.accessibility_features || {};
+        return fallbackFeatureLabels
+          .filter(function (entry) { return nestedValue(features, entry[0]) === true; })
+          .slice(0, 5)
+          .map(function (entry) { return entry[1]; });
+      }
+
+      function sortedFilteredResults() {
+        var results = searchResults && Array.isArray(searchResults.results)
+          ? searchResults.results.slice()
+          : [];
+        var sortValue = document.getElementById('sort-hotels').value;
+
+        results.sort(function (a, b) {
+          if (sortValue === 'highest-rated') {
+            return b.hotel.rating - a.hotel.rating || b.match_percentage - a.match_percentage;
+          }
+          if (sortValue === 'hotel-name') {
+            return a.hotel.name.localeCompare(b.hotel.name);
+          }
+          return b.match_percentage - a.match_percentage || b.hotel.rating - a.hotel.rating;
+        });
+
+        return results;
+      }
+
+      function renderHotelResults() {
+        var list = document.getElementById('hotel-results-list');
+        var countEl = document.querySelector('.results-toolbar__count strong');
+        var results = sortedFilteredResults();
+
+        countEl.textContent = results.length + (results.length === 1 ? ' hotel' : ' hotels');
+        list.replaceChildren();
+
+        if (results.length === 0) {
+          var empty = document.createElement('div');
+          empty.className = 'results-empty';
+          empty.innerHTML = '<i class="ti ti-mood-sad" aria-hidden="true"></i><h2>No matching hotels found</h2><p>Try a nearby city or adjust your accessibility preferences.</p>';
+          list.appendChild(empty);
+          return;
+        }
+
+        results.forEach(function (result, index) {
+          var hotel = result.hotel;
+          var match = Math.round(result.match_percentage);
+          var style = imageStyles[index % imageStyles.length];
+          var labels = result.matched_needs && result.matched_needs.length
+            ? result.matched_needs.slice(0, 5).map(featureLabel)
+            : fallbackFeatures(hotel);
+
+          var article = document.createElement('article');
+          article.className = 'hotel-card';
+
+          var image = document.createElement('div');
+          image.className = 'hotel-card__image';
+          image.style.background = style[0];
+          image.style.color = style[1];
+          image.innerHTML = '<i class="ti ti-building-skyscraper" aria-hidden="true"></i>';
+
+          var body = document.createElement('div');
+          body.className = 'hotel-card__body';
+
+          var head = document.createElement('div');
+          head.className = 'hotel-card__head';
+
+          var name = document.createElement('h3');
+          name.className = 'hotel-card__name';
+          name.textContent = hotel.name;
+
+          var badge = document.createElement('span');
+          badge.className = match < 80 ? 'hotel-card__match hotel-card__match--med' : 'hotel-card__match';
+          badge.innerHTML = '<i class="ti ' + (match < 80 ? 'ti-shield-half' : 'ti-shield-check') + '" aria-hidden="true"></i> ' + match + '% match';
+          head.append(name, badge);
+
+          var meta = document.createElement('div');
+          meta.className = 'hotel-card__meta';
+          meta.innerHTML = '<i class="ti ti-map-pin" aria-hidden="true"></i> ';
+          meta.append(document.createTextNode(hotel.location + ' · ' + Number(hotel.rating).toFixed(1) + ' rating'));
+
+          var description = document.createElement('p');
+          description.style.margin = '0';
+          description.style.color = 'var(--color-text-secondary)';
+          description.style.fontSize = '13.5px';
+          description.style.lineHeight = '1.55';
+          description.textContent = hotel.description;
+
+          var featureWrap = document.createElement('div');
+          featureWrap.className = 'hotel-card__features';
+          labels.forEach(function (label) {
+            var pill = document.createElement('span');
+            pill.className = 'feature-pill';
+            pill.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> ';
+            pill.append(document.createTextNode(label));
+            featureWrap.appendChild(pill);
+          });
+
+          if (result.missing_needs && result.missing_needs.length > 0) {
+            var missing = document.createElement('span');
+            missing.className = 'feature-pill';
+            missing.innerHTML = '<i class="ti ti-alert-triangle" aria-hidden="true"></i> ';
+            missing.append(document.createTextNode(result.missing_needs.length + ' requested ' + (result.missing_needs.length === 1 ? 'need' : 'needs') + ' not confirmed'));
+            featureWrap.appendChild(missing);
+          }
+
+          var footer = document.createElement('div');
+          footer.className = 'hotel-card__footer';
+          var link = document.createElement('a');
+          link.className = 'btn-primary hotel-card__cta';
+          link.href = '/hotel';
+          link.textContent = 'View details';
+          link.addEventListener('click', function () {
+            sessionStorage.setItem('inclusitripSelectedHotel', JSON.stringify(result));
+          });
+          footer.appendChild(link);
+
+          body.append(head, meta, description, featureWrap, footer);
+          article.append(image, body);
+          list.appendChild(article);
+        });
+      }
+
+      function applySearchSummary() {
+        if (!activeSearch) {
+          renderHotelResults();
+          return;
+        }
+
+        var destination = activeSearch.destination || 'Selected destination';
+        var guests = guestLabel(activeSearch.guests);
+        var resultCount = searchResults && Array.isArray(searchResults.results)
+          ? searchResults.results.length
+          : null;
+
+        document.getElementById('header-where').textContent = destination;
+        document.getElementById('header-guests').textContent = guests;
+        document.querySelector('.breadcrumb span:last-child').textContent = destination;
+        document.querySelector('.results-hero__sub').innerHTML =
+          'Showing results for <strong style="color: var(--color-text-on-dark);"></strong>' +
+          (resultCount === null ? '' : ' · ' + resultCount + ' matches') +
+          ' · ' + guests;
+        document.querySelector('.results-hero__sub strong').textContent = destination;
+        var summaryDestination = document.querySelector('#search-summary .search-summary__field:nth-child(1) .search-summary__value');
+        var summaryGuests = document.querySelector('#search-summary .search-summary__field:nth-child(2) .search-summary__value');
+        summaryDestination.lastChild.textContent = ' ' + destination;
+        summaryGuests.lastChild.textContent = ' ' + guests;
+        document.getElementById('es-destination').value = destination;
+        document.getElementById('es-guests').value = guests;
+        renderAccessibilityFilters();
+        renderHotelResults();
+      }
+
+      async function loadLoggedInAccessibilityPreferences() {
+        if (!activeSearch || !activeSearch.user_id) return;
+
+        var response = await fetch('/api/users/' + activeSearch.user_id + '/accessibility-preferences');
+        var profile = await response.json();
+        if (!response.ok) {
+          throw new Error(typeof profile.detail === 'string' ? profile.detail : 'Could not load accessibility preferences.');
+        }
+
+        activeSearch.accessibility_needs = profile;
+        sessionStorage.setItem('inclusitripActiveSearch', JSON.stringify(activeSearch));
+      }
+
+      async function saveLoggedInAccessibilityPreferences(profile) {
+        if (!activeSearch || !activeSearch.user_id) return;
+
+        var response = await fetch('/api/users/' + activeSearch.user_id + '/profile', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(profile),
+        });
+        var data = await response.json();
+        if (!response.ok) {
+          throw new Error(typeof data.detail === 'string' ? data.detail : 'Could not save accessibility preferences.');
+        }
+      }
+
+      async function postActiveSearch() {
+        var response = await fetch('/api/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(activeSearch),
+        });
+        var data = await response.json();
+        if (!response.ok) throw new Error(typeof data.detail === 'string' ? data.detail : 'Could not load results.');
+        searchResults = data;
+        sessionStorage.setItem('inclusitripSearchResults', JSON.stringify(data));
+        applySearchSummary();
+      }
+
+      async function refreshSearchResults() {
+        if (!activeSearch) {
+          applySearchSummary();
+          return;
+        }
+
+        try {
+          await loadLoggedInAccessibilityPreferences();
+          await postActiveSearch();
+        } catch (error) {
+          alert(error.message || 'Could not load results.');
+          renderHotelResults();
+        }
+      }
+
       // Toggle the "Edit search" drawer.
       var toggleBtn = document.getElementById('edit-search-toggle');
       var drawer = document.getElementById('edit-search');
@@ -922,13 +1249,30 @@
 
       cancelBtn.addEventListener('click', closeDrawer);
 
-      // On apply, just close the drawer (mockup — no real fetch).
-      form.addEventListener('submit', function (e) {
+      form.addEventListener('submit', async function (e) {
         e.preventDefault();
-        closeDrawer();
+        var destination = document.getElementById('es-destination').value.trim();
+        var guestsValue = document.getElementById('es-guests').value;
+        var guests = Number.parseInt(guestsValue, 10) || 1;
+        if (!destination) return;
+
+        activeSearch = {
+          destination: destination,
+          user_id: activeSearch && activeSearch.user_id ? activeSearch.user_id : null,
+          accessibility_needs: activeSearch && activeSearch.accessibility_needs ? activeSearch.accessibility_needs : {},
+          guests: guests,
+        };
+        sessionStorage.setItem('inclusitripActiveSearch', JSON.stringify(activeSearch));
+
+        try {
+          await postActiveSearch();
+          closeDrawer();
+        } catch (error) {
+          alert(error.message || 'Could not update results.');
+        }
       });
 
-      // Clear filter checkboxes.
+      // Clear filter controls; nothing is saved until Apply filters is pressed.
       var clearBtn = document.getElementById('clear-filters');
       clearBtn.addEventListener('click', function () {
         document.querySelectorAll('.filter-card input[type="checkbox"]').forEach(function (cb) {
@@ -939,14 +1283,36 @@
         });
       });
 
-      // Apply filters — mockup feedback only.
       var applyBtn = document.getElementById('apply-filters');
-      applyBtn.addEventListener('click', function () {
-        applyBtn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Filters applied';
-        setTimeout(function () {
-          applyBtn.innerHTML = '<i class="ti ti-filter-check" aria-hidden="true"></i> Apply filters';
-        }, 1400);
+      applyBtn.addEventListener('click', async function () {
+        if (!activeSearch) return;
+
+        var originalText = applyBtn.innerHTML;
+        var profile = buildAccessibilityProfileFromFilters();
+        activeSearch.accessibility_needs = profile;
+        sessionStorage.setItem('inclusitripActiveSearch', JSON.stringify(activeSearch));
+
+        applyBtn.disabled = true;
+        applyBtn.innerHTML = '<i class="ti ti-loader-2" aria-hidden="true"></i> Applying...';
+
+        try {
+          await saveLoggedInAccessibilityPreferences(profile);
+          await postActiveSearch();
+          applyBtn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Filters applied';
+          setTimeout(function () {
+            applyBtn.innerHTML = originalText;
+            applyBtn.disabled = false;
+          }, 1400);
+        } catch (error) {
+          applyBtn.innerHTML = originalText;
+          applyBtn.disabled = false;
+          alert(error.message || 'Could not apply filters.');
+        }
       });
+
+      document.getElementById('sort-hotels').addEventListener('change', renderHotelResults);
+
+      refreshSearchResults();
     })();
   </script>
 
