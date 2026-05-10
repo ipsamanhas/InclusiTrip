@@ -1044,12 +1044,33 @@
         }
 
         var sidebarConfidenceCopy = document.getElementById('sidebar-confidence-copy');
+        var sidebarConfidencePill = document.getElementById('sidebar-confidence-pill');
         if (sidebarConfidenceCopy) {
           var reviewCount = Array.isArray(hotel.reviews) ? hotel.reviews.length : 0;
           var needCount = requestedNeeds.length;
           sidebarConfidenceCopy.textContent =
             'Based on your ' + needCount + ' ' + (needCount === 1 ? 'need' : 'needs') +
             ' · ' + reviewCount + ' traveler ' + (reviewCount === 1 ? 'review' : 'reviews') + ' for this hotel.';
+
+          if (sidebarConfidencePill && typeof selected.match_percentage === 'number') {
+            var matchPct = selected.match_percentage;
+            var confidenceLevel = 'LOW';
+            var confidenceBgColor = 'var(--color-danger-light)';
+            var confidenceTextColor = '#791F1F';
+            if (matchPct >= 80) {
+              confidenceLevel = 'HIGH';
+              confidenceBgColor = 'var(--color-success-light)';
+              confidenceTextColor = '#27500A';
+            } else if (matchPct >= 50) {
+              confidenceLevel = 'MED';
+              confidenceBgColor = 'var(--color-warn-light)';
+              confidenceTextColor = '#633806';
+            }
+            sidebarConfidencePill.textContent = '';
+            sidebarConfidencePill.innerHTML = '<i class="ti ti-shield-check" style="font-size: 12px;" aria-hidden="true"></i> ' + confidenceLevel + ' confidence';
+            sidebarConfidencePill.style.background = confidenceBgColor;
+            sidebarConfidencePill.style.color = confidenceTextColor;
+          }
         }
 
         var sidebarFeatures = document.getElementById('sidebar-features-list');
