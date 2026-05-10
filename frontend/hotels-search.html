@@ -749,6 +749,38 @@
         return guests === 1 ? '1 adult' : guests + ' adults';
       }
 
+      function buildSearchQueryParams(destination, accessibilityNeeds, userId, guests) {
+        var params = new URLSearchParams();
+        params.append('destination', destination);
+        params.append('guests', guests || 1);
+        if (userId) params.append('user_id', userId);
+        
+        // Add accessibility needs with dot notation: mobility.wheelchair_accessible=true
+        if (accessibilityNeeds) {
+          var categories = ['mobility', 'dietary', 'speech', 'sensory', 'cognitive'];
+          categories.forEach(function(category) {
+            var categoryData = accessibilityNeeds[category];
+            if (categoryData) {
+              Object.entries(categoryData).forEach(function(entry) {
+                var key = entry[0];
+                var value = entry[1];
+                if (Array.isArray(value)) {
+                  // Handle array values like allergy_accommodations, languages
+                  if (value.length > 0) {
+                    params.append(category + '.' + key, value.join(','));
+                  }
+                } else if (value === true || value === 1) {
+                  // Only add true boolean values to reduce URL length
+                  params.append(category + '.' + key, 'true');
+                }
+              });
+            }
+          });
+        }
+        
+        return params.toString();
+      }
+
       var featureLabels = {
         'mobility.wheelchair_accessible': 'Wheelchair accessible',
         'mobility.short_walking_distances': 'Short walking distances',
@@ -1208,10 +1240,15 @@
       }
 
       async function postActiveSearch() {
-        var response = await fetch('/api/search', {
-          method: 'POST',
+        var queryParams = buildSearchQueryParams(
+          activeSearch.destination,
+          activeSearch.accessibility_needs,
+          activeSearch.user_id,
+          activeSearch.guests
+        );
+        var response = await fetch('/api/search?' + queryParams, {
+          method: 'GET',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(activeSearch),
         });
         var data = await response.json();
         if (!response.ok) throw new Error(typeof data.detail === 'string' ? data.detail : 'Could not load results.');
