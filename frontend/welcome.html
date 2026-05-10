@@ -1196,6 +1196,7 @@
     let currentProfile = null;
     let currentHotel = null;
     let draftAccessibilityProfile = null;
+    const GUEST_ACCESSIBILITY_PROFILE_KEY = "inclusitripGuestAccessibilityProfile";
     let hotelSignupFeaturesDraft = null;
     let hotelProfileFeaturesDraft = null;
     let preferencesOpenedFromProfile = false;
@@ -1214,8 +1215,54 @@
       return localStorage.getItem("inclusitripUserId");
     }
 
+    function getGuestAccessibilityProfile() {
+      try {
+        return JSON.parse(sessionStorage.getItem(GUEST_ACCESSIBILITY_PROFILE_KEY) || "null");
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function setGuestAccessibilityProfile(profile) {
+      sessionStorage.setItem(GUEST_ACCESSIBILITY_PROFILE_KEY, JSON.stringify(profile));
+    }
+
+    function clearGuestAccessibilityProfile() {
+      sessionStorage.removeItem(GUEST_ACCESSIBILITY_PROFILE_KEY);
+    }
+
     function getHotelId() {
       return localStorage.getItem("inclusitripHotelId");
+    }
+
+    function buildSearchQueryParams(destination, accessibilityNeeds, userId = null, guests = 1) {
+      const params = new URLSearchParams();
+      params.append("destination", destination);
+      params.append("guests", guests);
+      if (userId) params.append("user_id", userId);
+      
+      // Add accessibility needs with dot notation: mobility.wheelchair_accessible=true
+      if (accessibilityNeeds) {
+        const categories = ["mobility", "dietary", "speech", "sensory", "cognitive"];
+        categories.forEach(category => {
+          const categoryData = accessibilityNeeds[category];
+          if (categoryData) {
+            Object.entries(categoryData).forEach(([key, value]) => {
+              if (Array.isArray(value)) {
+                // Handle array values like allergy_accommodations, languages
+                if (value.length > 0) {
+                  params.append(`${category}.${key}`, value.join(","));
+                }
+              } else if (value === true || value === 1) {
+                // Only add true boolean values to reduce URL length
+                params.append(`${category}.${key}`, "true");
+              }
+            });
+          }
+        });
+      }
+      
+      return params.toString();
     }
 
     async function fetchCurrentProfile() {
@@ -1362,7 +1409,10 @@
     }
 
     function getProfileDraft() {
-      if (!currentProfile) return null;
+      if (!currentProfile) {
+        const guestProfile = getGuestAccessibilityProfile();
+        return guestProfile ? { accessibility_profile: guestProfile } : null;
+      }
       return {
         ...currentProfile,
         accessibility_profile: draftAccessibilityProfile ?? currentProfile.accessibility_profile,
@@ -1590,7 +1640,7 @@
       } else if (context === "hotel-profile") {
         hydrateAccessibilityPayload(hotelProfileFeaturesDraft || currentHotel?.accessibility_features || emptyAccessibilityPayload());
       } else {
-        hydrateAccessibilityFromProfile(getProfileDraft());
+        hydrateAccessibilityFromProfile(getProfileDraft() || { accessibility_profile: getGuestAccessibilityProfile() || emptyAccessibilityPayload() });
       }
 
       preferencesModal.hidden = false;
@@ -1651,6 +1701,7 @@
       }
       currentProfile = data;
       draftAccessibilityProfile = null;
+      clearGuestAccessibilityProfile();
       renderAuthActions(currentProfile);
       renderProfileNeeds(currentProfile);
     }
@@ -1686,10 +1737,15 @@
       sessionStorage.setItem("inclusitripActiveSearch", JSON.stringify(searchRequest));
 
       try {
-        const response = await fetch("/api/search", {
-          method: "POST",
+        const queryParams = buildSearchQueryParams(
+          destination,
+          searchRequest.accessibility_needs,
+          searchRequest.user_id,
+          searchRequest.guests
+        );
+        const response = await fetch(`/api/search?${queryParams}`, {
+          method: "GET",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(searchRequest),
         });
         const data = await response.json();
         if (!response.ok) {
@@ -1962,6 +2018,7 @@
           await persistAccessibilityPreferences();
         } else {
           stageAccessibilityPreferences();
+          setGuestAccessibilityProfile(draftAccessibilityProfile || emptyAccessibilityPayload());
         }
         closePreferences();
       } catch (e) {
@@ -2033,6 +2090,7 @@
         }
       }
       if (localStorage.getItem("inclusitripSignedIn") !== "true") {
+        draftAccessibilityProfile = getGuestAccessibilityProfile();
         renderAuthActions();
         renderDefaultNeeds();
         return;
