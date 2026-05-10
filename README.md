@@ -14,8 +14,8 @@ Ipsa Manhas, Harshita Handa, Rosanna Dovganyuk, Sehajvir Gill, Samia Rahman
 Open **Terminal** (macOS/Linux) or **Command Prompt** / **PowerShell** (Windows) and run:
 
 ```bash
-git clone <your-repo-url>
-cd <project-directory>
+git clone <https://github.com/ipsamanhas/InclusiTrip.git>
+cd <InclusiTrip>
 ```
 
 ### 2. Create a virtual environment
