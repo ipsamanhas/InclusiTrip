@@ -7,7 +7,7 @@ It is designed for travellers with diverse accessibility needs, including indivi
 Ipsa Manhas, Harshita Handa, Rosanna Dovganyuk, Sehajvir Gill, Samia Rahman
 
 
-## Getting Started
+# Getting Started
 
 ### 1. Clone the repository
 
