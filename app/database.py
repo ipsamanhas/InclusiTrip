@@ -15,17 +15,25 @@ Base = declarative_base()
 
 
 def migrate_sqlite_users_table(engine_: object) -> None:
-    """Add new SQLite columns when the DB file existed before migrations."""
+    """Add SQLite columns when the DB file existed before simple migrations."""
     if "sqlite" not in str(engine_.url):
         return
     from sqlalchemy import inspect, text
 
-    columns = [c["name"] for c in inspect(engine_).get_columns("users")]
+    inspector = inspect(engine_)
+
     with engine_.begin() as conn:
-        if "phone" not in columns:
-            conn.execute(text("ALTER TABLE users ADD COLUMN phone VARCHAR(64)"))
-        if "photo_url" not in columns:
-            conn.execute(text("ALTER TABLE users ADD COLUMN photo_url TEXT"))
+        if inspector.has_table("users"):
+            user_columns = [c["name"] for c in inspector.get_columns("users")]
+            if "phone" not in user_columns:
+                conn.execute(text("ALTER TABLE users ADD COLUMN phone VARCHAR(64)"))
+            if "photo_url" not in user_columns:
+                conn.execute(text("ALTER TABLE users ADD COLUMN photo_url TEXT"))
+
+        if inspector.has_table("hotels"):
+            hotel_columns = [c["name"] for c in inspector.get_columns("hotels")]
+            if "owner_id" not in hotel_columns:
+                conn.execute(text("ALTER TABLE hotels ADD COLUMN owner_id VARCHAR(36)"))
 
 
 def get_db() -> Generator[Session, None, None]:

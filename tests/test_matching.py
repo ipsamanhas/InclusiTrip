@@ -6,15 +6,15 @@ from app.services import match_hotels
 def test_exact_requested_features_return_full_match():
     profile = AccessibilityProfile(
         mobility=MobilityNeeds(wheelchair_accessible=True, ramp_access=True),
-        dietary=DietaryNeeds(vegetarian=True),
+        dietary=DietaryNeeds(vegan=True),
     )
 
-    results = match_hotels(HOTELS, "Paris", profile)
+    results = match_hotels(HOTELS, "Vancouver", profile)
 
-    hotel_access = results[0]
-    assert hotel_access.hotel.name == "Hotel de l'Access"
-    assert hotel_access.match_percentage == 100.0
-    assert hotel_access.missing_needs == []
+    harbour = results[0]
+    assert harbour.hotel.name == "Harbour Step-Free Suites"
+    assert harbour.match_percentage == 100.0
+    assert harbour.missing_needs == []
 
 
 def test_partial_match_reports_missing_needs():
@@ -23,17 +23,16 @@ def test_partial_match_reports_missing_needs():
         dietary=DietaryNeeds(vegetarian=True, halal=True),
     )
 
-    results = match_hotels(HOTELS, "Paris", profile)
-    voyageur = next(result for result in results if result.hotel.name == "Le Voyageur Hotel")
+    results = match_hotels(HOTELS, "New York", profile)
+    wayfinder = next(result for result in results if result.hotel.name == "Wayfinder Plaza")
 
-    assert voyageur.match_percentage == 50.0
-    assert "mobility.accessible_bathroom" in voyageur.missing_needs
-    assert "dietary.halal" in voyageur.missing_needs
+    assert wayfinder.match_percentage == 75.0
+    assert "dietary.halal" in wayfinder.missing_needs
 
 
 def test_guest_search_request_does_not_require_user_account():
     request = SearchRequest(
-        destination="Paris",
+        destination="Toronto",
         accessibility_needs=AccessibilityProfile(
             mobility=MobilityNeeds(wheelchair_accessible=True)
         ),

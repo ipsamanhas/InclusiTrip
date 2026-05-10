@@ -746,7 +746,7 @@
         <h2 id="search-heading">Destination Search</h2>
         <p>Inclusive travel starts here.</p>
 
-        <form>
+        <form id="destination-search-form">
           <label for="destination">Choose your destination</label>
           <div class="destination-field">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -910,6 +910,7 @@
 
   <script>
     const openPreferencesButton = document.getElementById("open-preferences");
+    const destinationSearchForm = document.getElementById("destination-search-form");
     const preferencesModal = document.getElementById("preferences-modal");
     const preferencesFormEl = document.getElementById("preferences-form");
     const closePreferencesButton = document.getElementById("close-preferences");
@@ -1141,6 +1142,20 @@
       return out;
     }
 
+    function emptyAccessibilityPayload() {
+      const out = {};
+      Object.entries(ACCESS_SCHEMA).forEach(([cat, cfg]) => {
+        out[cat] = {};
+        cfg.bools.forEach((key) => {
+          out[cat][key] = false;
+        });
+        cfg.arrays.forEach((key) => {
+          out[cat][key] = [];
+        });
+      });
+      return out;
+    }
+
     function hydrateAccessibilityFromProfile(profile) {
       const form = preferencesFormEl;
       const ap = profile?.accessibility_profile;
@@ -1313,6 +1328,7 @@
 
     function stageAccessibilityPreferences() {
       draftAccessibilityProfile = buildAccessibilityPayload();
+      renderProfileNeeds({ accessibility_profile: draftAccessibilityProfile });
       if (!profileModal.hidden) {
         renderSavedPreferences();
       }
@@ -1336,6 +1352,53 @@
       renderProfileNeeds(currentProfile);
     }
 
+    function getSearchAccessibilityProfile() {
+      if (currentProfile?.accessibility_profile) {
+        return currentProfile.accessibility_profile;
+      }
+      if (draftAccessibilityProfile) {
+        return draftAccessibilityProfile;
+      }
+      return buildAccessibilityPayload();
+    }
+
+    async function submitDestinationSearch(event) {
+      event.preventDefault();
+
+      const destinationInput = document.getElementById("destination");
+      const destination = destinationInput.value.trim();
+      if (!destination) {
+        destinationInput.focus();
+        return;
+      }
+
+      const isSignedIn = localStorage.getItem("inclusitripSignedIn") === "true";
+      const searchRequest = {
+        destination,
+        user_id: isSignedIn ? getUserId() : null,
+        accessibility_needs: getSearchAccessibilityProfile() || emptyAccessibilityPayload(),
+        guests: 1,
+      };
+
+      sessionStorage.setItem("inclusitripActiveSearch", JSON.stringify(searchRequest));
+
+      try {
+        const response = await fetch("/api/search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(searchRequest),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(typeof data.detail === "string" ? data.detail : "Could not search hotels.");
+        }
+        sessionStorage.setItem("inclusitripSearchResults", JSON.stringify(data));
+        window.location.href = "/hotels-search";
+      } catch (error) {
+        alert(error.message || "Could not search hotels. Please try again.");
+      }
+    }
+
     function openProfile() {
       if (!currentProfile) return;
       document.getElementById("profile-title").textContent = currentProfile.name || "Your profile";
@@ -1349,12 +1412,16 @@
     function closeProfile() {
       draftAccessibilityProfile = null;
       avatarOverride = undefined;
+      if (currentProfile) {
+        renderProfileNeeds(currentProfile);
+      }
       profileModal.classList.remove("is-open");
       profileModal.hidden = true;
       document.getElementById("profile-button")?.focus();
     }
 
     openPreferencesButton.addEventListener("click", openPreferences);
+    destinationSearchForm.addEventListener("submit", submitDestinationSearch);
 
     profileDetailForm.addEventListener("submit", saveProfileDetail);
 

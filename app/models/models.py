@@ -125,6 +125,7 @@ class UserResponse(BaseModel):
 
 class SearchRequest(BaseModel):
     destination: str
+    user_id: Optional[uuid.UUID] = None
     accessibility_needs: AccessibilityProfile = Field(default_factory=AccessibilityProfile)
     guests: int = Field(default=1, ge=1)
 
@@ -134,3 +135,9 @@ class HotelMatchResult(BaseModel):
     match_percentage: float
     matched_needs: List[str]
     missing_needs: List[str]
+
+
+class SearchResponse(BaseModel):
+    search_id: Optional[uuid.UUID] = None
+    search: SearchRequest
+    results: List[HotelMatchResult]
