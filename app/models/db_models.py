@@ -32,6 +32,8 @@ class HotelDB(Base):
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     owner_id = Column(String(36), ForeignKey("hotel_owners.id"), nullable=True, index=True)
     name = Column(String(255), nullable=False)
+    email = Column(String(255), unique=True, nullable=True, index=True)
+    password = Column(Text, nullable=True)
     location = Column(String(255), nullable=False, index=True)
     description = Column(Text, nullable=False)
     rating = Column(Float, nullable=False)
