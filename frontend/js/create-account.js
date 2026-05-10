@@ -9,12 +9,65 @@ const savePreferencesButton = document.getElementById("save-preferences");
 
 const HOME_URL = "/";
 
-const categoryLabels = {
-  "Mobility": "mobility",
-  "Food/Diet": "foodDiet",
-  "Language/Speech Accommodations": "languageSpeech",
-  "Sensory Needs": "sensory",
-  "Cognitive Needs": "cognitive",
+// Maps each modal field name to which AccessibilityProfile category it belongs to,
+// matching the Pydantic models in app/models/models.py.
+const PROFILE_SCHEMA = {
+  mobility: {
+    bools: [
+      "wheelchair_accessible",
+      "short_walking_distances",
+      "long_walking_distances",
+      "remote_controlled_doors",
+      "remote_controlled_curtains",
+      "remote_controlled_lights",
+      "ramp_access",
+      "elevator_access",
+      "accessible_bathroom",
+      "wide_hallways",
+    ],
+    arrays: [],
+  },
+  dietary: {
+    bools: [
+      "non_vegetarian",
+      "pescatarian",
+      "vegetarian",
+      "vegan",
+      "gluten_free",
+      "halal",
+      "kosher",
+    ],
+    arrays: ["allergy_accommodations"],
+  },
+  speech: {
+    bools: [
+      "hearing_impaired_support",
+      "speech_impaired_support",
+      "sign_language",
+      "captions",
+    ],
+    arrays: ["languages"],
+  },
+  sensory: {
+    bools: [
+      "dimly_lit_spaces",
+      "quiet_rooms",
+      "sensory_rooms",
+      "noise_cancelling_support",
+      "weighted_blankets",
+      "fidget_tools",
+      "aromatherapy_free_rooms",
+    ],
+    arrays: [],
+  },
+  cognitive: {
+    bools: [
+      "ibcces_certification",
+      "clear_wayfinding",
+      "staff_disability_awareness_training",
+    ],
+    arrays: [],
+  },
 };
 
 let createdUserId = null;
@@ -38,42 +91,51 @@ function closePreferences() {
   document.body.style.overflow = "";
 }
 
-// Save preferences in the SAME shape welcome.html expects, so when the user
-// lands on the home page right after, the data is already there.
-function savePreferenceSelections() {
-  const savedProfile = {};
+// Build the AccessibilityProfile payload that matches the Pydantic model the
+// PUT /api/users/{user_id}/profile endpoint expects.
+function buildAccessibilityProfile() {
+  const formData = new FormData(preferencesForm);
+  const profile = {};
 
-  preferencesForm.querySelectorAll(".preference-group").forEach((group) => {
-    const categoryName = group.querySelector("legend").textContent.trim();
-    const categoryKey = categoryLabels[categoryName];
-    const selections = [];
+  for (const [category, fields] of Object.entries(PROFILE_SCHEMA)) {
+    profile[category] = {};
 
-    group.querySelectorAll(".checkbox-label").forEach((label) => {
-      const checkbox = label.querySelector("input[type='checkbox']");
-      if (checkbox.checked) {
-        selections.push(label.textContent.trim());
-      }
+    fields.bools.forEach((name) => {
+      profile[category][name] = formData.has(name);
     });
 
-    group.querySelectorAll(".text-field input").forEach((input) => {
-      if (input.value.trim()) {
-        const fieldLabel = group.querySelector(`label[for="${input.id}"]`).textContent.trim();
-        selections.push(`${fieldLabel}: ${input.value.trim()}`);
-      }
+    fields.arrays.forEach((name) => {
+      const raw = (formData.get(name) || "").trim();
+      profile[category][name] = raw
+        ? raw.split(",").map((s) => s.trim()).filter(Boolean)
+        : [];
     });
+  }
 
-    savedProfile[categoryKey] = {
-      label: categoryName,
-      selections,
-    };
+  return profile;
+}
+
+async function savePreferencesToBackend() {
+  if (!createdUserId) return;
+  const profile = buildAccessibilityProfile();
+  const response = await fetch(`/api/users/${createdUserId}/profile`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(profile),
   });
+  if (!response.ok) {
+    throw new Error("Could not save preferences.");
+  }
+}
 
-  localStorage.setItem("inclusitripPreferences", JSON.stringify(savedProfile));
+function markSignedIn(userId) {
+  localStorage.setItem("inclusitripSignedIn", "true");
+  if (userId) {
+    localStorage.setItem("inclusitripUserId", userId);
+  }
 }
 
 function goHome() {
-  // Mark the user as signed in so welcome.html shows "My Profile" / "Log Out".
-  localStorage.setItem("inclusitripSignedIn", "true");
   window.location.href = HOME_URL;
 }
 
@@ -110,6 +172,7 @@ form.addEventListener("submit", async (event) => {
     }
 
     createdUserId = data.id;
+    markSignedIn(createdUserId);
     showStatus(`Account created for ${data.name}! Set your accessibility preferences.`);
     openPreferences();
   } catch (error) {
@@ -117,10 +180,20 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-savePreferencesButton.addEventListener("click", () => {
-  savePreferenceSelections();
-  closePreferences();
-  goHome();
+savePreferencesButton.addEventListener("click", async () => {
+  savePreferencesButton.disabled = true;
+  const originalLabel = savePreferencesButton.textContent;
+  savePreferencesButton.textContent = "Saving...";
+
+  try {
+    await savePreferencesToBackend();
+    closePreferences();
+    goHome();
+  } catch (error) {
+    savePreferencesButton.disabled = false;
+    savePreferencesButton.textContent = originalLabel;
+    showStatus("Could not save preferences. Please try again.", true);
+  }
 });
 
 cancelPreferencesButton.addEventListener("click", () => {
