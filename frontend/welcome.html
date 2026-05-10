@@ -2050,7 +2050,21 @@
       }
     }
 
-    initializeAuthState();
+    function maybeOpenProfileFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("openProfile") !== "1") return;
+      const url = new URL(window.location.href);
+      url.searchParams.delete("openProfile");
+      const query = url.searchParams.toString();
+      window.history.replaceState({}, "", url.pathname + (query ? `?${query}` : "") + url.hash);
+      if (localStorage.getItem("inclusitripSignedIn") !== "true" || !currentProfile) return;
+      requestAnimationFrame(() => openProfile());
+    }
+
+    (async function bootWelcome() {
+      await initializeAuthState();
+      maybeOpenProfileFromQuery();
+    })();
   </script>
 </body>
 </html>

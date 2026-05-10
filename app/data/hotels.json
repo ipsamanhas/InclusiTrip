@@ -1,0 +1,1329 @@
+{
+  "hotels": [
+    {
+      "id": "e90c5d34-c792-4874-8ba7-53e037a49742",
+      "owner_id": null,
+      "name": "Fairmont Royal York",
+      "location": "Toronto, Canada",
+      "description": "Historic luxury hotel in downtown Toronto with 12 fully accessible rooms featuring lowered light switches, peepholes and thermostats, wider doorways, grab bars, raised sinks and toilets, lever door handles, and roll-in showers with seats. Connected to PATH; accessible transportation, assistive listening devices, and closed-captioned TVs available.",
+      "rating": 4.5,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": true,
+          "sign_language": false,
+          "captions": true,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "c58d9261-81a2-4744-aea2-220ad9475dbe",
+      "owner_id": null,
+      "name": "Chelsea Hotel Toronto",
+      "location": "Toronto, Canada",
+      "description": "Downtown Toronto hotel with 19 fully accessible rooms with roll-in showers and 21 partially accessible rooms with bathtubs. Safety bars, handheld showers, visual fire-alarm notifications, and large-print/Braille hotel information. Wheelchair-accessible pool. Adopted the 'Closing the Gap' accessibility program.",
+      "rating": 4.1,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": true,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "b2fec555-947e-4c1b-b840-a0694281a5ea",
+      "owner_id": null,
+      "name": "Sheraton Centre Toronto Hotel",
+      "location": "Toronto, Canada",
+      "description": "Connected to Toronto's PATH via an accessible route. Accessible gym, indoor/outdoor heated pool with a lift, accessible elevators, and a 24-hour accessible reception. Adapted rooms include walk-in showers with grab bars and closed-captioned programming.",
+      "rating": 4.0,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": true,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "0cfe546b-51f7-4ff5-9b30-75bdf34b137b",
+      "owner_id": null,
+      "name": "1 Hotel Toronto",
+      "location": "Toronto, Canada",
+      "description": "Eco-luxury hotel with a fully automatic accessible main entrance, lobby free of any steps, lowered registration desk, two guest and two service elevators serving every level, and assistive listening devices for meeting rooms on request. All meeting rooms are wheelchair accessible.",
+      "rating": 4.7,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": true,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "65d29cd8-f651-4167-990c-55f90e1c9bd3",
+      "owner_id": null,
+      "name": "Hilton Toronto",
+      "location": "Toronto, Canada",
+      "description": "Downtown hotel near Osgoode Subway with accessible rooms compliant with current ADA standards. Partially accessible rooms include safety bars and raised vanities and toilets; fully accessible rooms add wider doorways, electrical outlets configured for accessibility, and roll-in showers or tubs with handheld sprays. Transfer benches available on request.",
+      "rating": 4.2,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "1ba8880a-e599-4825-8707-3c7c6e5634e1",
+      "owner_id": null,
+      "name": "Delta Hotels by Marriott Toronto",
+      "location": "Toronto, Canada",
+      "description": "Connected to Toronto's underground PATH walkway, providing accessible routes to public transit, shopping, and attractions. Accessible recreational amenities including an indoor heated pool and hot tub. Some guest rooms have glass-enclosed walk-in showers.",
+      "rating": 4.3,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": false,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "4d342215-13be-43d5-8512-e3339fdbd15d",
+      "owner_id": null,
+      "name": "Fairmont Hotel Vancouver",
+      "location": "Vancouver, Canada",
+      "description": "Twelve specially designed accessible rooms with special-handle doors and large bathrooms equipped with grab bars. ADA-compliant rooms and suites with 32-inch clear doorways. Valet parking accepts vehicles outfitted for wheelchair drivers; accessible guest transportation available with advance notice.",
+      "rating": 4.5,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": true,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "9b946501-7d18-42aa-a867-e45c922404f2",
+      "owner_id": null,
+      "name": "Fairmont Waterfront",
+      "location": "Vancouver, Canada",
+      "description": "ADA-compliant rooms and suites with varied bed heights, shower and bath configurations, and room layouts. Doorways with at least 33\" clear width, closed-captioned televisions, raised toilet seats, shower chairs, transfer benches, and support bars. Room numbers indented; function rooms labelled in Braille; service animals always welcome.",
+      "rating": 4.5,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": true,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "6365113f-da5d-450b-b81b-545511bb2d9d",
+      "owner_id": null,
+      "name": "Fairmont Pacific Rim",
+      "location": "Vancouver, Canada",
+      "description": "Waterfront downtown property with accessible rooms featuring touch-pad controls for lights, blinds and temperature. Accessible spa areas including a bench in the steam room and a portable shower bench for the high-pressure shower. Massage tables that lower for transfers.",
+      "rating": 4.7,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": true,
+          "remote_controlled_lights": true,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "cc20eb81-8331-4c86-8be1-4c1ed449b151",
+      "owner_id": null,
+      "name": "Fairmont Vancouver Airport",
+      "location": "Richmond, Canada",
+      "description": "In-terminal hotel with accessible rooms featuring 32\"+ clear doorways, visual and audible alarms, fire refuge areas on each floor for wheelchair users, TTY for guest use, assistive listening devices for meetings, closed-captioned TVs, and Braille and tactile signage. Wheelchairs, shower chairs, toilet risers and transfer benches available on request.",
+      "rating": 4.6,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": true,
+          "sign_language": false,
+          "captions": true,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "6bb0487d-1ae6-4fa2-a588-1fcbb40561d9",
+      "owner_id": null,
+      "name": "Fairmont Chateau Whistler",
+      "location": "Whistler, Canada",
+      "description": "Resort with main lobby wheelchair accessible from all entrances, ramp from driveway, no steps to the front desk, six accessible parking stalls in the underground garage with elevator access, and accessible restaurants. In partnership with Whistler Adaptive, additional in-room equipment can be coordinated on request.",
+      "rating": 4.6,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "ba30268e-50ba-458f-863f-b536fb983cac",
+      "owner_id": null,
+      "name": "Fairmont Banff Springs",
+      "location": "Banff, Canada",
+      "description": "Iconic 'castle in the Rockies' with several wheelchair-accessible guest rooms, some with roll-in showers and grab bars. Accessible route from the public entrance to registration, restaurants, meeting and ballroom areas, and spa. Wheelchairs, bed lifts, transfer benches, shower benches and person lifts available on request. Staff will read printed material for blind/low-vision guests.",
+      "rating": 4.7,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "e17ce0fc-24e1-4c62-bdb4-e8f9d5c31869",
+      "owner_id": null,
+      "name": "Sunshine Mountain Lodge",
+      "location": "Banff, Canada",
+      "description": "Ski-in/ski-out lodge inside Banff National Park with two wheelchair-accessible rooms featuring shower seats. Located at Sunshine Village ski resort with accessible parking and routes to the main lodge.",
+      "rating": 4.4,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": false,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": false
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "535f3ac7-d2d7-4c70-bd20-605f7a9d05f4",
+      "owner_id": null,
+      "name": "Fairmont Palliser",
+      "location": "Calgary, Canada",
+      "description": "Historic downtown Calgary landmark with four guest rooms meeting Access Level Two requirements: safety grips, grab bars in showers, raised toilet seats, lowered peepholes and wide doorways. Two loaner wheelchairs on request. Accessibility lift on the NW side (9th Ave) and accessible entry via valet parking; all meeting and function spaces are wheelchair accessible.",
+      "rating": 4.4,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "3d3855c3-5d2c-4735-aa9d-4a4d1690c343",
+      "owner_id": null,
+      "name": "Hyatt Regency Calgary",
+      "location": "Calgary, Canada",
+      "description": "Downtown Calgary hotel offering wheelchair-accessible rooms, accessible parking, accessible path of travel, and elevator access throughout. Connected to the Calgary TELUS Convention Centre.",
+      "rating": 4.4,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": false,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "8a6297e9-d233-441b-88f1-2bbd24c400dd",
+      "owner_id": null,
+      "name": "Fairmont Hotel Macdonald",
+      "location": "Edmonton, Canada",
+      "description": "Historic 'Mac' overlooking the river valley with a fully mobility-accessible guest room: roll-in shower, grab bars, wheelchair-friendly bedroom and bathroom layout, and lowered peepholes, door handles and light switches. Compliant with the Accessible Canada Act.",
+      "rating": 4.5,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "6020c172-d606-45d5-bfae-7582ba08dff3",
+      "owner_id": null,
+      "name": "JW Marriott Edmonton ICE District",
+      "location": "Edmonton, Canada",
+      "description": "Modern downtown tower attached to Rogers Place with accessible rooms (32-inch wide door openings, roll-in showers, wheelchair-accessible bathroom vanities), accessible meeting spaces, and accessible elevators.",
+      "rating": 4.5,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "1486a9d3-ca1a-4fff-b96d-5e70f4746b4a",
+      "owner_id": null,
+      "name": "Fairmont The Queen Elizabeth",
+      "location": "Montreal, Canada",
+      "description": "Downtown Montreal hotel with 13 rooms specially designed for guests with reduced mobility (two on Fairmont Gold floors), featuring widened entrances, grab bars, accessible showers and lowered sinks. Vibrating alarm clock-radios, amplifiers for hearing-impaired guests, door-knock sensors, flashing lights for call/smoke alerts, telecaption TVs, and TTY phones available.",
+      "rating": 4.5,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": true,
+          "sign_language": false,
+          "captions": true,
+          "languages": ["English", "French"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "dedc8070-144a-476f-9672-2d46b8400ded",
+      "owner_id": null,
+      "name": "Hotel Bonaventure Montreal",
+      "location": "Montreal, Canada",
+      "description": "Downtown landmark with 2.5 acres of rooftop gardens, year-round outdoor heated pool, accessible main entrance, accessible elevators, and wheelchair-accessible rooms. Steps from major Montreal attractions.",
+      "rating": 4.3,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": false,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English", "French"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "8e76d4ec-bcff-4bae-b1a6-5ca6ce9a37c2",
+      "owner_id": null,
+      "name": "The Ritz-Carlton, Montreal",
+      "location": "Montreal, Canada",
+      "description": "Historic five-star hotel with European-inspired charm, accessible main entrance, accessible rooms on request, and a building that guests using wheelchairs report as broadly accessible throughout.",
+      "rating": 4.6,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": false,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": false
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English", "French"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "e76be665-7282-4827-a4cc-2ffc6a0034d7",
+      "owner_id": null,
+      "name": "Fairmont Le Chateau Frontenac",
+      "location": "Quebec City, Canada",
+      "description": "Iconic chateau above the St. Lawrence with multiple ADA-compliant rooms in Fairmont King and Deluxe King categories: 32-inch doorways, TTYs and assistive listening devices on request, closed-captioned TVs, and Braille signage. Accessible public entrance, concierge area, restrooms, restaurants, fitness center, and indoor pool. Designated accessible parking and valet that accepts vehicles outfitted for wheelchair drivers.",
+      "rating": 4.5,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": true,
+          "speech_impaired_support": true,
+          "sign_language": false,
+          "captions": true,
+          "languages": ["English", "French"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "55fbd18c-9223-4085-be0c-4445ef8a449c",
+      "owner_id": null,
+      "name": "Auberge Saint-Antoine",
+      "location": "Quebec City, Canada",
+      "description": "Boutique relais & chateaux property in Old Quebec's Lower Town, frequently recommended for travellers with mobility needs. Accessible entrances, elevator access throughout, and accessible guest rooms; staff known for attentive service.",
+      "rating": 4.7,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": false,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": false
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English", "French"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "bc11cebd-80c6-4cfb-8462-997a19a14891",
+      "owner_id": null,
+      "name": "Fairmont Chateau Laurier",
+      "location": "Ottawa, Canada",
+      "description": "Historic chateau-style hotel beside Parliament Hill with wheelchair-accessible rooms, accessible main entrance, accessible elevators, and an accessible indoor pool. Service animals welcome; printed materials read on request for blind or low-vision guests.",
+      "rating": 4.5,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English", "French"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "7e326f61-2131-4fad-b209-c344233f3f7a",
+      "owner_id": null,
+      "name": "The Westin Nova Scotian",
+      "location": "Halifax, Canada",
+      "description": "Historic railway hotel attached to Halifax's VIA Rail station with wheelchair-accessible rooms, roll-in showers on request, accessible meeting space and indoor pool, and elevator access throughout. Service animals welcome.",
+      "rating": 4.3,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": true
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    },
+    {
+      "id": "abd2f2e2-b692-48bd-8e95-af4dce20ff9f",
+      "owner_id": null,
+      "name": "The Fort Garry Hotel",
+      "location": "Winnipeg, Canada",
+      "description": "Historic chateau-style hotel in downtown Winnipeg with wheelchair-accessible rooms, accessible main entrance, elevator access, and an accessible spa. Located near The Forks and Union Station.",
+      "rating": 4.4,
+      "accessibility_features": {
+        "mobility": {
+          "wheelchair_accessible": true,
+          "short_walking_distances": false,
+          "long_walking_distances": false,
+          "remote_controlled_doors": false,
+          "remote_controlled_curtains": false,
+          "remote_controlled_lights": false,
+          "ramp_access": true,
+          "elevator_access": true,
+          "accessible_bathroom": true,
+          "wide_hallways": false
+        },
+        "dietary": {
+          "non_vegetarian": false,
+          "pescatarian": false,
+          "vegetarian": false,
+          "vegan": false,
+          "gluten_free": false,
+          "halal": false,
+          "kosher": false,
+          "allergy_accommodations": []
+        },
+        "speech": {
+          "hearing_impaired_support": false,
+          "speech_impaired_support": false,
+          "sign_language": false,
+          "captions": false,
+          "languages": ["English"]
+        },
+        "sensory": {
+          "dimly_lit_spaces": false,
+          "quiet_rooms": false,
+          "sensory_rooms": false,
+          "noise_cancelling_support": false,
+          "weighted_blankets": false,
+          "fidget_tools": false,
+          "aromatherapy_free_rooms": false
+        },
+        "cognitive": {
+          "ibcces_certification": false,
+          "clear_wayfinding": false,
+          "staff_disability_awareness_training": false
+        }
+      }
+    }
+  ]
+}

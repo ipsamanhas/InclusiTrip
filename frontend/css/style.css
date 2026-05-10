@@ -130,6 +130,32 @@ a {
   font-size: 16px;
 }
 
+/* Welcome-page logo (SVG mark + serif wordmark) reused across pages. */
+.site-header__brand-svg {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.site-header__brand-text {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0;
+  line-height: 1;
+  color: inherit;
+}
+
+.site-footer__brand .site-header__brand-svg {
+  width: 30px;
+  height: 30px;
+}
+
+.site-footer__brand .site-header__brand-text {
+  font-size: 1.1rem;
+}
+
 .search-pill {
   flex: 1;
   max-width: 520px;
@@ -218,9 +244,46 @@ a {
   background: var(--color-brand);
   color: white;
   border: none;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.site-header__profile-slot {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.site-header__profile-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.4rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-brand-dark);
+  border: 2px solid var(--color-brand-border);
+  background: transparent;
+}
+
+.site-header__profile-login:hover,
+.site-header__profile-login:focus {
+  background: var(--color-brand-lighter);
+  border-color: var(--color-brand);
+}
+
+.site-header__profile[hidden],
+.site-header__profile-login[hidden] {
+  display: none !important;
 }
 
 /* ---------- Page wrapper ---------- */

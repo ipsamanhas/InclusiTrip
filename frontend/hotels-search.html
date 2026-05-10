@@ -508,31 +508,32 @@
 
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="/" class="site-header__brand">
-        <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
-        InclusiTrip
+      <a href="/" class="site-header__brand" aria-label="InclusiTrip home">
+        <svg class="site-header__brand-svg" viewBox="0 0 96 96" role="img" aria-hidden="true" focusable="false">
+          <rect x="10" y="7" width="76" height="82" rx="22" fill="#0c5d61" />
+          <g transform="translate(19 13) scale(0.62)">
+            <path d="M35 25 C33 22 36 19 39 21 L59 34 L70 34 C77 34 84 38 87 45 C83 51 76 55 68 55 L52 55 L41 68 C39 70 36 68 37 65 L43 55 L27 55 C23 55 21 53 20 50 L15 39 C14 36 17 34 20 36 L30 43 L42 41 Z" fill="#ffffff" />
+          </g>
+          <g transform="translate(16 20) scale(0.62)">
+            <circle cx="42" cy="59" r="5.6" fill="#f5ad37" />
+            <path d="M42 67 L42 78 L58 78" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M57 78 L69 92" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M41 66 C30 68 23 78 25 89 C27 101 42 106 53 99 C59 95 63 89 64 82" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+            <path d="M69 92 L76 87" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+          </g>
+        </svg>
+        <span class="site-header__brand-text">InclusiTrip</span>
       </a>
-
-      <div class="search-pill" role="search">
-        <div class="search-pill__field">
-          <span class="search-pill__label">Where</span>
-          <span class="search-pill__value" id="header-where">Paris, France</span>
-        </div>
-        <div class="search-pill__field">
-          <span class="search-pill__label">Travelers</span>
-          <span class="search-pill__value" id="header-guests">2 adults</span>
-        </div>
-        <button class="search-pill__btn" aria-label="Search">
-          <i class="ti ti-search" aria-hidden="true"></i>
-        </button>
-      </div>
 
       <nav class="site-header__nav" aria-label="Primary">
         <a href="#">Saved</a>
         <a href="#">Trips</a>
         <a href="#">Help</a>
       </nav>
-      <button class="site-header__profile" type="button" aria-label="My profile">A</button>
+      <div id="hotels-auth-actions" class="site-header__profile-slot" aria-label="Account actions">
+        <button class="site-header__profile" type="button" id="hotels-profile-btn" aria-label="My profile" hidden>?</button>
+        <a class="site-header__profile-login" href="/login" id="hotels-login-link" hidden>Log In</a>
+      </div>
     </div>
   </header>
 
@@ -676,9 +677,21 @@
     <div class="site-footer__inner">
       <div class="site-footer__cols">
         <div class="site-footer__col">
-          <a href="/" class="site-header__brand" style="font-size: 16px;">
-            <span class="site-header__brand-mark"><i class="ti ti-accessible" aria-hidden="true"></i></span>
-            InclusiTrip
+          <a href="/" class="site-header__brand site-footer__brand" aria-label="InclusiTrip home">
+            <svg class="site-header__brand-svg" viewBox="0 0 96 96" role="img" aria-hidden="true" focusable="false">
+              <rect x="10" y="7" width="76" height="82" rx="22" fill="#0c5d61" />
+              <g transform="translate(19 13) scale(0.62)">
+                <path d="M35 25 C33 22 36 19 39 21 L59 34 L70 34 C77 34 84 38 87 45 C83 51 76 55 68 55 L52 55 L41 68 C39 70 36 68 37 65 L43 55 L27 55 C23 55 21 53 20 50 L15 39 C14 36 17 34 20 36 L30 43 L42 41 Z" fill="#ffffff" />
+              </g>
+              <g transform="translate(16 20) scale(0.62)">
+                <circle cx="42" cy="59" r="5.6" fill="#f5ad37" />
+                <path d="M42 67 L42 78 L58 78" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M57 78 L69 92" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M41 66 C30 68 23 78 25 89 C27 101 42 106 53 99 C59 95 63 89 64 82" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+                <path d="M69 92 L76 87" fill="none" stroke="#f5ad37" stroke-width="7" stroke-linecap="round" />
+              </g>
+            </svg>
+            <span class="site-header__brand-text">InclusiTrip</span>
           </a>
           <p class="site-footer__brand-blurb">
             Travel info that actually reflects accessibility — built with and for disabled travelers.
@@ -1151,8 +1164,6 @@
           ? searchResults.results.length
           : null;
 
-        document.getElementById('header-where').textContent = destination;
-        document.getElementById('header-guests').textContent = guests;
         document.querySelector('.breadcrumb span:last-child').textContent = destination;
         document.querySelector('.results-hero__sub').innerHTML =
           'Showing results for <strong style="color: var(--color-text-on-dark);"></strong>' +
@@ -1312,6 +1323,47 @@
 
       document.getElementById('sort-hotels').addEventListener('change', renderHotelResults);
 
+      function initialFromName(name) {
+        if (!name) return '?';
+        var trimmed = String(name).trim();
+        return trimmed ? trimmed.charAt(0).toUpperCase() : '?';
+      }
+
+      async function hydrateProfileBadge() {
+        var profileBtn = document.getElementById('hotels-profile-btn');
+        var loginLink = document.getElementById('hotels-login-link');
+        var signedIn = localStorage.getItem('inclusitripSignedIn') === 'true';
+        var userId = localStorage.getItem('inclusitripUserId');
+        if (!signedIn || !userId) {
+          profileBtn.hidden = true;
+          loginLink.hidden = false;
+          return;
+        }
+
+        loginLink.hidden = true;
+        profileBtn.hidden = false;
+        profileBtn.textContent = '·';
+        profileBtn.setAttribute('aria-label', 'My profile');
+        profileBtn.onclick = function () {
+          window.location.href = '/?openProfile=1';
+        };
+
+        try {
+          var response = await fetch('/api/users/' + encodeURIComponent(userId) + '/profile');
+          if (!response.ok) throw new Error('profile fetch failed');
+          var data = await response.json();
+          var label = initialFromName(data && data.name);
+          profileBtn.textContent = label;
+          if (data && data.name) {
+            profileBtn.setAttribute('aria-label', 'My profile (' + data.name + ')');
+            profileBtn.title = data.name;
+          }
+        } catch (err) {
+          profileBtn.textContent = '?';
+        }
+      }
+
+      hydrateProfileBadge();
       refreshSearchResults();
     })();
   </script>
