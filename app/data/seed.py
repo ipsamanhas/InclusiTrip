@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 import uuid
+from pathlib import Path
 
 from app.models import (
     AccessibilityProfile,
@@ -14,6 +16,8 @@ from app.models import (
     SpeechNeeds,
     User,
 )
+
+HOTELS_JSON_PATH = Path(__file__).resolve().parent / "hotels.json"
 
 USER_MAYA_ID = uuid.UUID("44444444-4444-4444-4444-444444444444")
 USER_ALEX_ID = uuid.UUID("55555555-5555-5555-5555-555555555555")
@@ -767,6 +771,70 @@ def _seed_owner_id_for_hotel(index: int) -> str:
     return str(owner_ids[index % len(owner_ids)])
 
 
+def _load_hotels_from_json(db, json_path: Path = HOTELS_JSON_PATH) -> int:
+    """Upsert hotels from a JSON file into the database.
+
+    Skips entries whose `id` already exists, or whose `name` + `location`
+    pair already exists in the table.
+
+    Returns the number of newly inserted hotels.
+    """
+    from app.models.db_models import HotelDB
+
+    if not json_path.exists():
+        return 0
+
+    with json_path.open("r", encoding="utf-8") as fp:
+        payload = json.load(fp)
+
+    raw_hotels = payload.get("hotels") if isinstance(payload, dict) else payload
+    if not isinstance(raw_hotels, list):
+        return 0
+
+    existing_ids = {hid for (hid,) in db.query(HotelDB.id).all()}
+    existing_pairs = {
+        (name.strip().lower(), loc.strip().lower())
+        for (name, loc) in db.query(HotelDB.name, HotelDB.location).all()
+        if name and loc
+    }
+
+    inserted = 0
+    for index, raw in enumerate(raw_hotels):
+        hotel_id = str(raw.get("id") or uuid.uuid4())
+        name = str(raw.get("name", "")).strip()
+        location = str(raw.get("location", "")).strip()
+
+        if not name or not location:
+            continue
+        if hotel_id in existing_ids:
+            continue
+        pair_key = (name.lower(), location.lower())
+        if pair_key in existing_pairs:
+            continue
+
+        features_raw = raw.get("accessibility_features") or {}
+        features = HotelAccessibilityFeatures.model_validate(features_raw)
+
+        owner_id = raw.get("owner_id") or _seed_owner_id_for_hotel(index)
+
+        db.add(
+            HotelDB(
+                id=hotel_id,
+                owner_id=owner_id,
+                name=name,
+                location=location,
+                description=str(raw.get("description", "")).strip(),
+                rating=float(raw.get("rating", 0.0)),
+                accessibility_features=features.model_dump(),
+            )
+        )
+        existing_ids.add(hotel_id)
+        existing_pairs.add(pair_key)
+        inserted += 1
+
+    return inserted
+
+
 def seed_database() -> None:
     """Insert seed users, hotels, and reviews into empty database tables."""
     from app.database import SessionLocal
@@ -818,6 +886,11 @@ def seed_database() -> None:
                     accessibility_features=hotel.accessibility_features.model_dump(),
                 )
                 db.add(db_hotel)
+
+        # Owner FKs need to exist before we flush hotel rows that reference them.
+        db.flush()
+
+        _load_hotels_from_json(db)
 
         for index, hotel in enumerate(db.query(HotelDB).order_by(HotelDB.name).all()):
             if hotel.owner_id is None:
