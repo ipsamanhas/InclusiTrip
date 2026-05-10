@@ -78,6 +78,9 @@ def patch_user_profile(
     if "photo_url" in patch:
         v = patch["photo_url"]
         user.photo_url = None if v is None else (str(v).strip() or None)
+    if "accessibility_profile" in patch:
+        profile = patch["accessibility_profile"]
+        user.accessibility_profile = None if profile is None else profile
 
     db.commit()
     db.refresh(user)

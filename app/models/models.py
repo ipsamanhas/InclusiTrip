@@ -90,8 +90,6 @@ class Review(BaseModel):
 
 class Hotel(BaseModel):
     id: uuid.UUID = Field(default_factory=uuid.uuid4)
-    email: EmailStr
-    password: str
     name: str
     location: str
     description: str
@@ -112,6 +110,7 @@ class UpdateAccountRequest(BaseModel):
     email: Optional[EmailStr] = None
     phone: Optional[str] = Field(default=None, max_length=64)
     photo_url: Optional[str] = Field(default=None, max_length=1_300_000)
+    accessibility_profile: Optional[AccessibilityProfile] = None
 
 
 class UserResponse(BaseModel):
@@ -135,4 +134,3 @@ class HotelMatchResult(BaseModel):
     match_percentage: float
     matched_needs: List[str]
     missing_needs: List[str]
-

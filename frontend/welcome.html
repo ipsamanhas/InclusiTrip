@@ -368,6 +368,10 @@
       display: flex;
     }
 
+    .modal-backdrop.is-top-layer {
+      z-index: 950;
+    }
+
     .preferences-modal {
       width: min(960px, 100%);
       max-height: min(88vh, 900px);
@@ -1009,6 +1013,8 @@
     };
 
     let currentProfile = null;
+    let draftAccessibilityProfile = null;
+    let preferencesOpenedFromProfile = false;
     /** undefined = unchanged; string = preview / new image URL; null = remove on save */
     let avatarOverride = undefined;
     const MAX_PHOTO_UPLOAD = 850 * 1024;
@@ -1081,6 +1087,14 @@
           };
         })
         .filter((category) => category.selections.length > 0);
+    }
+
+    function getProfileDraft() {
+      if (!currentProfile) return null;
+      return {
+        ...currentProfile,
+        accessibility_profile: draftAccessibilityProfile ?? currentProfile.accessibility_profile,
+      };
     }
 
     function renderDefaultNeeds() {
@@ -1183,6 +1197,7 @@
     function hydrateProfileDetailForm(profile) {
       avatarOverride = undefined;
       profilePhotoInput.value = "";
+      draftAccessibilityProfile = null;
       document.getElementById("profile-field-name").value = profile?.name || "";
       document.getElementById("profile-field-email").value = profile?.email || "";
       document.getElementById("profile-field-phone").value = profile?.phone || "";
@@ -1222,7 +1237,13 @@
         const response = await fetch(`/api/users/${userId}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, phone: phone || "", photo_url: photoUrl }),
+          body: JSON.stringify({
+            name,
+            email,
+            phone: phone || "",
+            photo_url: photoUrl,
+            accessibility_profile: draftAccessibilityProfile ?? currentProfile?.accessibility_profile ?? null,
+          }),
         });
         const data = await response.json();
         if (!response.ok) {
@@ -1230,6 +1251,7 @@
           return;
         }
         currentProfile = data;
+        draftAccessibilityProfile = null;
         avatarOverride = undefined;
         renderAuthActions(currentProfile);
         renderProfileNeeds(currentProfile);
@@ -1245,7 +1267,7 @@
     }
 
     function renderSavedPreferences() {
-      const categories = getSelectedPreferences(currentProfile);
+      const categories = getSelectedPreferences(getProfileDraft());
       if (categories.length === 0) {
         savedPreferences.innerHTML = `<p class="empty-state">No accessibility preferences are saved for this account yet.</p>`;
         return;
@@ -1268,40 +1290,50 @@
     }
 
     function openPreferences() {
-      hydrateAccessibilityFromProfile(currentProfile);
+      preferencesOpenedFromProfile = !profileModal.hidden;
+      hydrateAccessibilityFromProfile(getProfileDraft());
       preferencesModal.hidden = false;
       preferencesModal.classList.add("is-open");
+      preferencesModal.classList.toggle("is-top-layer", preferencesOpenedFromProfile);
       closePreferencesButton.focus();
     }
 
     function closePreferences() {
       preferencesModal.classList.remove("is-open");
+      preferencesModal.classList.remove("is-top-layer");
       preferencesModal.hidden = true;
-      if (!profileModal.hidden && managePrefsInlineBtn) {
+      const shouldFocusProfile = preferencesOpenedFromProfile;
+      preferencesOpenedFromProfile = false;
+      if (shouldFocusProfile && !profileModal.hidden && managePrefsInlineBtn) {
         managePrefsInlineBtn.focus();
       } else {
         openPreferencesButton.focus();
       }
     }
 
+    function stageAccessibilityPreferences() {
+      draftAccessibilityProfile = buildAccessibilityPayload();
+      if (!profileModal.hidden) {
+        renderSavedPreferences();
+      }
+    }
+
     async function persistAccessibilityPreferences() {
       const userId = getUserId();
       if (!userId) throw new Error("Not signed in.");
-      const payload = buildAccessibilityPayload();
-      const response = await fetch(`/api/users/${userId}/profile`, {
-        method: "PUT",
+      const response = await fetch(`/api/users/${userId}`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ accessibility_profile: buildAccessibilityPayload() }),
       });
       const data = await response.json();
       if (!response.ok) {
         throw new Error(typeof data.detail === "string" ? data.detail : "Could not save preferences.");
       }
       currentProfile = data;
+      draftAccessibilityProfile = null;
+      renderAuthActions(currentProfile);
       renderProfileNeeds(currentProfile);
-      if (!profileModal.hidden) {
-        renderSavedPreferences();
-      }
     }
 
     function openProfile() {
@@ -1315,6 +1347,8 @@
     }
 
     function closeProfile() {
+      draftAccessibilityProfile = null;
+      avatarOverride = undefined;
       profileModal.classList.remove("is-open");
       profileModal.hidden = true;
       document.getElementById("profile-button")?.focus();
@@ -1359,12 +1393,18 @@
     savePreferencesButton.addEventListener("click", async () => {
       const prev = savePreferencesButton.textContent;
       savePreferencesButton.disabled = true;
-      savePreferencesButton.textContent = "Saving...";
+      savePreferencesButton.textContent = "Saved";
       try {
-        await persistAccessibilityPreferences();
+        if (preferencesOpenedFromProfile) {
+          stageAccessibilityPreferences();
+        } else if (localStorage.getItem("inclusitripSignedIn") === "true") {
+          await persistAccessibilityPreferences();
+        } else {
+          stageAccessibilityPreferences();
+        }
         closePreferences();
       } catch (e) {
-        alert(e.message || "Could not save preferences.");
+        alert(e.message || "Could not update preferences.");
       } finally {
         savePreferencesButton.disabled = false;
         savePreferencesButton.textContent = prev;
