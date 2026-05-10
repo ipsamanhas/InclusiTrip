@@ -91,6 +91,8 @@ class Review(BaseModel):
 class Hotel(BaseModel):
     id: uuid.UUID = Field(default_factory=uuid.uuid4)
     name: str
+    email: Optional[EmailStr] = None
+    password: str = Field(default="", exclude=True)
     location: str
     description: str
     rating: float = Field(ge=0, le=5)
@@ -121,6 +123,29 @@ class UserResponse(BaseModel):
     phone: Optional[str] = None
     photo_url: Optional[str] = None
     accessibility_profile: Optional[AccessibilityProfile] = None
+
+
+class HotelSignupRequest(BaseModel):
+    name: str = Field(min_length=1)
+    email: EmailStr
+    password: str = Field(min_length=8)
+    location: str = Field(min_length=1)
+    description: str = Field(min_length=1)
+    accessibility_features: HotelAccessibilityFeatures = Field(default_factory=HotelAccessibilityFeatures)
+
+
+class HotelLoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class HotelUpdateRequest(BaseModel):
+    name: Optional[str] = Field(default=None, min_length=1)
+    email: Optional[EmailStr] = None
+    password: Optional[str] = Field(default=None, min_length=8)
+    location: Optional[str] = Field(default=None, min_length=1)
+    description: Optional[str] = Field(default=None, min_length=1)
+    accessibility_features: Optional[HotelAccessibilityFeatures] = None
 
 
 class SearchRequest(BaseModel):

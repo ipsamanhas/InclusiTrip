@@ -771,6 +771,13 @@ def _seed_owner_id_for_hotel(index: int) -> str:
     return str(owner_ids[index % len(owner_ids)])
 
 
+def _seed_hotel_email(index: int, hotel: Hotel) -> str:
+    slug = "".join(ch.lower() if ch.isalnum() else "-" for ch in hotel.name).strip("-")
+    while "--" in slug:
+        slug = slug.replace("--", "-")
+    return f"{slug or 'hotel'}-{index + 1}@hotel.example"
+
+
 def _load_hotels_from_json(db, json_path: Path = HOTELS_JSON_PATH) -> int:
     """Upsert hotels from a JSON file into the database.
 
@@ -880,6 +887,8 @@ def seed_database() -> None:
                     id=str(hotel.id),
                     owner_id=_seed_owner_id_for_hotel(index),
                     name=hotel.name,
+                    email=hotel.email.lower() if hotel.email else _seed_hotel_email(index, hotel),
+                    password=hotel.password or "hotelpass123",
                     location=hotel.location,
                     description=hotel.description,
                     rating=hotel.rating,
@@ -895,6 +904,19 @@ def seed_database() -> None:
         for index, hotel in enumerate(db.query(HotelDB).order_by(HotelDB.name).all()):
             if hotel.owner_id is None:
                 hotel.owner_id = _seed_owner_id_for_hotel(index)
+            if hotel.email is None:
+                hotel.email = _seed_hotel_email(index, Hotel(
+                    id=uuid.UUID(str(hotel.id)),
+                    name=hotel.name,
+                    location=hotel.location,
+                    description=hotel.description,
+                    rating=hotel.rating,
+                    accessibility_features=HotelAccessibilityFeatures.model_validate(
+                        hotel.accessibility_features
+                    ),
+                ))
+            if hotel.password is None:
+                hotel.password = "hotelpass123"
 
         if db.query(ReviewDB).first() is None:
             for review in REVIEWS:

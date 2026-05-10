@@ -34,6 +34,10 @@ def migrate_sqlite_users_table(engine_: object) -> None:
             hotel_columns = [c["name"] for c in inspector.get_columns("hotels")]
             if "owner_id" not in hotel_columns:
                 conn.execute(text("ALTER TABLE hotels ADD COLUMN owner_id VARCHAR(36)"))
+            if "email" not in hotel_columns:
+                conn.execute(text("ALTER TABLE hotels ADD COLUMN email VARCHAR(255)"))
+            if "password" not in hotel_columns:
+                conn.execute(text("ALTER TABLE hotels ADD COLUMN password TEXT"))
 
 
 def get_db() -> Generator[Session, None, None]:

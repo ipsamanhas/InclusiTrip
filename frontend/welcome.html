@@ -353,6 +353,31 @@
       font-size: 0.95rem;
     }
 
+    .hotel-entry-actions {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px solid #eee8dc;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .hotel-entry-actions p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .hotel-entry-actions__buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .hotel-entry-actions__buttons .btn {
+      width: auto;
+      min-height: 2.75rem;
+      padding: 0.65rem 1rem;
+    }
+
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -549,7 +574,9 @@
 
     .profile-detail-form input[type="text"],
     .profile-detail-form input[type="email"],
-    .profile-detail-form input[type="tel"] {
+    .profile-detail-form input[type="tel"],
+    .profile-detail-form input[type="password"],
+    .profile-detail-form textarea {
       padding: 0.75rem 1rem;
       min-height: 3rem;
       border: 2px solid #d6cec1;
@@ -560,7 +587,16 @@
       box-sizing: border-box;
     }
 
-    #profile-global-error {
+    .profile-detail-form textarea {
+      min-height: 7rem;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    #profile-global-error,
+    #hotel-login-error,
+    #hotel-signup-error,
+    #hotel-profile-error {
       margin: 0 0 1rem;
       padding: 0.65rem 0.85rem;
       background: #fff7e6;
@@ -725,6 +761,8 @@
       <div class="auth-actions" id="auth-actions" aria-label="Account actions">
         <a href="/login" class="auth-link">Log In</a>
         <a href="/create-account" class="auth-button">Sign Up</a>
+        <button type="button" class="auth-link" id="hotel-login-open">Hotel Log In</button>
+        <button type="button" class="auth-button" id="hotel-signup-open">List Your Hotel</button>
       </div>
     </nav>
 
@@ -774,6 +812,14 @@
 
         <div class="access-note">
           Clear layout, large controls, descriptive labels, and keyboard-friendly navigation.
+        </div>
+
+        <div class="hotel-entry-actions">
+          <p>Hotels can create or update listings here.</p>
+          <div class="hotel-entry-actions__buttons">
+            <button type="button" class="btn btn-secondary hotel-login-trigger">Hotel Log In</button>
+            <button type="button" class="btn btn-primary hotel-signup-trigger">List Your Hotel</button>
+          </div>
         </div>
       </section>
     </main>
@@ -908,6 +954,129 @@
     </section>
   </div>
 
+  <div class="modal-backdrop" id="hotel-login-modal" role="dialog" aria-modal="true" aria-labelledby="hotel-login-title" hidden>
+    <section class="preferences-modal">
+      <div class="modal-header">
+        <h2 id="hotel-login-title">Hotel log in</h2>
+        <button type="button" class="icon-button" id="close-hotel-login" aria-label="Close hotel login">×</button>
+      </div>
+
+      <div class="profile-content">
+        <p class="profile-intro">Log in to update your hotel details and accessibility features.</p>
+        <p id="hotel-login-error" role="alert" hidden></p>
+
+        <form class="profile-detail-form" id="hotel-login-form">
+          <div class="form-field-row">
+            <label for="hotel-login-email">Email</label>
+            <input type="email" id="hotel-login-email" name="email" autocomplete="email" required />
+          </div>
+          <div class="form-field-row">
+            <label for="hotel-login-password">Password</label>
+            <input type="password" id="hotel-login-password" name="password" autocomplete="current-password" required />
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancel-hotel-login">Cancel</button>
+        <button type="submit" class="btn btn-primary" form="hotel-login-form" id="hotel-login-submit">Log in</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="hotel-signup-modal" role="dialog" aria-modal="true" aria-labelledby="hotel-signup-title" hidden>
+    <section class="preferences-modal">
+      <div class="modal-header">
+        <h2 id="hotel-signup-title">List your hotel</h2>
+        <button type="button" class="icon-button" id="close-hotel-signup" aria-label="Close hotel signup">×</button>
+      </div>
+
+      <div class="profile-content">
+        <p class="profile-intro">Create a hotel account and add the accessibility features travelers can match against.</p>
+        <p id="hotel-signup-error" role="alert" hidden></p>
+
+        <form class="profile-detail-form" id="hotel-signup-form">
+          <div class="form-field-row">
+            <label for="hotel-signup-name">Hotel name</label>
+            <input type="text" id="hotel-signup-name" name="name" required />
+          </div>
+          <div class="form-field-row">
+            <label for="hotel-signup-email">Email</label>
+            <input type="email" id="hotel-signup-email" name="email" autocomplete="email" required />
+          </div>
+          <div class="form-field-row">
+            <label for="hotel-signup-password">Password</label>
+            <input type="password" id="hotel-signup-password" name="password" autocomplete="new-password" minlength="8" required />
+          </div>
+          <div class="form-field-row">
+            <label for="hotel-signup-location">Location</label>
+            <input type="text" id="hotel-signup-location" name="location" placeholder="e.g. Vancouver, Canada" required />
+          </div>
+          <div class="form-field-row">
+            <label for="hotel-signup-description">Description</label>
+            <textarea id="hotel-signup-description" name="description" required></textarea>
+          </div>
+
+          <h3 class="profile-prefs-heading">Accessibility features</h3>
+          <p class="profile-prefs-tip">Select what your hotel provides. These features are used to calculate traveler match scores.</p>
+          <div class="saved-preferences" id="hotel-signup-features-summary"></div>
+          <button type="button" class="btn btn-secondary manage-prefs-inline" id="manage-hotel-signup-features">Customize accessibility features…</button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancel-hotel-signup">Cancel</button>
+        <button type="submit" class="btn btn-primary" form="hotel-signup-form" id="hotel-signup-submit">Create hotel account</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="hotel-profile-modal" role="dialog" aria-modal="true" aria-labelledby="hotel-profile-title" hidden>
+    <section class="preferences-modal">
+      <div class="modal-header">
+        <h2 id="hotel-profile-title">Hotel details</h2>
+        <button type="button" class="icon-button" id="close-hotel-profile" aria-label="Close hotel profile">×</button>
+      </div>
+
+      <div class="profile-content">
+        <p class="profile-intro">Update your hotel listing and the accessibility features shown in matching results.</p>
+        <p id="hotel-profile-error" role="alert" hidden></p>
+
+        <form class="profile-detail-form" id="hotel-profile-form">
+          <div class="form-field-row">
+            <label for="hotel-profile-name">Hotel name</label>
+            <input type="text" id="hotel-profile-name" name="name" required />
+          </div>
+          <div class="form-field-row">
+            <label for="hotel-profile-email">Email</label>
+            <input type="email" id="hotel-profile-email" name="email" autocomplete="email" required />
+          </div>
+          <div class="form-field-row">
+            <label for="hotel-profile-password">New password</label>
+            <input type="password" id="hotel-profile-password" name="password" autocomplete="new-password" minlength="8" placeholder="Leave blank to keep current password" />
+          </div>
+          <div class="form-field-row">
+            <label for="hotel-profile-location">Location</label>
+            <input type="text" id="hotel-profile-location" name="location" required />
+          </div>
+          <div class="form-field-row">
+            <label for="hotel-profile-description">Description</label>
+            <textarea id="hotel-profile-description" name="description" required></textarea>
+          </div>
+
+          <h3 class="profile-prefs-heading">Accessibility features</h3>
+          <div class="saved-preferences" id="hotel-profile-features-summary"></div>
+          <button type="button" class="btn btn-secondary manage-prefs-inline" id="manage-hotel-profile-features">Customize accessibility features…</button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="done-hotel-profile">Close</button>
+        <button type="submit" class="btn btn-primary" form="hotel-profile-form" id="hotel-profile-submit">Save hotel</button>
+      </div>
+    </section>
+  </div>
+
   <script>
     const openPreferencesButton = document.getElementById("open-preferences");
     const destinationSearchForm = document.getElementById("destination-search-form");
@@ -925,6 +1094,17 @@
     const profileGlobalError = document.getElementById("profile-global-error");
     const profilePhotoInput = document.getElementById("profile-photo-input");
     const savedPreferences = document.getElementById("saved-preferences");
+    const hotelLoginModal = document.getElementById("hotel-login-modal");
+    const hotelSignupModal = document.getElementById("hotel-signup-modal");
+    const hotelProfileModal = document.getElementById("hotel-profile-modal");
+    const hotelLoginForm = document.getElementById("hotel-login-form");
+    const hotelSignupForm = document.getElementById("hotel-signup-form");
+    const hotelProfileForm = document.getElementById("hotel-profile-form");
+    const hotelLoginError = document.getElementById("hotel-login-error");
+    const hotelSignupError = document.getElementById("hotel-signup-error");
+    const hotelProfileError = document.getElementById("hotel-profile-error");
+    const hotelSignupFeaturesSummary = document.getElementById("hotel-signup-features-summary");
+    const hotelProfileFeaturesSummary = document.getElementById("hotel-profile-features-summary");
 
     /** Matches backend AccessibilityProfile / create-account payload */
     const ACCESS_SCHEMA = {
@@ -1014,8 +1194,12 @@
     };
 
     let currentProfile = null;
+    let currentHotel = null;
     let draftAccessibilityProfile = null;
+    let hotelSignupFeaturesDraft = null;
+    let hotelProfileFeaturesDraft = null;
     let preferencesOpenedFromProfile = false;
+    let preferencesContext = "traveler";
     /** undefined = unchanged; string = preview / new image URL; null = remove on save */
     let avatarOverride = undefined;
     const MAX_PHOTO_UPLOAD = 850 * 1024;
@@ -1030,6 +1214,10 @@
       return localStorage.getItem("inclusitripUserId");
     }
 
+    function getHotelId() {
+      return localStorage.getItem("inclusitripHotelId");
+    }
+
     async function fetchCurrentProfile() {
       const userId = getUserId();
       if (!userId) throw new Error("Missing user id.");
@@ -1038,9 +1226,50 @@
       return response.json();
     }
 
+    async function fetchCurrentHotel() {
+      const hotelId = getHotelId();
+      if (!hotelId) throw new Error("Missing hotel id.");
+      const response = await fetch(`/api/hotels/${hotelId}`);
+      if (!response.ok) throw new Error("Could not load hotel.");
+      return response.json();
+    }
+
+    function bindHotelNavButtons() {
+      document.getElementById("hotel-login-open")?.addEventListener("click", openHotelLogin);
+      document.getElementById("hotel-signup-open")?.addEventListener("click", openHotelSignup);
+      document.querySelectorAll(".hotel-login-trigger").forEach((button) => {
+        button.addEventListener("click", openHotelLogin);
+      });
+      document.querySelectorAll(".hotel-signup-trigger").forEach((button) => {
+        button.addEventListener("click", openHotelSignup);
+      });
+    }
+
     function renderAuthActions(profile = null) {
+      const isHotelSignedIn = localStorage.getItem("inclusitripHotelSignedIn") === "true";
       const isSignedIn = localStorage.getItem("inclusitripSignedIn") === "true";
-      if (isSignedIn) {
+      if (isHotelSignedIn) {
+        clearElement(authActions);
+        const hotelButton = document.createElement("button");
+        hotelButton.type = "button";
+        hotelButton.className = "auth-link";
+        hotelButton.id = "hotel-dashboard-button";
+        hotelButton.textContent = currentHotel?.name || "Hotel Dashboard";
+        hotelButton.addEventListener("click", openHotelProfile);
+        const logoutButton = document.createElement("button");
+        logoutButton.type = "button";
+        logoutButton.className = "auth-button";
+        logoutButton.textContent = "Log Out";
+        logoutButton.addEventListener("click", () => {
+          localStorage.removeItem("inclusitripHotelSignedIn");
+          localStorage.removeItem("inclusitripHotelId");
+          currentHotel = null;
+          hotelProfileFeaturesDraft = null;
+          renderAuthActions();
+          renderDefaultNeeds();
+        });
+        authActions.append(hotelButton, logoutButton);
+      } else if (isSignedIn) {
         clearElement(authActions);
         const profileButton = document.createElement("button");
         profileButton.type = "button";
@@ -1060,18 +1289,33 @@
           renderAuthActions();
           renderDefaultNeeds();
         });
-        authActions.append(profileButton, logoutButton);
+        const hotelLoginButton = document.createElement("button");
+        hotelLoginButton.type = "button";
+        hotelLoginButton.className = "auth-link";
+        hotelLoginButton.id = "hotel-login-open";
+        hotelLoginButton.textContent = "Hotel Log In";
+        hotelLoginButton.addEventListener("click", openHotelLogin);
+        const hotelSignupButton = document.createElement("button");
+        hotelSignupButton.type = "button";
+        hotelSignupButton.className = "auth-button";
+        hotelSignupButton.id = "hotel-signup-open";
+        hotelSignupButton.textContent = "List Your Hotel";
+        hotelSignupButton.addEventListener("click", openHotelSignup);
+        authActions.append(profileButton, logoutButton, hotelLoginButton, hotelSignupButton);
       } else {
         authActions.innerHTML = `
           <a href="/login" class="auth-link">Log In</a>
           <a href="/create-account" class="auth-button">Sign Up</a>
+          <button type="button" class="auth-link" id="hotel-login-open">Hotel Log In</button>
+          <button type="button" class="auth-button" id="hotel-signup-open">List Your Hotel</button>
         `;
+        bindHotelNavButtons();
       }
     }
 
-    function getSelectedPreferences(profile) {
-      if (!profile?.accessibility_profile) return [];
-      return Object.entries(profile.accessibility_profile)
+    function getSelectedAccessibilityGroups(accessibilityProfile) {
+      if (!accessibilityProfile) return [];
+      return Object.entries(accessibilityProfile)
         .map(([categoryKey, preferences]) => {
           const selections = [];
           Object.entries(preferences || {}).forEach(([preferenceKey, value]) => {
@@ -1088,6 +1332,33 @@
           };
         })
         .filter((category) => category.selections.length > 0);
+    }
+
+    function getSelectedPreferences(profile) {
+      return getSelectedAccessibilityGroups(profile?.accessibility_profile);
+    }
+
+    function renderFeatureSummary(container, features, emptyText) {
+      const categories = getSelectedAccessibilityGroups(features);
+      if (categories.length === 0) {
+        container.innerHTML = `<p class="empty-state">${emptyText}</p>`;
+        return;
+      }
+      clearElement(container);
+      categories.forEach((category) => {
+        const card = document.createElement("section");
+        card.className = "saved-card";
+        const heading = document.createElement("h3");
+        heading.textContent = category.label;
+        const list = document.createElement("ul");
+        category.selections.forEach((selection) => {
+          const item = document.createElement("li");
+          item.textContent = selection;
+          list.appendChild(item);
+        });
+        card.append(heading, list);
+        container.appendChild(card);
+      });
     }
 
     function getProfileDraft() {
@@ -1156,9 +1427,9 @@
       return out;
     }
 
-    function hydrateAccessibilityFromProfile(profile) {
+    function hydrateAccessibilityPayload(accessibilityPayload) {
       const form = preferencesFormEl;
-      const ap = profile?.accessibility_profile;
+      const ap = accessibilityPayload;
       Object.entries(ACCESS_SCHEMA).forEach(([cat, cfg]) => {
         const catData = ap && ap[cat] ? ap[cat] : {};
         cfg.bools.forEach((key) => {
@@ -1173,6 +1444,10 @@
           }
         });
       });
+    }
+
+    function hydrateAccessibilityFromProfile(profile) {
+      hydrateAccessibilityPayload(profile?.accessibility_profile);
     }
 
     function initials(name) {
@@ -1304,12 +1579,23 @@
       });
     }
 
-    function openPreferences() {
-      preferencesOpenedFromProfile = !profileModal.hidden;
-      hydrateAccessibilityFromProfile(getProfileDraft());
+    function openPreferences(context = "traveler") {
+      preferencesContext = context;
+      preferencesOpenedFromProfile = context === "profile";
+      document.getElementById("preferences-title").textContent =
+        context.startsWith("hotel") ? "Hotel Accessibility Features" : "Accessibility Preferences";
+
+      if (context === "hotel-signup") {
+        hydrateAccessibilityPayload(hotelSignupFeaturesDraft || emptyAccessibilityPayload());
+      } else if (context === "hotel-profile") {
+        hydrateAccessibilityPayload(hotelProfileFeaturesDraft || currentHotel?.accessibility_features || emptyAccessibilityPayload());
+      } else {
+        hydrateAccessibilityFromProfile(getProfileDraft());
+      }
+
       preferencesModal.hidden = false;
       preferencesModal.classList.add("is-open");
-      preferencesModal.classList.toggle("is-top-layer", preferencesOpenedFromProfile);
+      preferencesModal.classList.toggle("is-top-layer", context !== "traveler");
       closePreferencesButton.focus();
     }
 
@@ -1317,19 +1603,36 @@
       preferencesModal.classList.remove("is-open");
       preferencesModal.classList.remove("is-top-layer");
       preferencesModal.hidden = true;
-      const shouldFocusProfile = preferencesOpenedFromProfile;
+      const lastContext = preferencesContext;
       preferencesOpenedFromProfile = false;
-      if (shouldFocusProfile && !profileModal.hidden && managePrefsInlineBtn) {
+      preferencesContext = "traveler";
+      document.getElementById("preferences-title").textContent = "Accessibility Preferences";
+      if (lastContext === "profile" && !profileModal.hidden && managePrefsInlineBtn) {
         managePrefsInlineBtn.focus();
+      } else if (lastContext === "hotel-signup" && !hotelSignupModal.hidden) {
+        document.getElementById("manage-hotel-signup-features").focus();
+      } else if (lastContext === "hotel-profile" && !hotelProfileModal.hidden) {
+        document.getElementById("manage-hotel-profile-features").focus();
       } else {
         openPreferencesButton.focus();
       }
     }
 
     function stageAccessibilityPreferences() {
-      draftAccessibilityProfile = buildAccessibilityPayload();
+      const payload = buildAccessibilityPayload();
+      if (preferencesContext === "hotel-signup") {
+        hotelSignupFeaturesDraft = payload;
+        renderFeatureSummary(hotelSignupFeaturesSummary, hotelSignupFeaturesDraft, "No accessibility features selected yet.");
+        return;
+      }
+      if (preferencesContext === "hotel-profile") {
+        hotelProfileFeaturesDraft = payload;
+        renderFeatureSummary(hotelProfileFeaturesSummary, hotelProfileFeaturesDraft, "No accessibility features selected yet.");
+        return;
+      }
+      draftAccessibilityProfile = payload;
       renderProfileNeeds({ accessibility_profile: draftAccessibilityProfile });
-      if (!profileModal.hidden) {
+      if (preferencesContext === "profile" && !profileModal.hidden) {
         renderSavedPreferences();
       }
     }
@@ -1409,6 +1712,197 @@
       closeProfileButton.focus();
     }
 
+    function showHotelError(element, message) {
+      element.textContent = message;
+      element.hidden = false;
+    }
+
+    function resetHotelSignupForm() {
+      hotelSignupForm.reset();
+      hotelSignupFeaturesDraft = emptyAccessibilityPayload();
+      hotelSignupError.hidden = true;
+      hotelSignupError.textContent = "";
+      renderFeatureSummary(hotelSignupFeaturesSummary, hotelSignupFeaturesDraft, "No accessibility features selected yet.");
+    }
+
+    function openHotelSignup() {
+      resetHotelSignupForm();
+      hotelSignupModal.hidden = false;
+      hotelSignupModal.classList.add("is-open");
+      document.getElementById("close-hotel-signup").focus();
+    }
+
+    function closeHotelSignup() {
+      hotelSignupModal.classList.remove("is-open");
+      hotelSignupModal.hidden = true;
+      document.getElementById("hotel-signup-open")?.focus();
+    }
+
+    function openHotelLogin() {
+      hotelLoginForm.reset();
+      hotelLoginError.hidden = true;
+      hotelLoginError.textContent = "";
+      hotelLoginModal.hidden = false;
+      hotelLoginModal.classList.add("is-open");
+      document.getElementById("close-hotel-login").focus();
+    }
+
+    function closeHotelLogin() {
+      hotelLoginModal.classList.remove("is-open");
+      hotelLoginModal.hidden = true;
+      document.getElementById("hotel-login-open")?.focus();
+    }
+
+    function hydrateHotelProfileForm(hotel) {
+      hotelProfileFeaturesDraft = hotel?.accessibility_features || emptyAccessibilityPayload();
+      document.getElementById("hotel-profile-name").value = hotel?.name || "";
+      document.getElementById("hotel-profile-email").value = hotel?.email || "";
+      document.getElementById("hotel-profile-password").value = "";
+      document.getElementById("hotel-profile-location").value = hotel?.location || "";
+      document.getElementById("hotel-profile-description").value = hotel?.description || "";
+      hotelProfileError.hidden = true;
+      hotelProfileError.textContent = "";
+      renderFeatureSummary(hotelProfileFeaturesSummary, hotelProfileFeaturesDraft, "No accessibility features selected yet.");
+    }
+
+    function openHotelProfile() {
+      if (!currentHotel) return;
+      document.getElementById("hotel-profile-title").textContent = currentHotel.name || "Hotel details";
+      hydrateHotelProfileForm(currentHotel);
+      hotelProfileModal.hidden = false;
+      hotelProfileModal.classList.add("is-open");
+      document.getElementById("close-hotel-profile").focus();
+    }
+
+    function closeHotelProfile() {
+      hotelProfileFeaturesDraft = currentHotel?.accessibility_features || null;
+      hotelProfileModal.classList.remove("is-open");
+      hotelProfileModal.hidden = true;
+      document.getElementById("hotel-dashboard-button")?.focus();
+    }
+
+    async function submitHotelSignup(event) {
+      event.preventDefault();
+      const submitBtn = document.getElementById("hotel-signup-submit");
+      const prev = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Creating...";
+      hotelSignupError.hidden = true;
+      try {
+        const response = await fetch("/api/hotels/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: document.getElementById("hotel-signup-name").value.trim(),
+            email: document.getElementById("hotel-signup-email").value.trim(),
+            password: document.getElementById("hotel-signup-password").value,
+            location: document.getElementById("hotel-signup-location").value.trim(),
+            description: document.getElementById("hotel-signup-description").value.trim(),
+            accessibility_features: hotelSignupFeaturesDraft || emptyAccessibilityPayload(),
+          }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          showHotelError(hotelSignupError, typeof data.detail === "string" ? data.detail : "Could not create hotel account.");
+          return;
+        }
+        currentHotel = data;
+        localStorage.setItem("inclusitripHotelSignedIn", "true");
+        localStorage.setItem("inclusitripHotelId", data.id);
+        localStorage.removeItem("inclusitripSignedIn");
+        localStorage.removeItem("inclusitripUserId");
+        currentProfile = null;
+        closeHotelSignup();
+        renderAuthActions();
+        openHotelProfile();
+      } catch (error) {
+        showHotelError(hotelSignupError, "Could not create hotel account. Please try again.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = prev;
+      }
+    }
+
+    async function submitHotelLogin(event) {
+      event.preventDefault();
+      const submitBtn = document.getElementById("hotel-login-submit");
+      const prev = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Logging in...";
+      hotelLoginError.hidden = true;
+      try {
+        const response = await fetch("/api/hotels/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: document.getElementById("hotel-login-email").value.trim(),
+            password: document.getElementById("hotel-login-password").value,
+          }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          showHotelError(hotelLoginError, typeof data.detail === "string" ? data.detail : "Could not log in.");
+          return;
+        }
+        localStorage.setItem("inclusitripHotelSignedIn", "true");
+        localStorage.setItem("inclusitripHotelId", data.hotel_id);
+        localStorage.removeItem("inclusitripSignedIn");
+        localStorage.removeItem("inclusitripUserId");
+        currentProfile = null;
+        currentHotel = await fetchCurrentHotel();
+        closeHotelLogin();
+        renderAuthActions();
+        openHotelProfile();
+      } catch (error) {
+        showHotelError(hotelLoginError, "Could not log in. Please try again.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = prev;
+      }
+    }
+
+    async function saveHotelProfile(event) {
+      event.preventDefault();
+      if (!currentHotel) return;
+      const submitBtn = document.getElementById("hotel-profile-submit");
+      const prev = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Saving...";
+      hotelProfileError.hidden = true;
+      const password = document.getElementById("hotel-profile-password").value;
+      const payload = {
+        name: document.getElementById("hotel-profile-name").value.trim(),
+        email: document.getElementById("hotel-profile-email").value.trim(),
+        location: document.getElementById("hotel-profile-location").value.trim(),
+        description: document.getElementById("hotel-profile-description").value.trim(),
+        accessibility_features: hotelProfileFeaturesDraft || currentHotel.accessibility_features || emptyAccessibilityPayload(),
+      };
+      if (password) payload.password = password;
+
+      try {
+        const response = await fetch(`/api/hotels/${currentHotel.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          showHotelError(hotelProfileError, typeof data.detail === "string" ? data.detail : "Could not save hotel.");
+          return;
+        }
+        currentHotel = data;
+        hotelProfileFeaturesDraft = data.accessibility_features;
+        renderAuthActions();
+        hydrateHotelProfileForm(currentHotel);
+        document.getElementById("hotel-profile-title").textContent = currentHotel.name || "Hotel details";
+      } catch (error) {
+        showHotelError(hotelProfileError, "Could not save hotel. Please try again.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = prev;
+      }
+    }
+
     function closeProfile() {
       draftAccessibilityProfile = null;
       avatarOverride = undefined;
@@ -1420,7 +1914,7 @@
       document.getElementById("profile-button")?.focus();
     }
 
-    openPreferencesButton.addEventListener("click", openPreferences);
+    openPreferencesButton.addEventListener("click", () => openPreferences("traveler"));
     destinationSearchForm.addEventListener("submit", submitDestinationSearch);
 
     profileDetailForm.addEventListener("submit", saveProfileDetail);
@@ -1462,7 +1956,7 @@
       savePreferencesButton.disabled = true;
       savePreferencesButton.textContent = "Saved";
       try {
-        if (preferencesOpenedFromProfile) {
+        if (preferencesContext === "profile" || preferencesContext === "hotel-signup" || preferencesContext === "hotel-profile") {
           stageAccessibilityPreferences();
         } else if (localStorage.getItem("inclusitripSignedIn") === "true") {
           await persistAccessibilityPreferences();
@@ -1478,10 +1972,23 @@
       }
     });
 
-    managePrefsInlineBtn.addEventListener("click", openPreferences);
+    managePrefsInlineBtn.addEventListener("click", () => openPreferences("profile"));
+    document.getElementById("manage-hotel-signup-features").addEventListener("click", () => openPreferences("hotel-signup"));
+    document.getElementById("manage-hotel-profile-features").addEventListener("click", () => openPreferences("hotel-profile"));
+
+    hotelSignupForm.addEventListener("submit", submitHotelSignup);
+    hotelLoginForm.addEventListener("submit", submitHotelLogin);
+    hotelProfileForm.addEventListener("submit", saveHotelProfile);
 
     closeProfileButton.addEventListener("click", closeProfile);
     doneProfileButton.addEventListener("click", closeProfile);
+    document.getElementById("close-hotel-login").addEventListener("click", closeHotelLogin);
+    document.getElementById("cancel-hotel-login").addEventListener("click", closeHotelLogin);
+    document.getElementById("close-hotel-signup").addEventListener("click", closeHotelSignup);
+    document.getElementById("cancel-hotel-signup").addEventListener("click", closeHotelSignup);
+    document.getElementById("close-hotel-profile").addEventListener("click", closeHotelProfile);
+    document.getElementById("done-hotel-profile").addEventListener("click", closeHotelProfile);
+    bindHotelNavButtons();
 
     preferencesModal.addEventListener("click", (event) => {
       if (event.target === preferencesModal) closePreferences();
@@ -1491,13 +1998,40 @@
       if (event.target === profileModal) closeProfile();
     });
 
+    hotelLoginModal.addEventListener("click", (event) => {
+      if (event.target === hotelLoginModal) closeHotelLogin();
+    });
+
+    hotelSignupModal.addEventListener("click", (event) => {
+      if (event.target === hotelSignupModal) closeHotelSignup();
+    });
+
+    hotelProfileModal.addEventListener("click", (event) => {
+      if (event.target === hotelProfileModal) closeHotelProfile();
+    });
+
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
       if (!preferencesModal.hidden) closePreferences();
+      else if (!hotelLoginModal.hidden) closeHotelLogin();
+      else if (!hotelSignupModal.hidden) closeHotelSignup();
+      else if (!hotelProfileModal.hidden) closeHotelProfile();
       else if (!profileModal.hidden) closeProfile();
     });
 
     async function initializeAuthState() {
+      if (localStorage.getItem("inclusitripHotelSignedIn") === "true") {
+        try {
+          currentHotel = await fetchCurrentHotel();
+          renderAuthActions();
+          renderDefaultNeeds();
+          return;
+        } catch (error) {
+          localStorage.removeItem("inclusitripHotelSignedIn");
+          localStorage.removeItem("inclusitripHotelId");
+          currentHotel = null;
+        }
+      }
       if (localStorage.getItem("inclusitripSignedIn") !== "true") {
         renderAuthActions();
         renderDefaultNeeds();
