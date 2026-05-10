@@ -110,6 +110,7 @@ class UpdateAccountRequest(BaseModel):
     email: Optional[EmailStr] = None
     phone: Optional[str] = Field(default=None, max_length=64)
     photo_url: Optional[str] = Field(default=None, max_length=1_300_000)
+    accessibility_profile: Optional[AccessibilityProfile] = None
 
 
 class UserResponse(BaseModel):
@@ -133,4 +134,3 @@ class HotelMatchResult(BaseModel):
     match_percentage: float
     matched_needs: List[str]
     missing_needs: List[str]
-
