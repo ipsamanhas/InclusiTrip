@@ -5,3 +5,54 @@ It is designed for travellers with diverse accessibility needs, including indivi
 
 # Team Members
 Ipsa Manhas, Harshita Handa, Rosanna Dovganyuk, Sehajvir Gill, Samia Rahman
+
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd <project-directory>
+```
+
+### 2. Create a virtual environment
+
+**macOS / Linux:**
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+**Windows (Command Prompt):**
+
+```cmd
+python -m venv venv
+venv\Scripts\activate
+```
+
+**Windows (PowerShell):**
+
+```powershell
+python -m venv venv
+venv\Scripts\Activate.ps1
+```
+
+> If PowerShell blocks the activation script, run `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned` once, then try again.
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the development server
+
+```bash
+fastapi dev
+```
+
+The site will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+To stop the server, press `Ctrl+C` in the terminal. When you're done working, deactivate the virtual environment with `deactivate`.
