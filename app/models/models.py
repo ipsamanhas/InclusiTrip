@@ -104,11 +104,21 @@ class CreateAccountRequest(BaseModel):
     password: str = Field(min_length=8)
 
 
+class UpdateAccountRequest(BaseModel):
+    """Partial update payload for a user's editable account fields."""
+    name: Optional[str] = Field(default=None, min_length=1)
+    email: Optional[EmailStr] = None
+    phone: Optional[str] = Field(default=None, max_length=64)
+    photo_url: Optional[str] = Field(default=None, max_length=1_300_000)
+
+
 class UserResponse(BaseModel):
     """Safe user representation that excludes the password."""
     id: uuid.UUID
     name: str
     email: EmailStr
+    phone: Optional[str] = None
+    photo_url: Optional[str] = None
     accessibility_profile: Optional[AccessibilityProfile] = None
 
 

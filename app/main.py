@@ -6,7 +6,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
-from app.database import Base, engine, get_db
+from app.database import Base, engine, get_db, migrate_sqlite_users_table
 from app.data.users import get_user_by_email, get_user_by_id, verify_password
 from app.models.models import LoginRequest
 from app.routes import auth_router
@@ -33,6 +33,7 @@ app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 def on_startup() -> None:
     """Create database tables and seed initial data on server start."""
     Base.metadata.create_all(bind=engine)
+    migrate_sqlite_users_table(engine)
 
     from app.data.seed import seed_database
     seed_database()
@@ -92,5 +93,7 @@ def get_user_profile(user_id: str, db: Session = Depends(get_db)):
         "id": user.id,
         "name": user.name,
         "email": user.email,
+        "phone": getattr(user, "phone", None),
+        "photo_url": getattr(user, "photo_url", None),
         "accessibility_profile": user.accessibility_profile,
     }

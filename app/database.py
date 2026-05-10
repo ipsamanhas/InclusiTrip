@@ -14,6 +14,20 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 Base = declarative_base()
 
 
+def migrate_sqlite_users_table(engine_: object) -> None:
+    """Add new SQLite columns when the DB file existed before migrations."""
+    if "sqlite" not in str(engine_.url):
+        return
+    from sqlalchemy import inspect, text
+
+    columns = [c["name"] for c in inspect(engine_).get_columns("users")]
+    with engine_.begin() as conn:
+        if "phone" not in columns:
+            conn.execute(text("ALTER TABLE users ADD COLUMN phone VARCHAR(64)"))
+        if "photo_url" not in columns:
+            conn.execute(text("ALTER TABLE users ADD COLUMN photo_url TEXT"))
+
+
 def get_db() -> Generator[Session, None, None]:
     """FastAPI dependency that provides a database session per request."""
     db = SessionLocal()
