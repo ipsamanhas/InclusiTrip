@@ -14,6 +14,8 @@ def db_hotel_to_model(hotel: HotelDB) -> Hotel:
     return Hotel(
         id=uuid.UUID(str(hotel.id)),
         name=hotel.name,
+        email=hotel.email,
+        password=hotel.password or "",
         location=hotel.location,
         description=hotel.description,
         rating=hotel.rating,
@@ -43,3 +45,69 @@ def list_hotels(db: Session) -> List[Hotel]:
         .all()
     )
     return [db_hotel_to_model(hotel) for hotel in hotel_rows]
+
+
+def get_hotel_by_id(db: Session, hotel_id: str) -> HotelDB | None:
+    """Look up one hotel listing by id."""
+    return (
+        db.query(HotelDB)
+        .options(selectinload(HotelDB.reviews))
+        .filter(HotelDB.id == hotel_id)
+        .first()
+    )
+
+
+def get_hotel_by_email(db: Session, email: str) -> HotelDB | None:
+    """Look up a hotel account by email."""
+    return db.query(HotelDB).filter(HotelDB.email == email.lower()).first()
+
+
+def create_hotel(
+    db: Session,
+    *,
+    name: str,
+    email: str,
+    password: str,
+    location: str,
+    description: str,
+    accessibility_features: dict,
+) -> HotelDB:
+    """Create a hotel listing that can also log in as its own account."""
+    hotel = HotelDB(
+        id=str(uuid.uuid4()),
+        name=name,
+        email=email.lower(),
+        password=password,
+        location=location,
+        description=description,
+        rating=0,
+        accessibility_features=accessibility_features,
+    )
+    db.add(hotel)
+    db.commit()
+    db.refresh(hotel)
+    return hotel
+
+
+def patch_hotel(db: Session, hotel_id: str, patch: dict) -> HotelDB | None:
+    """Partially update editable hotel listing/account fields."""
+    hotel = get_hotel_by_id(db, hotel_id)
+    if hotel is None:
+        return None
+
+    if "name" in patch:
+        hotel.name = patch["name"]
+    if "email" in patch and patch["email"] is not None:
+        hotel.email = patch["email"].lower()
+    if "password" in patch and patch["password"] is not None:
+        hotel.password = patch["password"]
+    if "location" in patch:
+        hotel.location = patch["location"]
+    if "description" in patch:
+        hotel.description = patch["description"]
+    if "accessibility_features" in patch and patch["accessibility_features"] is not None:
+        hotel.accessibility_features = patch["accessibility_features"]
+
+    db.commit()
+    db.refresh(hotel)
+    return hotel
