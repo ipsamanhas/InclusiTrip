@@ -64,5 +64,5 @@ To stop the server, press `Ctrl+C` in the terminal. When you're done working, de
 
 # Presentation Slides
 
-[Presentation Slides](https://canva.link/f0lhn01v1evphzi)
+[InclusiTrip Slides](https://canva.link/f0lhn01v1evphzi)
 
