@@ -478,6 +478,117 @@
       font-size: 1.05rem;
     }
 
+    .profile-intro {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .profile-editor-photo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-avatar {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--line);
+      background: rgba(34,201,202,0.15);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile-avatar-fallback {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--teal-dark);
+    }
+
+    .profile-photo-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .profile-photo-buttons .btn {
+      width: auto;
+      min-height: 2.65rem;
+      padding: 0.45rem 1rem;
+    }
+
+    .profile-detail-form .form-field-row {
+      display: grid;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .profile-detail-form label {
+      margin: 0;
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 0.95rem;
+    }
+
+    .profile-detail-form input[type="text"],
+    .profile-detail-form input[type="email"],
+    .profile-detail-form input[type="tel"] {
+      padding: 0.75rem 1rem;
+      min-height: 3rem;
+      border: 2px solid #d6cec1;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 1rem;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+
+    #profile-global-error {
+      margin: 0 0 1rem;
+      padding: 0.65rem 0.85rem;
+      background: #fff7e6;
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .profile-prefs-heading {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin: 1.75rem 0 0.4rem;
+    }
+
+    .profile-prefs-tip {
+      margin: 0 0 1rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .manage-prefs-inline {
+      width: auto;
+      min-height: 2.75rem;
+      margin-top: 0.85rem;
+    }
+
+    #save-profile-submit {
+      min-height: 2.85rem;
+    }
+
     .saved-preferences {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -671,7 +782,7 @@
         <button type="button" class="icon-button" id="close-preferences" aria-label="Close preferences">×</button>
       </div>
 
-      <form class="preferences-form">
+      <form class="preferences-form" id="preferences-form">
         <div class="preference-grid">
           <fieldset class="preference-group">
             <legend>Mobility</legend>
@@ -744,18 +855,51 @@
   <div class="modal-backdrop" id="profile-modal" role="dialog" aria-modal="true" aria-labelledby="profile-title" hidden>
     <section class="preferences-modal">
       <div class="modal-header">
-        <h2 id="profile-title">My Profile</h2>
+        <h2 id="profile-title">Your profile</h2>
         <button type="button" class="icon-button" id="close-profile" aria-label="Close profile">×</button>
       </div>
 
       <div class="profile-content">
-        <p class="profile-summary">Your saved accessibility preferences are shown below.</p>
-        <div class="saved-preferences" id="saved-preferences"></div>
+        <p class="profile-intro">Update how you appear and what accessibility needs we use when recommending places.</p>
+
+        <p id="profile-global-error" role="alert" hidden></p>
+
+        <div class="profile-editor-photo">
+          <div class="profile-avatar" aria-hidden="true">
+            <img id="profile-avatar-img" alt="" hidden />
+            <span class="profile-avatar-fallback" id="profile-avatar-fallback">?</span>
+          </div>
+          <input type="file" id="profile-photo-input" accept="image/*" hidden />
+          <div class="profile-photo-buttons">
+            <button type="button" class="btn btn-secondary" id="profile-photo-change">Change photo</button>
+            <button type="button" class="btn btn-secondary" id="profile-photo-remove">Remove photo</button>
+          </div>
+        </div>
+
+        <form class="profile-detail-form" id="profile-detail-form">
+          <div class="form-field-row">
+            <label for="profile-field-name">Full name</label>
+            <input type="text" id="profile-field-name" name="name" autocomplete="name" required />
+          </div>
+          <div class="form-field-row">
+            <label for="profile-field-email">Email</label>
+            <input type="email" id="profile-field-email" name="email" autocomplete="email" required />
+          </div>
+          <div class="form-field-row">
+            <label for="profile-field-phone">Phone number</label>
+            <input type="tel" id="profile-field-phone" name="phone" autocomplete="tel" placeholder="e.g. +1 555 123 4567" />
+          </div>
+
+          <h3 class="profile-prefs-heading">Accessibility preferences</h3>
+          <p class="profile-prefs-tip">Customize how we filter and match destinations. Open the checklist to edit all options.</p>
+          <div class="saved-preferences" id="saved-preferences"></div>
+          <button type="button" class="btn btn-secondary manage-prefs-inline" id="manage-prefs-inline">Customize accessibility preferences…</button>
+        </form>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="edit-profile-preferences">Edit Preferences</button>
-        <button type="button" class="btn btn-primary" id="done-profile">Done</button>
+        <button type="button" class="btn btn-secondary" id="done-profile">Close</button>
+        <button type="submit" class="btn btn-primary" form="profile-detail-form" id="save-profile-submit">Save profile</button>
       </div>
     </section>
   </div>
@@ -763,6 +907,7 @@
   <script>
     const openPreferencesButton = document.getElementById("open-preferences");
     const preferencesModal = document.getElementById("preferences-modal");
+    const preferencesFormEl = document.getElementById("preferences-form");
     const closePreferencesButton = document.getElementById("close-preferences");
     const cancelPreferencesButton = document.getElementById("cancel-preferences");
     const savePreferencesButton = document.getElementById("save-preferences");
@@ -770,15 +915,53 @@
     const profileModal = document.getElementById("profile-modal");
     const closeProfileButton = document.getElementById("close-profile");
     const doneProfileButton = document.getElementById("done-profile");
-    const editProfilePreferencesButton = document.getElementById("edit-profile-preferences");
+    const managePrefsInlineBtn = document.getElementById("manage-prefs-inline");
+    const profileDetailForm = document.getElementById("profile-detail-form");
+    const profileGlobalError = document.getElementById("profile-global-error");
+    const profilePhotoInput = document.getElementById("profile-photo-input");
     const savedPreferences = document.getElementById("saved-preferences");
 
-    const categoryLabels = {
-      "Mobility": "mobility",
-      "Food/Diet": "dietary",
-      "Language/Speech Accommodations": "speech",
-      "Sensory Needs": "sensory",
-      "Cognitive Needs": "cognitive"
+    /** Matches backend AccessibilityProfile / create-account payload */
+    const ACCESS_SCHEMA = {
+      mobility: {
+        bools: [
+          "wheelchair_accessible",
+          "short_walking_distances",
+          "long_walking_distances",
+          "remote_controlled_doors",
+          "remote_controlled_curtains",
+          "remote_controlled_lights",
+          "ramp_access",
+          "elevator_access",
+          "accessible_bathroom",
+          "wide_hallways",
+        ],
+        arrays: [],
+      },
+      dietary: {
+        bools: ["non_vegetarian", "pescatarian", "vegetarian", "vegan", "gluten_free", "halal", "kosher"],
+        arrays: ["allergy_accommodations"],
+      },
+      speech: {
+        bools: ["hearing_impaired_support", "speech_impaired_support", "sign_language", "captions"],
+        arrays: ["languages"],
+      },
+      sensory: {
+        bools: [
+          "dimly_lit_spaces",
+          "quiet_rooms",
+          "sensory_rooms",
+          "noise_cancelling_support",
+          "weighted_blankets",
+          "fidget_tools",
+          "aromatherapy_free_rooms",
+        ],
+        arrays: [],
+      },
+      cognitive: {
+        bools: ["ibcces_certification", "clear_wayfinding", "staff_disability_awareness_training"],
+        arrays: [],
+      },
     };
 
     const preferenceLabels = {
@@ -814,7 +997,7 @@
       aromatherapy_free_rooms: "Aromatherapy-free rooms",
       ibcces_certification: "IBCCES certification",
       clear_wayfinding: "Clear wayfinding",
-      staff_disability_awareness_training: "Staff disability awareness training"
+      staff_disability_awareness_training: "Staff disability awareness training",
     };
 
     const profileCategoryLabels = {
@@ -822,10 +1005,13 @@
       dietary: "Food/Diet",
       speech: "Language/Speech Accommodations",
       sensory: "Sensory Needs",
-      cognitive: "Cognitive Needs"
+      cognitive: "Cognitive Needs",
     };
 
     let currentProfile = null;
+    /** undefined = unchanged; string = preview / new image URL; null = remove on save */
+    let avatarOverride = undefined;
+    const MAX_PHOTO_UPLOAD = 850 * 1024;
 
     function clearElement(element) {
       while (element.firstChild) {
@@ -839,31 +1025,22 @@
 
     async function fetchCurrentProfile() {
       const userId = getUserId();
-      if (!userId) {
-        throw new Error("Missing user id.");
-      }
-
+      if (!userId) throw new Error("Missing user id.");
       const response = await fetch(`/api/users/${userId}/profile`);
-      if (!response.ok) {
-        throw new Error("Could not load profile.");
-      }
-
+      if (!response.ok) throw new Error("Could not load profile.");
       return response.json();
     }
 
     function renderAuthActions(profile = null) {
       const isSignedIn = localStorage.getItem("inclusitripSignedIn") === "true";
-
       if (isSignedIn) {
         clearElement(authActions);
-
         const profileButton = document.createElement("button");
         profileButton.type = "button";
         profileButton.className = "auth-link";
         profileButton.id = "profile-button";
         profileButton.textContent = profile?.name || "My Profile";
         profileButton.addEventListener("click", openProfile);
-
         const logoutButton = document.createElement("button");
         logoutButton.type = "button";
         logoutButton.className = "auth-button";
@@ -876,7 +1053,6 @@
           renderAuthActions();
           renderDefaultNeeds();
         });
-
         authActions.append(profileButton, logoutButton);
       } else {
         authActions.innerHTML = `
@@ -887,34 +1063,29 @@
     }
 
     function getSelectedPreferences(profile) {
-      if (!profile?.accessibility_profile) {
-        return [];
-      }
-
-      return Object.entries(profile.accessibility_profile).map(([categoryKey, preferences]) => {
-        const selections = [];
-
-        Object.entries(preferences || {}).forEach(([preferenceKey, value]) => {
-          if (value === true) {
-            selections.push(preferenceLabels[preferenceKey] || preferenceKey);
-          }
-
-          if (Array.isArray(value) && value.length > 0) {
-            selections.push(`${preferenceLabels[preferenceKey] || preferenceKey}: ${value.join(", ")}`);
-          }
-        });
-
-        return {
-          label: profileCategoryLabels[categoryKey] || categoryKey,
-          selections
-        };
-      }).filter((category) => category.selections.length > 0);
+      if (!profile?.accessibility_profile) return [];
+      return Object.entries(profile.accessibility_profile)
+        .map(([categoryKey, preferences]) => {
+          const selections = [];
+          Object.entries(preferences || {}).forEach(([preferenceKey, value]) => {
+            if (value === true) {
+              selections.push(preferenceLabels[preferenceKey] || preferenceKey);
+            }
+            if (Array.isArray(value) && value.length > 0) {
+              selections.push(`${preferenceLabels[preferenceKey] || preferenceKey}: ${value.join(", ")}`);
+            }
+          });
+          return {
+            label: profileCategoryLabels[categoryKey] || categoryKey,
+            selections,
+          };
+        })
+        .filter((category) => category.selections.length > 0);
     }
 
     function renderDefaultNeeds() {
       const needsList = document.querySelector(".needs-list");
       clearElement(needsList);
-
       ["Mobility", "Food/Diet", "Language/Speech Accommodations", "Sensory Needs", "Cognitive Needs"].forEach((need) => {
         const chip = document.createElement("span");
         chip.className = "need-chip";
@@ -926,84 +1097,178 @@
     function renderProfileNeeds(profile) {
       const needsList = document.querySelector(".needs-list");
       const categories = getSelectedPreferences(profile);
-      const selections = categories.flatMap((category) => category.selections);
-
-      if (selections.length === 0) {
+      if (categories.length === 0) {
         renderDefaultNeeds();
         return;
       }
-
       clearElement(needsList);
-      selections.forEach((selection) => {
+      categories.forEach((category) => {
         const chip = document.createElement("span");
         chip.className = "need-chip";
-        chip.textContent = selection;
+        chip.textContent = category.label;
         needsList.appendChild(chip);
       });
     }
 
-    function savePreferenceSelections() {
-      const savedProfile = {};
-
-      document.querySelectorAll(".preference-group").forEach((group) => {
-        const categoryName = group.querySelector("legend").textContent.trim();
-        const categoryKey = categoryLabels[categoryName];
-        const selections = [];
-
-        group.querySelectorAll(".checkbox-label").forEach((label) => {
-          const checkbox = label.querySelector("input[type='checkbox']");
-          if (checkbox.checked) {
-            selections.push(label.textContent.trim());
-          }
+    function buildAccessibilityPayload() {
+      const form = preferencesFormEl;
+      const fd = new FormData(form);
+      const out = {};
+      Object.entries(ACCESS_SCHEMA).forEach(([cat, cfg]) => {
+        out[cat] = {};
+        cfg.bools.forEach((key) => {
+          out[cat][key] = fd.has(key);
         });
-
-        group.querySelectorAll(".text-field input").forEach((input) => {
-          if (input.value.trim()) {
-            const label = group.querySelector(`label[for="${input.id}"]`).textContent.trim();
-            selections.push(`${label}: ${input.value.trim()}`);
-          }
+        cfg.arrays.forEach((key) => {
+          const raw = (fd.get(key) || "").toString().trim();
+          out[cat][key] = raw ? raw.split(",").map((s) => s.trim()).filter(Boolean) : [];
         });
-
-        savedProfile[categoryKey] = {
-          label: categoryName,
-          selections
-        };
       });
+      return out;
+    }
 
-      localStorage.setItem("inclusitripPreferences", JSON.stringify(savedProfile));
+    function hydrateAccessibilityFromProfile(profile) {
+      const form = preferencesFormEl;
+      const ap = profile?.accessibility_profile;
+      Object.entries(ACCESS_SCHEMA).forEach(([cat, cfg]) => {
+        const catData = ap && ap[cat] ? ap[cat] : {};
+        cfg.bools.forEach((key) => {
+          const el = form.querySelector(`input[name="${key}"][type="checkbox"]`);
+          if (el) el.checked = !!catData[key];
+        });
+        cfg.arrays.forEach((key) => {
+          const el = form.querySelector(`input[name="${key}"]`);
+          if (el) {
+            const val = catData[key];
+            el.value = Array.isArray(val) ? val.join(", ") : "";
+          }
+        });
+      });
+    }
+
+    function initials(name) {
+      if (!name || !String(name).trim()) return "?";
+      const parts = String(name).trim().split(/\s+/);
+      const a = parts[0].charAt(0);
+      const b = parts.length > 1 ? parts[parts.length - 1].charAt(0) : "";
+      return (a + b).toUpperCase() || "?";
+    }
+
+    function resolveAvatarPreviewUrl(profile) {
+      if (avatarOverride !== undefined) {
+        if (avatarOverride === null) return null;
+        return avatarOverride;
+      }
+      return profile?.photo_url || null;
+    }
+
+    function updateAvatarUi(profile) {
+      const img = document.getElementById("profile-avatar-img");
+      const fallback = document.getElementById("profile-avatar-fallback");
+      const url = resolveAvatarPreviewUrl(profile);
+      fallback.textContent = initials(profile?.name || "?");
+      if (url) {
+        img.src = url;
+        img.alt = "";
+        img.hidden = false;
+        fallback.hidden = true;
+      } else {
+        img.removeAttribute("src");
+        img.alt = "";
+        img.hidden = true;
+        fallback.hidden = false;
+      }
+    }
+
+    function hydrateProfileDetailForm(profile) {
+      avatarOverride = undefined;
+      profilePhotoInput.value = "";
+      document.getElementById("profile-field-name").value = profile?.name || "";
+      document.getElementById("profile-field-email").value = profile?.email || "";
+      document.getElementById("profile-field-phone").value = profile?.phone || "";
+      profileGlobalError.hidden = true;
+      profileGlobalError.textContent = "";
+      updateAvatarUi(profile);
+    }
+
+    function showProfileGlobalError(message) {
+      profileGlobalError.textContent = message;
+      profileGlobalError.hidden = false;
+    }
+
+    async function saveProfileDetail(event) {
+      event.preventDefault();
+      const userId = getUserId();
+      if (!userId) return;
+      const name = document.getElementById("profile-field-name").value.trim();
+      const email = document.getElementById("profile-field-email").value.trim();
+      const phone = document.getElementById("profile-field-phone").value.trim();
+      if (!name) {
+        showProfileGlobalError("Name cannot be empty.");
+        return;
+      }
+      let photoUrl;
+      if (avatarOverride !== undefined) {
+        photoUrl = avatarOverride === null ? null : avatarOverride;
+      } else {
+        photoUrl = currentProfile?.photo_url ?? null;
+      }
+      const saveBtn = document.getElementById("save-profile-submit");
+      const prev = saveBtn.textContent;
+      saveBtn.disabled = true;
+      saveBtn.textContent = "Saving...";
+      profileGlobalError.hidden = true;
+      try {
+        const response = await fetch(`/api/users/${userId}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, phone: phone || "", photo_url: photoUrl }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          showProfileGlobalError(typeof data.detail === "string" ? data.detail : "Could not save profile.");
+          return;
+        }
+        currentProfile = data;
+        avatarOverride = undefined;
+        renderAuthActions(currentProfile);
+        renderProfileNeeds(currentProfile);
+        document.getElementById("profile-title").textContent = currentProfile.name || "Your profile";
+        hydrateProfileDetailForm(currentProfile);
+        renderSavedPreferences();
+      } catch (e) {
+        showProfileGlobalError("Could not save profile. Please try again.");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = prev;
+      }
     }
 
     function renderSavedPreferences() {
       const categories = getSelectedPreferences(currentProfile);
-
       if (categories.length === 0) {
-        savedPreferences.innerHTML = `
-          <p class="empty-state">No accessibility preferences are saved for this account yet.</p>
-        `;
+        savedPreferences.innerHTML = `<p class="empty-state">No accessibility preferences are saved for this account yet.</p>`;
         return;
       }
-
       clearElement(savedPreferences);
       categories.forEach((category) => {
         const card = document.createElement("section");
         card.className = "saved-card";
-
         const heading = document.createElement("h3");
         heading.textContent = category.label;
-
         const list = document.createElement("ul");
         category.selections.forEach((selection) => {
           const item = document.createElement("li");
           item.textContent = selection;
           list.appendChild(item);
         });
-
         card.append(heading, list);
         savedPreferences.appendChild(card);
       });
     }
 
     function openPreferences() {
+      hydrateAccessibilityFromProfile(currentProfile);
       preferencesModal.hidden = false;
       preferencesModal.classList.add("is-open");
       closePreferencesButton.focus();
@@ -1012,15 +1277,37 @@
     function closePreferences() {
       preferencesModal.classList.remove("is-open");
       preferencesModal.hidden = true;
-      openPreferencesButton.focus();
+      if (!profileModal.hidden && managePrefsInlineBtn) {
+        managePrefsInlineBtn.focus();
+      } else {
+        openPreferencesButton.focus();
+      }
+    }
+
+    async function persistAccessibilityPreferences() {
+      const userId = getUserId();
+      if (!userId) throw new Error("Not signed in.");
+      const payload = buildAccessibilityPayload();
+      const response = await fetch(`/api/users/${userId}/profile`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(typeof data.detail === "string" ? data.detail : "Could not save preferences.");
+      }
+      currentProfile = data;
+      renderProfileNeeds(currentProfile);
+      if (!profileModal.hidden) {
+        renderSavedPreferences();
+      }
     }
 
     function openProfile() {
-      if (!currentProfile) {
-        return;
-      }
-
-      document.getElementById("profile-title").textContent = currentProfile.name;
+      if (!currentProfile) return;
+      document.getElementById("profile-title").textContent = currentProfile.name || "Your profile";
+      hydrateProfileDetailForm(currentProfile);
       renderSavedPreferences();
       profileModal.hidden = false;
       profileModal.classList.add("is-open");
@@ -1034,41 +1321,73 @@
     }
 
     openPreferencesButton.addEventListener("click", openPreferences);
-    closePreferencesButton.addEventListener("click", closePreferences);
-    cancelPreferencesButton.addEventListener("click", closePreferences);
-    savePreferencesButton.addEventListener("click", () => {
-      savePreferenceSelections();
-      closePreferences();
-    });
-    closeProfileButton.addEventListener("click", closeProfile);
-    doneProfileButton.addEventListener("click", closeProfile);
-    editProfilePreferencesButton.addEventListener("click", () => {
-      closeProfile();
-      openPreferences();
+
+    profileDetailForm.addEventListener("submit", saveProfileDetail);
+
+    document.getElementById("profile-photo-change").addEventListener("click", () => profilePhotoInput.click());
+
+    profilePhotoInput.addEventListener("change", () => {
+      const file = profilePhotoInput.files && profilePhotoInput.files[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        showProfileGlobalError("Please choose an image file.");
+        return;
+      }
+      if (file.size > MAX_PHOTO_UPLOAD) {
+        showProfileGlobalError("Image is too large. Try one under about 850 KB.");
+        profilePhotoInput.value = "";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        avatarOverride = typeof reader.result === "string" ? reader.result : null;
+        updateAvatarUi(currentProfile);
+        profileGlobalError.hidden = true;
+      };
+      reader.readAsDataURL(file);
     });
 
-    preferencesModal.addEventListener("click", (event) => {
-      if (event.target === preferencesModal) {
+    document.getElementById("profile-photo-remove").addEventListener("click", () => {
+      profilePhotoInput.value = "";
+      avatarOverride = null;
+      updateAvatarUi(currentProfile);
+    });
+
+    closePreferencesButton.addEventListener("click", closePreferences);
+    cancelPreferencesButton.addEventListener("click", closePreferences);
+
+    savePreferencesButton.addEventListener("click", async () => {
+      const prev = savePreferencesButton.textContent;
+      savePreferencesButton.disabled = true;
+      savePreferencesButton.textContent = "Saving...";
+      try {
+        await persistAccessibilityPreferences();
         closePreferences();
+      } catch (e) {
+        alert(e.message || "Could not save preferences.");
+      } finally {
+        savePreferencesButton.disabled = false;
+        savePreferencesButton.textContent = prev;
       }
+    });
+
+    managePrefsInlineBtn.addEventListener("click", openPreferences);
+
+    closeProfileButton.addEventListener("click", closeProfile);
+    doneProfileButton.addEventListener("click", closeProfile);
+
+    preferencesModal.addEventListener("click", (event) => {
+      if (event.target === preferencesModal) closePreferences();
     });
 
     profileModal.addEventListener("click", (event) => {
-      if (event.target === profileModal) {
-        closeProfile();
-      }
+      if (event.target === profileModal) closeProfile();
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        if (!preferencesModal.hidden) {
-          closePreferences();
-        }
-
-        if (!profileModal.hidden) {
-          closeProfile();
-        }
-      }
+      if (event.key !== "Escape") return;
+      if (!preferencesModal.hidden) closePreferences();
+      else if (!profileModal.hidden) closeProfile();
     });
 
     async function initializeAuthState() {
@@ -1077,7 +1396,6 @@
         renderDefaultNeeds();
         return;
       }
-
       try {
         currentProfile = await fetchCurrentProfile();
         renderAuthActions(currentProfile);

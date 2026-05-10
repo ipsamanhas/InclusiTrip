@@ -55,3 +55,45 @@ def create_user(
     db.commit()
     db.refresh(new_user)
     return new_user
+
+
+def patch_user_profile(
+    db: Session,
+    user_id: str,
+    *,
+    patch: dict,
+) -> Optional[UserDB]:
+    """Apply only the keys supplied in patch (excluding None / unset semantics left to caller)."""
+    user = get_user_by_id(db, user_id)
+    if user is None:
+        return None
+
+    if "name" in patch:
+        user.name = patch["name"]
+    if "email" in patch:
+        user.email = patch["email"].lower()
+    if "phone" in patch:
+        v = patch["phone"]
+        user.phone = None if v is None else (str(v).strip() or None)
+    if "photo_url" in patch:
+        v = patch["photo_url"]
+        user.photo_url = None if v is None else (str(v).strip() or None)
+
+    db.commit()
+    db.refresh(user)
+    return user
+
+
+def update_user_profile(
+    db: Session,
+    user_id: str,
+    accessibility_profile: dict,
+) -> Optional[UserDB]:
+    """Replace a user's accessibility_profile with the given dict."""
+    user = get_user_by_id(db, user_id)
+    if user is None:
+        return None
+    user.accessibility_profile = accessibility_profile
+    db.commit()
+    db.refresh(user)
+    return user
