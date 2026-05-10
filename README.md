@@ -7,18 +7,20 @@ It is designed for travellers with diverse accessibility needs, including indivi
 Ipsa Manhas, Harshita Handa, Rosanna Dovganyuk, Sehajvir Gill, Samia Rahman
 
 
-## Getting Started
+# Getting Started
 
 ### 1. Clone the repository
 
+Open **Terminal** (macOS/Linux) or **Command Prompt** / **PowerShell** (Windows) and run:
+
 ```bash
-git clone <your-repo-url>
-cd <project-directory>
+git clone <https://github.com/ipsamanhas/InclusiTrip.git>
+cd <InclusiTrip>
 ```
 
 ### 2. Create a virtual environment
 
-**macOS / Linux:**
+**macOS / Linux (Terminal):**
 
 ```bash
 python3 -m venv venv
@@ -43,6 +45,8 @@ venv\Scripts\Activate.ps1
 
 ### 3. Install dependencies
 
+In the same terminal (with the virtual environment activated), run:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -56,3 +60,9 @@ fastapi dev
 The site will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 To stop the server, press `Ctrl+C` in the terminal. When you're done working, deactivate the virtual environment with `deactivate`.
+
+
+# Presentation Slides
+
+[Presentation Slides](https://canva.link/f0lhn01v1evphzi)
+
