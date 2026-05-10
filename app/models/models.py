@@ -90,6 +90,8 @@ class Review(BaseModel):
 
 class Hotel(BaseModel):
     id: uuid.UUID = Field(default_factory=uuid.uuid4)
+    email: EmailStr
+    password: str
     name: str
     location: str
     description: str
